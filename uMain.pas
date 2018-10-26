@@ -32,6 +32,7 @@ procedure TfMain.DrawTaskList;
     Result := TGroupBox.Create(Application);
     with Result do
       begin
+        Left := 800;
         Parent := fMain;
         Caption := 'Year ' + IntToStr(Year);
         Align := alLeft;
@@ -40,12 +41,10 @@ procedure TfMain.DrawTaskList;
       end;
   end;
 
-  procedure CreateTaskButton(const Task: TTask; const Box: TGroupBox; const TaskIndex: Integer);
-  var
-    Button: TButton;
+  function CreateTaskButton(const Task: TTask; const Box: TGroupBox; const TaskIndex: Integer): TButton;
   begin
-    Button := TButton.Create(Application);
-    with Button do
+    Result := TButton.Create(Application);
+    with Result do
       begin
         Parent := Box;
         Left := 8;
@@ -62,7 +61,6 @@ var
   YearBox: TGroupBox;
 begin
   FormWidth := 16;
-  FormHeight := 68;
 
   Year := -1;
   with TTaskHost.Tasks do
@@ -75,8 +73,9 @@ begin
             Inc(FormWidth, YearBox.Width + 6);
           end;
 
-        CreateTaskButton(Items[I], YearBox, I);
-        Inc(FormHeight, 25);
+        with CreateTaskButton(Items[I], YearBox, I) do
+          if FormHeight < 68 + Top + Height then
+            FormHeight := 68 + Top + 8;
       end;
 
   fMain.Width := FormWidth;

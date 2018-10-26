@@ -3,7 +3,7 @@ unit uTask;
 interface
 
 uses
-  System.SysUtils, System.Generics.Collections, System.Classes;
+  System.SysUtils, System.Generics.Collections, System.Generics.Defaults, System.Classes;
 
 type
   EInputNotFound = Exception;
@@ -33,10 +33,12 @@ type
   TTaskHost = class
   private
     class var FTasks: TTaskList;
+    class var FComparer: IComparer<TTask>;
   public
     class constructor CreateClass;
     class destructor DestroyClass;
     class property Tasks: TTaskList read FTasks;
+    class procedure AddTask(const Task: TTask);
   end;
 
 implementation
@@ -51,13 +53,26 @@ const
 
 { TTaskHost }
 
+class procedure TTaskHost.AddTask(const Task: TTask);
+begin
+  FTasks.Add(Task);
+  FTasks.Sort(FComparer);
+end;
+
 class constructor TTaskHost.CreateClass;
 begin
   FTasks := TTaskList.Create;
+  FComparer := TComparer<TTask>.Construct(function (const Left, Right: TTask): Integer
+    begin
+      Result := Left.FYear - Right.FYear;
+      if Result = 0 then
+        Result := Left.FNumber - Right.FNumber;
+    end);
 end;
 
 class destructor TTaskHost.DestroyClass;
 begin
+  FComparer := nil;
   FTasks.Free;
 end;
 
@@ -74,7 +89,7 @@ end;
 
 constructor TTask.Create;
 begin
-  TTaskHost.Tasks.Add(Self);
+  TTaskHost.AddTask(Self);
 end;
 
 destructor TTask.Destroy;
@@ -124,6 +139,8 @@ begin
     DoRun;
   except
     on E: EInputNotFound do
+      Error(E.Message);
+    on E: Exception do
       Error(E.Message);
   end;
 end;
