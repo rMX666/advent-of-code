@@ -36,7 +36,7 @@ procedure TfMain.DrawTaskList;
         Caption := 'Year ' + IntToStr(Year);
         Align := alLeft;
         AlignWithMargins := True;
-        Width := 256;
+        Width := 300;
       end;
   end;
 
@@ -58,9 +58,12 @@ procedure TfMain.DrawTaskList;
   end;
 
 var
-  I, Year: Integer;
+  I, Year, FormWidth, FormHeight: Integer;
   YearBox: TGroupBox;
 begin
+  FormWidth := 16;
+  FormHeight := 68;
+
   Year := -1;
   with TTaskHost.Tasks do
     for I := 0 to Count - 1 do
@@ -69,10 +72,15 @@ begin
           begin
             Year := Items[I].Year;
             YearBox := CreateYearBox(Year);
+            Inc(FormWidth, YearBox.Width + 6);
           end;
 
         CreateTaskButton(Items[I], YearBox, I);
+        Inc(FormHeight, 25);
       end;
+
+  fMain.Width := FormWidth;
+  fMain.Height := FormHeight;
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);

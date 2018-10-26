@@ -3,7 +3,7 @@ object fMain: TfMain
   Top = 0
   Caption = 'Advent Of Code'
   ClientHeight = 374
-  ClientWidth = 621
+  ClientWidth = 1208
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
