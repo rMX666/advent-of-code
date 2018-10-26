@@ -103,6 +103,7 @@
         <DCCReference Include="uMain.pas">
             <Form>fMain</Form>
         </DCCReference>
+        <DCCReference Include="AoC2015\Task01\uTask_2015_01.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
