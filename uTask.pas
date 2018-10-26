@@ -18,7 +18,8 @@ type
     procedure OK(const Msg: String);
     procedure Error(const Msg: String);
   public
-    constructor Create(const AYear, ANumber: Integer; const AName: String);
+    constructor Create; overload; virtual;
+    constructor Create(const AYear, ANumber: Integer; const AName: String); overload;
     destructor Destroy; override;
     procedure Run;
     property Year: Integer read FYear;
@@ -64,10 +65,16 @@ end;
 
 constructor TTask.Create(const AYear, ANumber: Integer; const AName: String);
 begin
-  TTaskHost.Tasks.Add(Self);
   FYear := AYear;
   FNumber := ANumber;
   FName := AName;
+
+  Create;
+end;
+
+constructor TTask.Create;
+begin
+  TTaskHost.Tasks.Add(Self);
 end;
 
 destructor TTask.Destroy;
