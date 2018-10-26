@@ -6,3 +6,5 @@ __recovery/
 *.exe
 *.dcu
 *.stat
+*.swp
+*.~*
