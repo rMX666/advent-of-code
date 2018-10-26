@@ -8,7 +8,8 @@ uses
   uTask_2015_02 in 'AoC2015\Task02\uTask_2015_02.pas',
   uTask_2015_03 in 'AoC2015\Task03\uTask_2015_03.pas',
   uTask_2015_04 in 'AoC2015\Task04\uTask_2015_04.pas',
-  uTask_2015_05 in 'AoC2015\Task05\uTask_2015_05.pas';
+  uTask_2015_05 in 'AoC2015\Task05\uTask_2015_05.pas',
+  uTask_2015_06 in 'AoC2015\Task06\uTask_2015_06.pas';
 
 {$R *.res}
 

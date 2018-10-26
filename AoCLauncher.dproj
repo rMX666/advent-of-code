@@ -108,6 +108,7 @@
         <DCCReference Include="AoC2015\Task03\uTask_2015_03.pas"/>
         <DCCReference Include="AoC2015\Task04\uTask_2015_04.pas"/>
         <DCCReference Include="AoC2015\Task05\uTask_2015_05.pas"/>
+        <DCCReference Include="AoC2015\Task06\uTask_2015_06.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
