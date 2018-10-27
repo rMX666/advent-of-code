@@ -114,6 +114,12 @@
         <DCCReference Include="AoC2015\Task06\uTask_2015_06.pas"/>
         <DCCReference Include="AoC2015\Task07\uTask_2015_07.pas"/>
         <DCCReference Include="AoC2015\Task08\uTask_2015_08.pas"/>
+        <DCCReference Include="AoC2015\Task09\uTask_2015_09.pas"/>
+        <DCCReference Include="AoC2015\Task09\uForm_2015_09.pas">
+            <Form>fForm_2015_09</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="uUtil.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

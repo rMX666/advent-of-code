@@ -11,7 +11,10 @@ uses
   uTask_2015_05 in 'AoC2015\Task05\uTask_2015_05.pas',
   uTask_2015_06 in 'AoC2015\Task06\uTask_2015_06.pas',
   uTask_2015_07 in 'AoC2015\Task07\uTask_2015_07.pas',
-  uTask_2015_08 in 'AoC2015\Task08\uTask_2015_08.pas';
+  uTask_2015_08 in 'AoC2015\Task08\uTask_2015_08.pas',
+  uTask_2015_09 in 'AoC2015\Task09\uTask_2015_09.pas',
+  uForm_2015_09 in 'AoC2015\Task09\uForm_2015_09.pas' {fForm_2015_09},
+  uUtil in 'uUtil.pas';
 
 {$R *.res}
 
