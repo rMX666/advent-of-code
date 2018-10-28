@@ -3,6 +3,7 @@ program AoCLauncher;
 uses
   Vcl.Forms,
   uTask in 'uTask.pas',
+  uUtil in 'uUtil.pas',
   uMain in 'uMain.pas' {fMain},
   uTask_2015_01 in 'AoC2015\Task01\uTask_2015_01.pas',
   uTask_2015_02 in 'AoC2015\Task02\uTask_2015_02.pas',
@@ -14,9 +15,11 @@ uses
   uTask_2015_08 in 'AoC2015\Task08\uTask_2015_08.pas',
   uTask_2015_09 in 'AoC2015\Task09\uTask_2015_09.pas',
   uForm_2015_09 in 'AoC2015\Task09\uForm_2015_09.pas' {fForm_2015_09},
-  uUtil in 'uUtil.pas',
   uTask_2015_10 in 'AoC2015\Task10\uTask_2015_10.pas',
-  uTask_2015_11 in 'AoC2015\Task11\uTask_2015_11.pas';
+  uTask_2015_11 in 'AoC2015\Task11\uTask_2015_11.pas',
+  uTask_2015_12 in 'AoC2015\Task12\uTask_2015_12.pas',
+  uForm_2015_12 in 'AoC2015\Task12\uForm_2015_12.pas' {fMain_2015_12},
+  uJSON_2015_12 in 'AoC2015\Task12\uJSON_2015_12.pas';
 
 {$R *.res}
 

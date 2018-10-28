@@ -87,6 +87,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_MapFile>3</DCC_MapFile>
+        <DCC_UnitSearchPath>Q:\Documents\Embarcadero\_Components\Virtual Tree\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -103,6 +104,7 @@
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
         <DCCReference Include="uTask.pas"/>
+        <DCCReference Include="uUtil.pas"/>
         <DCCReference Include="uMain.pas">
             <Form>fMain</Form>
         </DCCReference>
@@ -119,9 +121,14 @@
             <Form>fForm_2015_09</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="uUtil.pas"/>
         <DCCReference Include="AoC2015\Task10\uTask_2015_10.pas"/>
         <DCCReference Include="AoC2015\Task11\uTask_2015_11.pas"/>
+        <DCCReference Include="AoC2015\Task12\uTask_2015_12.pas"/>
+        <DCCReference Include="AoC2015\Task12\uForm_2015_12.pas">
+            <Form>fMain_2015_12</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="AoC2015\Task12\uJSON_2015_12.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
