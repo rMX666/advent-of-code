@@ -19,7 +19,8 @@ uses
   uTask_2015_11 in 'AoC2015\Task11\uTask_2015_11.pas',
   uTask_2015_12 in 'AoC2015\Task12\uTask_2015_12.pas',
   uForm_2015_12 in 'AoC2015\Task12\uForm_2015_12.pas' {fMain_2015_12},
-  uJSON_2015_12 in 'AoC2015\Task12\uJSON_2015_12.pas';
+  uJSON_2015_12 in 'AoC2015\Task12\uJSON_2015_12.pas',
+  uTask_2015_13 in 'AoC2015\Task13\uTask_2015_13.pas';
 
 {$R *.res}
 

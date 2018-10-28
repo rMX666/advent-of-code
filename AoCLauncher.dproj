@@ -129,6 +129,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2015\Task12\uJSON_2015_12.pas"/>
+        <DCCReference Include="AoC2015\Task13\uTask_2015_13.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
