@@ -99,40 +99,36 @@ var
 
   procedure FindBestPath(out MinPath, MaxPath: Integer);
   var
-    Path, MinPathA, MaxPathA, NextPath: TArray<Integer>;
-    I, J, L, PermCount, PathLength: Integer;
+    MinPathA, MaxPathA: TArray<Integer>;
+    I, L, MinPathI, MaxPathI: Integer;
   begin
-    PermCount := 1;
     L := FLocations.Count;
-    SetLength(Path, L);
-    for I := 0 to L - 1 do
-      begin
-        Path[I] := I;
-        PermCount := PermCount * (I + 1);
-      end;
 
-    MinPath := MaxInt;
-    MaxPath := 0;
-    for I := 0 to PermCount do
-      begin
-        NextPath := Copy(Path, 0, L);
-        GetPermutation(NextPath, I);
+    MinPathI := MaxInt;
+    MaxPathI := 0;
 
+    RunPermutations(L, procedure (const NextPath: TArray<Integer>)
+      var
+        J, PathLength: Integer;
+      begin
         PathLength := 0;
         for J := 0 to L - 2 do
           Inc(PathLength, FGraph[TPoint.Create(NextPath[J], NextPath[J + 1])].Cost);
 
-        if PathLength < MinPath then
+        if PathLength < MinPathI then
           begin
-            MinPath := PathLength;
+            MinPathI := PathLength;
             MinPathA := Copy(NextPath, 0, L);
           end;
-        if PathLength > MaxPath then
+        if PathLength > MaxPathI then
           begin
-            MaxPath := PathLength;
+            MaxPathI := PathLength;
             MaxPathA := Copy(NextPath, 0, L);
           end;
-      end;
+      end);
+
+    MinPath := MinPathI;
+    MaxPath := MaxPathI;
 
     Form.HighLightPath(MinPathA, True);
     Form.HighLightPath(MaxPathA, False);
