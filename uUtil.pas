@@ -13,7 +13,7 @@ type
     FItemCount: Integer;
     FCount: Integer;
   protected
-    function DoGetEnumerator: TEnumerator<TPermutationItems>;
+    function DoGetEnumerator: TEnumerator<TPermutationItems>; reintroduce;
   public
     constructor Create(const AItemCount: Integer);
     type
@@ -35,7 +35,37 @@ type
     function GetEnumerator: TEnumerator; reintroduce; inline;
   end;
 
+  TSubSequences<T> = class(TEnumerable<TArray<T>>)
+  private
+    FSequence: TArray<T>;
+    FLength: Integer;
+  protected
+    function DoGetEnumerator: TEnumerator<TArray<T>>; reintroduce;
+  public
+    constructor Create(const ASequence: TArray<T>);
+    type
+      TEnumerator = class(TEnumerator<TArray<T>>)
+      private
+        FParent: TSubSequences<T>;
+        FCurrent: TArray<T>;
+        FIndex: Integer;
+        FCount: Integer;
+        function GetCurrent: TArray<T>;
+      protected
+        function DoGetCurrent: TArray<T>; override;
+        function DoMoveNext: Boolean; override;
+      public
+        constructor Create(const AParent: TSubSequences<T>);
+        property Current: TArray<T> read GetCurrent;
+        function MoveNext: Boolean;
+      end;
+    function GetEnumerator: TEnumerator; reintroduce; inline;
+  end;
+
 implementation
+
+uses
+  System.Math;
 
 procedure Swap(var A, B: Integer);
 var
@@ -117,6 +147,81 @@ begin
 end;
 
 function TPermutations.GetEnumerator: TEnumerator;
+begin
+  Result := TEnumerator.Create(Self);
+end;
+
+{ TSubSequences<T>.TEnumerator }
+
+constructor TSubSequences<T>.TEnumerator.Create(const AParent: TSubSequences<T>);
+begin
+  FParent := AParent;
+  SetLength(FCurrent, 0);
+  FIndex := 0;
+  FCount := Round(Power(2, FParent.FLength)) - 1;
+end;
+
+function TSubSequences<T>.TEnumerator.DoGetCurrent: TArray<T>;
+begin
+  Result := GetCurrent;
+end;
+
+function TSubSequences<T>.TEnumerator.DoMoveNext: Boolean;
+begin
+  Result := MoveNext;
+end;
+
+function TSubSequences<T>.TEnumerator.GetCurrent: TArray<T>;
+begin
+  Result := FCurrent;
+end;
+
+function TSubSequences<T>.TEnumerator.MoveNext: Boolean;
+var
+  Bit: Integer;
+  I, L: Integer;
+begin
+  if FIndex > FCount then
+    Exit(False);
+
+  Result := True;
+  Inc(FIndex);
+
+  Bit := FIndex;
+  I := FParent.FLength - 1;
+  L := 0;
+  SetLength(FCurrent, FParent.FLength);
+
+  while (Bit <> 0) and (I >= 0) do
+    begin
+      if (Bit and 1) = 1 then
+        begin
+          FCurrent[L] := FParent.FSequence[I];
+          Inc(L);
+        end;
+
+      Bit := Bit shr 1;
+      Dec(I);
+    end;
+
+  SetLength(FCurrent, L);
+end;
+
+{ TSubSequences<T> }
+
+constructor TSubSequences<T>.Create(const ASequence: TArray<T>);
+begin
+  FSequence := ASequence;
+  TArray.Sort<T>(FSequence);
+  FLength := Length(FSequence);
+end;
+
+function TSubSequences<T>.DoGetEnumerator: TEnumerator<TArray<T>>;
+begin
+  Result := GetEnumerator;
+end;
+
+function TSubSequences<T>.GetEnumerator: TEnumerator;
 begin
   Result := TEnumerator.Create(Self);
 end;

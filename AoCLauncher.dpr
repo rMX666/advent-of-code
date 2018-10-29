@@ -23,7 +23,8 @@ uses
   uTask_2015_13 in 'AoC2015\Task13\uTask_2015_13.pas',
   uTask_2015_14 in 'AoC2015\Task14\uTask_2015_14.pas',
   uTask_2015_15 in 'AoC2015\Task15\uTask_2015_15.pas',
-  uTask_2015_16 in 'AoC2015\Task16\uTask_2015_16.pas';
+  uTask_2015_16 in 'AoC2015\Task16\uTask_2015_16.pas',
+  uTask_2015_17 in 'AoC2015\Task17\uTask_2015_17.pas';
 
 {$R *.res}
 
