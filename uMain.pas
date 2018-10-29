@@ -61,6 +61,7 @@ var
   YearBox: TGroupBox;
 begin
   FormWidth := 16;
+  FormHeight := 0;
 
   Year := -1;
   with TTaskHost.Tasks do
