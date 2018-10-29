@@ -22,7 +22,8 @@ uses
   uJSON_2015_12 in 'AoC2015\Task12\uJSON_2015_12.pas',
   uTask_2015_13 in 'AoC2015\Task13\uTask_2015_13.pas',
   uTask_2015_14 in 'AoC2015\Task14\uTask_2015_14.pas',
-  uTask_2015_15 in 'AoC2015\Task15\uTask_2015_15.pas';
+  uTask_2015_15 in 'AoC2015\Task15\uTask_2015_15.pas',
+  uTask_2015_16 in 'AoC2015\Task16\uTask_2015_16.pas';
 
 {$R *.res}
 
