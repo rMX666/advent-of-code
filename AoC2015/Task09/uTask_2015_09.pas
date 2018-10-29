@@ -99,33 +99,37 @@ var
 
   procedure FindBestPath(out MinPath, MaxPath: Integer);
   var
-    MinPathA, MaxPathA: TArray<Integer>;
-    I, L, MinPathI, MaxPathI: Integer;
+    MinPathA, MaxPathA, NextPath: TPermutationItems;
+    I, L, J, PathLength, MinPathI, MaxPathI: Integer;
+    Permutations: TPermutations;
   begin
     L := FLocations.Count;
 
     MinPathI := MaxInt;
     MaxPathI := 0;
 
-    RunPermutations(L, procedure (const NextPath: TArray<Integer>)
-      var
-        J, PathLength: Integer;
-      begin
-        PathLength := 0;
-        for J := 0 to L - 2 do
-          Inc(PathLength, FGraph[TPoint.Create(NextPath[J], NextPath[J + 1])].Cost);
+    Permutations := TPermutations.Create(L);
+    try
+      for NextPath in Permutations do
+        begin
+          PathLength := 0;
+          for J := 0 to L - 2 do
+            Inc(PathLength, FGraph[TPoint.Create(NextPath[J], NextPath[J + 1])].Cost);
 
-        if PathLength < MinPathI then
-          begin
-            MinPathI := PathLength;
-            MinPathA := Copy(NextPath, 0, L);
-          end;
-        if PathLength > MaxPathI then
-          begin
-            MaxPathI := PathLength;
-            MaxPathA := Copy(NextPath, 0, L);
-          end;
-      end);
+          if PathLength < MinPathI then
+            begin
+              MinPathI := PathLength;
+              MinPathA := Copy(NextPath, 0, L);
+            end;
+          if PathLength > MaxPathI then
+            begin
+              MaxPathI := PathLength;
+              MaxPathA := Copy(NextPath, 0, L);
+            end;
+        end;
+    finally
+      Permutations.Free;
+    end;
 
     MinPath := MinPathI;
     MaxPath := MaxPathI;

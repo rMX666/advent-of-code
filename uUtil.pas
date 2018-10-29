@@ -2,13 +2,38 @@ unit uUtil;
 
 interface
 
-type
-  TPermutationHandler = reference to procedure (const Permutation: TArray<Integer>);
+uses
+  System.Generics.Collections;
 
-procedure Swap(var A, B: Integer);
-procedure GetPermutation(var A: TArray<Integer>; K: Integer);
-function GetPermutationCount(const ItemCount: Integer): Integer;
-procedure RunPermutations(const ItemCount: Integer; const Handler: TPermutationHandler);
+type
+  TPermutationItems = TArray<Integer>;
+
+  TPermutations = class(TEnumerable<TPermutationItems>)
+  public
+    FItemCount: Integer;
+    FCount: Integer;
+  protected
+    function DoGetEnumerator: TEnumerator<TPermutationItems>;
+  public
+    constructor Create(const AItemCount: Integer);
+    type
+      TEnumerator = class(TEnumerator<TPermutationItems>)
+      private
+        FParent: TPermutations;
+        FCurrent: TPermutationItems;
+        FInitial: TPermutationItems;
+        FCurrentIndex: Integer;
+        function GetCurrent: TPermutationItems;
+      protected
+        function DoGetCurrent: TPermutationItems; override;
+        function DoMoveNext: Boolean; override;
+      public
+        constructor Create(const AParent: TPermutations);
+        property Current: TPermutationItems read GetCurrent;
+        function MoveNext: Boolean;
+      end;
+    function GetEnumerator: TEnumerator; reintroduce; inline;
+  end;
 
 implementation
 
@@ -21,45 +46,79 @@ begin
   B := Tmp;
 end;
 
-procedure GetPermutation(var A: TArray<Integer>; K: Integer);
+{ TPermutation.TEnumerator }
+
+constructor TPermutations.TEnumerator.Create(const AParent: TPermutations);
 var
-  I, J: Integer;
+  I: Integer;
 begin
-  for I := Low(A) + 1 to High(A) + 1 do
+  FParent := AParent;
+
+  SetLength(FInitial, FParent.FItemCount);
+  for I := 0 to FParent.FItemCount do
+    FInitial[I] := I;
+
+  FCurrent := Copy(FInitial, 0, FParent.FItemCount);
+  FCurrentIndex := 0;
+end;
+
+function TPermutations.TEnumerator.DoGetCurrent: TPermutationItems;
+begin
+  Result := GetCurrent
+end;
+
+function TPermutations.TEnumerator.DoMoveNext: Boolean;
+begin
+  Result := MoveNext;
+end;
+
+function TPermutations.TEnumerator.GetCurrent: TPermutationItems;
+begin
+  Result := FCurrent;
+end;
+
+function TPermutations.TEnumerator.MoveNext: Boolean;
+var
+  I, J, K: Integer;
+begin
+  if FCurrentIndex >= FParent.FCount then
+    Exit(False);
+
+  Result := True;
+
+  Inc(FCurrentIndex);
+  FCurrent := Copy(FInitial, 0, FParent.FItemCount);
+
+  K := FCurrentIndex;
+  for I := Low(FCurrent) + 1 to High(FCurrent) + 1 do
     begin
       J := K mod I;
-      Swap(A[J], A[I - 1]);
+      Swap(FCurrent[J], FCurrent[I - 1]);
       K := K div I;
     end;
 end;
 
-function GetPermutationCount(const ItemCount: Integer): Integer;
+{ TPermutation }
+
+constructor TPermutations.Create(const AItemCount: Integer);
 var
   I: Integer;
 begin
-  Result := 1;
+  FItemCount := AItemCount;
 
-  for I := 2 to ItemCount do
-    Result := Result * I;
+  FCount := 1;
+  for I := 2 to FItemCount do
+    FCount := FCount * I;
 end;
 
-procedure RunPermutations(const ItemCount: Integer; const Handler: TPermutationHandler);
-var
-  I, K: Integer;
-  Items, NextItems: TArray<Integer>;
+function TPermutations.DoGetEnumerator: TEnumerator<TPermutationItems>;
 begin
-  SetLength(Items, ItemCount);
-  for I := 0 to ItemCount - 1 do
-    Items[I] := I;
+  Result := GetEnumerator;
+end;
 
-  K := GetPermutationCount(ItemCount);
-
-  for I := 1 to K do
-    begin
-      NextItems := Copy(Items, 0, ItemCount);
-      GetPermutation(NextItems, I);
-      Handler(NextItems);
-    end;
+function TPermutations.GetEnumerator: TEnumerator;
+begin
+  Result := TEnumerator.Create(Self);
 end;
 
 end.

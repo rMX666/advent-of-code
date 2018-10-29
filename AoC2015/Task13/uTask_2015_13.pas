@@ -67,28 +67,33 @@ end;
 
 function TTask_AoC.FindBestSeating: Integer;
 var
-  BestHappiness: Integer;
+  BestHappiness, I, NextI, Happiness: Integer;
+  Seating: TPermutationItems;
+  Permutations: TPermutations;
 begin
   BestHappiness := 0;
 
-  RunPermutations(FPersons.Count, procedure (const Seating: TArray<Integer>)
-    var
-      I, NextI, Happiness: Integer;
-    begin
-      Happiness := 0;
+  Permutations := TPermutations.Create(FPersons.Count);
+  try
+    for Seating in Permutations do
+      begin
+        Happiness := 0;
 
-      for I := 0 to FPersons.Count - 1 do
-        begin
-          NextI := I + 1;
-          if NextI = FPersons.Count then
-            NextI := 0;
+        for I := 0 to FPersons.Count - 1 do
+          begin
+            NextI := I + 1;
+            if NextI = FPersons.Count then
+              NextI := 0;
 
-          Inc(Happiness, GetRelationCost(FPersons[Seating[I]], FPersons[Seating[NextI]]));
-          Inc(Happiness, GetRelationCost(FPersons[Seating[NextI]], FPersons[Seating[I]]));
-        end;
-      if Happiness > BestHappiness then
-        BestHappiness := Happiness;
-    end);
+            Inc(Happiness, GetRelationCost(FPersons[Seating[I]], FPersons[Seating[NextI]]));
+            Inc(Happiness, GetRelationCost(FPersons[Seating[NextI]], FPersons[Seating[I]]));
+          end;
+        if Happiness > BestHappiness then
+          BestHappiness := Happiness;
+      end;
+  finally
+    Permutations.Free;
+  end;
 
   Result := BestHappiness;
 end;
