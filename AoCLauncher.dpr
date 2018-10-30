@@ -24,7 +24,9 @@ uses
   uTask_2015_14 in 'AoC2015\Task14\uTask_2015_14.pas',
   uTask_2015_15 in 'AoC2015\Task15\uTask_2015_15.pas',
   uTask_2015_16 in 'AoC2015\Task16\uTask_2015_16.pas',
-  uTask_2015_17 in 'AoC2015\Task17\uTask_2015_17.pas';
+  uTask_2015_17 in 'AoC2015\Task17\uTask_2015_17.pas',
+  uTask_2015_18 in 'AoC2015\Task18\uTask_2015_18.pas',
+  uForm_2015_18 in 'AoC2015\Task18\uForm_2015_18.pas' {fMain_2015_18};
 
 {$R *.res}
 
