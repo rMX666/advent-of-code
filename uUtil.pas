@@ -62,10 +62,39 @@ type
     function GetEnumerator: TEnumerator; reintroduce; inline;
   end;
 
+// Simplified implementation of Knuth-Morris-Pratt alhorithm
+// Search Needle in Haystack, return array of found positions (empty array of nothibg found)
+function KMP(const Needle, Haystack: String): TArray<Integer>;
+
 implementation
 
 uses
-  System.Math;
+  System.SysUtils, System.Math;
+
+function KMP(const Needle, Haystack: String): TArray<Integer>;
+var
+  NL, HL: Integer;
+  I, J: Integer;
+begin
+  SetLength(Result, 0);
+
+  NL := Needle.Length;
+  HL := Haystack.Length;
+
+  J := 1;
+  for I := 1 to HL do
+    begin
+      while (J > 1) and (Haystack[I] <> Needle[J]) do
+        Dec(J);
+      if Haystack[I] = Needle[J] then
+        Inc(J);
+      if J = NL + 1 then
+        begin
+          SetLength(Result, Length(Result) + 1);
+          Result[Length(Result) - 1] := I - NL + 1;
+        end;
+    end;
+end;
 
 procedure Swap(var A, B: Integer);
 var
