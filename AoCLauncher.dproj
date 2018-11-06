@@ -142,6 +142,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2015\Task19\uTask_2015_19.pas"/>
+        <DCCReference Include="AoC2015\Task20\uTask_2015_20.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
