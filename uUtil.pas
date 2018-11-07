@@ -39,11 +39,13 @@ type
   private
     FSequence: TArray<T>;
     FLength: Integer;
+    FMinLength, FMaxLength: Integer;
   protected
     function DoGetEnumerator: TEnumerator<TArray<T>>; reintroduce;
   public
-    constructor Create(const ASequence: TArray<T>);
+    constructor Create(const ASequence: TArray<T>; const AMinLength: Integer = -1; const AMaxLength: Integer = -1);
     type
+      TMoveNextResult = ( mnrOk, mnrWrongSize, mnrEof );
       TEnumerator = class(TEnumerator<TArray<T>>)
       private
         FParent: TSubSequences<T>;
@@ -51,6 +53,8 @@ type
         FIndex: Integer;
         FCount: Integer;
         function GetCurrent: TArray<T>;
+        function TryMoveNext: TMoveNextResult;
+        function CheckSubsequenceSize(const Index: Integer): Boolean;
       protected
         function DoGetCurrent: TArray<T>; override;
         function DoMoveNext: Boolean; override;
@@ -65,6 +69,9 @@ type
 // Simplified implementation of Knuth-Morris-Pratt alhorithm
 // Search Needle in Haystack, return array of found positions (empty array of nothibg found)
 function KMP(const Needle, Haystack: String): TArray<Integer>;
+
+// Count 1 bits in number
+function BitCount(X: Integer): Integer;
 
 implementation
 
@@ -94,6 +101,21 @@ begin
           Result[Length(Result) - 1] := I - NL + 1;
         end;
     end;
+end;
+
+function BitCount(X: Integer): Integer;
+begin
+  //          01010101010101010101010101010101...
+  X := (X and $55555555) + ((X shr 1) and $55555555);
+  //          00110011001100110011001100110011...
+  X := (X and $33333333) + ((X shr 2) and $33333333);
+  //          00001111000011110000111100001111...
+  X := (X and $0f0f0f0f) + ((X shr 4) and $0f0f0f0f);
+  //          00000000111111110000000011111111...
+  X := (X and $00ff00ff) + ((X shr 8) and $00ff00ff);
+  //          00000000000000001111111111111111...
+  X := (X and $0000ffff) + ((X shr 16) and $0000ffff);
+  Result := X;
 end;
 
 procedure Swap(var A, B: Integer);
@@ -186,7 +208,7 @@ constructor TSubSequences<T>.TEnumerator.Create(const AParent: TSubSequences<T>)
 begin
   FParent := AParent;
   SetLength(FCurrent, 0);
-  FIndex := 0;
+  FIndex := -1;
   FCount := Round(Power(2, FParent.FLength)) - 1;
 end;
 
@@ -207,14 +229,37 @@ end;
 
 function TSubSequences<T>.TEnumerator.MoveNext: Boolean;
 var
+  MoveNextResult: TMoveNextResult;
+begin
+  repeat
+    MoveNextResult := TryMoveNext;
+  until MoveNextResult <> mnrWrongSize;
+
+  Result := MoveNextResult = mnrOk;
+end;
+
+function TSubSequences<T>.TEnumerator.CheckSubsequenceSize(const Index: Integer): Boolean;
+var
+  Bits: Integer;
+begin
+  Bits := BitCount(Index);
+  Result := (FParent.FMinLength <= Bits) and (FParent.FMaxLength >= Bits);
+end;
+
+function TSubSequences<T>.TEnumerator.TryMoveNext: TMoveNextResult;
+var
   Bit: Integer;
   I, L: Integer;
 begin
   if FIndex > FCount then
-    Exit(False);
+    Exit(mnrEof);
 
-  Result := True;
   Inc(FIndex);
+
+  if not CheckSubsequenceSize(FIndex) then
+    Exit(mnrWrongSize);
+
+  Result := mnrOk;
 
   Bit := FIndex;
   I := FParent.FLength - 1;
@@ -238,11 +283,15 @@ end;
 
 { TSubSequences<T> }
 
-constructor TSubSequences<T>.Create(const ASequence: TArray<T>);
+constructor TSubSequences<T>.Create(const ASequence: TArray<T>; const AMinLength: Integer = -1; const AMaxLength: Integer = -1);
 begin
   FSequence := ASequence;
   TArray.Sort<T>(FSequence);
   FLength := Length(FSequence);
+  FMinLength := AMinLength;
+  FMaxLength := AMaxLength;
+  if FMaxLength = -1 then
+    FMaxLength := MaxInt;
 end;
 
 function TSubSequences<T>.DoGetEnumerator: TEnumerator<TArray<T>>;
