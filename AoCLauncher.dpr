@@ -29,7 +29,9 @@ uses
   uForm_2015_18 in 'AoC2015\Task18\uForm_2015_18.pas' {fMain_2015_18},
   uTask_2015_19 in 'AoC2015\Task19\uTask_2015_19.pas',
   uTask_2015_20 in 'AoC2015\Task20\uTask_2015_20.pas',
-  uTask_2015_21 in 'AoC2015\Task21\uTask_2015_21.pas';
+  uTask_2015_21 in 'AoC2015\Task21\uTask_2015_21.pas',
+  uTask_2015_22 in 'AoC2015\Task22\uTask_2015_22.pas',
+  uGame_2015_22 in 'AoC2015\Task22\uGame_2015_22.pas';
 
 {$R *.res}
 
