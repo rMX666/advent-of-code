@@ -146,6 +146,7 @@
         <DCCReference Include="AoC2015\Task21\uTask_2015_21.pas"/>
         <DCCReference Include="AoC2015\Task22\uTask_2015_22.pas"/>
         <DCCReference Include="AoC2015\Task22\uGame_2015_22.pas"/>
+        <DCCReference Include="AoC2015\Task23\uTask_2015_23.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

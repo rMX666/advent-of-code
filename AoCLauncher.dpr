@@ -31,7 +31,8 @@ uses
   uTask_2015_20 in 'AoC2015\Task20\uTask_2015_20.pas',
   uTask_2015_21 in 'AoC2015\Task21\uTask_2015_21.pas',
   uTask_2015_22 in 'AoC2015\Task22\uTask_2015_22.pas',
-  uGame_2015_22 in 'AoC2015\Task22\uGame_2015_22.pas';
+  uGame_2015_22 in 'AoC2015\Task22\uGame_2015_22.pas',
+  uTask_2015_23 in 'AoC2015\Task23\uTask_2015_23.pas';
 
 {$R *.res}
 
