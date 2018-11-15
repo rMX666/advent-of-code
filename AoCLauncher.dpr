@@ -35,7 +35,8 @@ uses
   uTask_2015_23 in 'AoC2015\Task23\uTask_2015_23.pas',
   uTask_2015_24 in 'AoC2015\Task24\uTask_2015_24.pas',
   uTask_2015_25 in 'AoC2015\Task25\uTask_2015_25.pas',
-  uTask_2016_01 in 'AoC2016\Task01\uTask_2016_01.pas';
+  uTask_2016_01 in 'AoC2016\Task01\uTask_2016_01.pas',
+  uTask_2016_02 in 'AoC2016\Task02\uTask_2016_02.pas';
 
 {$R *.res}
 
