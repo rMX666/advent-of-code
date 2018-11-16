@@ -160,6 +160,11 @@
         </DCCReference>
         <DCCReference Include="AoC2016\Task06\uTask_2016_06.pas"/>
         <DCCReference Include="AoC2016\Task07\uTask_2016_07.pas"/>
+        <DCCReference Include="AoC2016\Task08\uTask_2016_08.pas"/>
+        <DCCReference Include="AoC2016\Task08\uForm_2016_08.pas">
+            <Form>fMain_2016_08</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
