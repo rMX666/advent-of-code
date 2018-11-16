@@ -41,7 +41,8 @@ uses
   uTask_2016_04 in 'AoC2016\Task04\uTask_2016_04.pas',
   uTask_2016_05 in 'AoC2016\Task05\uTask_2016_05.pas',
   uForm_2016_05 in 'AoC2016\Task05\uForm_2016_05.pas' {fMain_2016_05},
-  uTask_2016_06 in 'AoC2016\Task06\uTask_2016_06.pas';
+  uTask_2016_06 in 'AoC2016\Task06\uTask_2016_06.pas',
+  uTask_2016_07 in 'AoC2016\Task07\uTask_2016_07.pas';
 
 {$R *.res}
 
