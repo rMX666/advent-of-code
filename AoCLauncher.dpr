@@ -50,7 +50,8 @@ uses
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
-  uTask_2018_04 in 'AoC2018\Task04\uTask_2018_04.pas';
+  uTask_2018_04 in 'AoC2018\Task04\uTask_2018_04.pas',
+  uTask_2018_05 in 'AoC2018\Task05\uTask_2018_05.pas';
 
 {$R *.res}
 
