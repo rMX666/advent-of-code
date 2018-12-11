@@ -73,6 +73,8 @@ function KMP(const Needle, Haystack: String): TArray<Integer>;
 // Count 1 bits in number
 function BitCount(X: Integer): Integer;
 
+procedure SortString(var S: String);
+
 implementation
 
 uses
@@ -116,6 +118,15 @@ begin
   //          00000000000000001111111111111111...
   X := (X and $0000ffff) + ((X shr 16) and $0000ffff);
   Result := X;
+end;
+
+procedure SortString(var S: String);
+var
+  A: TArray<Char>;
+begin
+  A := S.ToCharArray;
+  TArray.Sort<Char>(A);
+  S := String.Create(A);
 end;
 
 procedure Swap(var A, B: Integer);
