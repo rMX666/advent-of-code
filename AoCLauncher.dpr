@@ -56,7 +56,10 @@ uses
   uForm_2018_06 in 'AoC2018\Task06\uForm_2018_06.pas' {fMain_2018_06},
   uTask_2018_07 in 'AoC2018\Task07\uTask_2018_07.pas',
   uTask_2018_08 in 'AoC2018\Task08\uTask_2018_08.pas',
-  uTask_2018_09 in 'AoC2018\Task09\uTask_2018_09.pas';
+  uTask_2018_09 in 'AoC2018\Task09\uTask_2018_09.pas',
+  uTask_2018_10 in 'AoC2018\Task10\uTask_2018_10.pas',
+  uForm_2018_10 in 'AoC2018\Task10\uForm_2018_10.pas' {fMain_2018_10},
+  uStars_2018_10 in 'AoC2018\Task10\uStars_2018_10.pas';
 
 {$R *.res}
 
@@ -67,6 +70,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TfMain_2018_06, fMain_2018_06);
   Application.Run;
 end.
