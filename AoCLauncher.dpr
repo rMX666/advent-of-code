@@ -60,7 +60,8 @@ uses
   uTask_2018_10 in 'AoC2018\Task10\uTask_2018_10.pas',
   uForm_2018_10 in 'AoC2018\Task10\uForm_2018_10.pas' {fMain_2018_10},
   uStars_2018_10 in 'AoC2018\Task10\uStars_2018_10.pas',
-  uTask_2018_11 in 'AoC2018\Task11\uTask_2018_11.pas';
+  uTask_2018_11 in 'AoC2018\Task11\uTask_2018_11.pas',
+  uTask_2018_12 in 'AoC2018\Task12\uTask_2018_12.pas';
 
 {$R *.res}
 
