@@ -61,7 +61,10 @@ uses
   uForm_2018_10 in 'AoC2018\Task10\uForm_2018_10.pas' {fMain_2018_10},
   uStars_2018_10 in 'AoC2018\Task10\uStars_2018_10.pas',
   uTask_2018_11 in 'AoC2018\Task11\uTask_2018_11.pas',
-  uTask_2018_12 in 'AoC2018\Task12\uTask_2018_12.pas';
+  uTask_2018_12 in 'AoC2018\Task12\uTask_2018_12.pas',
+  uTask_2018_13 in 'AoC2018\Task13\uTask_2018_13.pas',
+  uCarts_2018_13 in 'AoC2018\Task13\uCarts_2018_13.pas',
+  uForm_2018_13 in 'AoC2018\Task13\uForm_2018_13.pas' {fMain_2018_13};
 
 {$R *.res}
 

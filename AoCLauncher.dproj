@@ -188,6 +188,12 @@
         <DCCReference Include="AoC2018\Task10\uStars_2018_10.pas"/>
         <DCCReference Include="AoC2018\Task11\uTask_2018_11.pas"/>
         <DCCReference Include="AoC2018\Task12\uTask_2018_12.pas"/>
+        <DCCReference Include="AoC2018\Task13\uTask_2018_13.pas"/>
+        <DCCReference Include="AoC2018\Task13\uCarts_2018_13.pas"/>
+        <DCCReference Include="AoC2018\Task13\uForm_2018_13.pas">
+            <Form>fMain_2018_13</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
