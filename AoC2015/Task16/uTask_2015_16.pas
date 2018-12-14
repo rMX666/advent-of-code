@@ -34,10 +34,11 @@ var
   I, Part1, Part2: Integer;
   Ethalon: TAuntProperties;
 begin
+  Ethalon := TAuntProperties.Create(10);
+
   try
     LoadAunts;
 
-    Ethalon := TAuntProperties.Create(10);
     Ethalon.Add('children', 3);
     Ethalon.Add('cats', 7);
     Ethalon.Add('samoyeds', 2);

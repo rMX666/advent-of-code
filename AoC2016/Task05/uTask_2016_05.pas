@@ -43,9 +43,9 @@ begin
         if Hash.StartsWith('00000') then
           case IsHardMode of
             True:
-              if Hash[6] in [ '0'..'7' ] then
+              if CharInSet(Hash[6], [ '0'..'7' ]) then
                 begin
-                  Pos := (Hash[6] + '').ToInteger + 1;
+                  Pos := String(Hash[6]).ToInteger + 1;
                   if Result[Pos] = '*' then
                     begin
                       Result[Pos] := Hash[7];

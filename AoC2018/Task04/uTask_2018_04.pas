@@ -142,12 +142,13 @@ end;
 function TTask_AoC.GetBestFreqMinute: Integer;
 var
   Guard: TGuard;
-  ID, BestFreq, Freq, Minute: Integer;
+  ID, BestFreq, Freq: Integer;
 begin
   BestFreq := -1;
+  ID := 0;
   for Guard in FGuards.Values do
     begin
-      Minute := Guard.GetBestMinute(Freq);
+      Guard.GetBestMinute(Freq);
       if BestFreq < Freq then
         begin
           BestFreq := Freq;
@@ -161,11 +162,8 @@ end;
 function TTask_AoC.GetBestMinute: Integer;
 var
   Guard: TGuard;
-  I, BestMinutes, ID: Integer;
-  Intervals: TIntervals;
+  BestMinutes, ID: Integer;
 begin
-  Result := 0;
-
   BestMinutes := 0;
   ID := 0;
   for Guard in FGuards.Values do
@@ -215,6 +213,8 @@ begin
     try
       Sort;
 
+      StartMinute := 0;
+      Guard := nil;
       I := 0;
       while I < Count do
         begin

@@ -48,6 +48,7 @@ var
   C, BestC: Char;
 begin
   Result := String.Create('-', FLines[0].Length);
+  BestC := #0;
 
   for I := 1 to Result.Length do
     begin

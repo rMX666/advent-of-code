@@ -31,9 +31,5 @@ object fMain_2018_13: TfMain_2018_13
     ParentDoubleBuffered = False
     TabOrder = 0
     OnDrawCell = sgMapDrawCell
-    ExplicitLeft = 240
-    ExplicitTop = 240
-    ExplicitWidth = 320
-    ExplicitHeight = 120
   end
 end

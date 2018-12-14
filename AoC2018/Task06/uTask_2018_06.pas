@@ -228,8 +228,6 @@ begin
 end;
 
 procedure TAreas.Expand;
-var
-  I: Integer;
 begin
   CalcBoundingBox;
 

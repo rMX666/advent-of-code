@@ -86,7 +86,7 @@ end;
 
 procedure TfMain_2018_13.StepCarts(Sender: TObject);
 begin
-  if FStep mod 50 = 0 then
+//  if FStep mod 50 = 0 then
     begin
       sgMap.Repaint;
       Application.ProcessMessages;

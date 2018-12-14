@@ -100,7 +100,7 @@ var
   procedure FindBestPath(out MinPath, MaxPath: Integer);
   var
     MinPathA, MaxPathA, NextPath: TPermutationItems;
-    I, L, J, PathLength, MinPathI, MaxPathI: Integer;
+    L, J, PathLength, MinPathI, MaxPathI: Integer;
     Permutations: TPermutations;
   begin
     L := FLocations.Count;

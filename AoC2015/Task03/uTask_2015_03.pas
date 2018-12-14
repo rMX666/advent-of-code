@@ -64,26 +64,30 @@ begin
   with Input do
     try
       Houses := TDictionary<TPoint,Integer>.Create;
-      Houses.Add(TPoint.Zero, 2);
 
-      SetLength(Points, Part);
-      for I := 0 to Part - 1 do
-        Points[I] := TPoint.Zero;
+      try
+        Houses.Add(TPoint.Zero, 2);
 
-      for I := 1 to Text.Trim.Length do
-        begin
-          Point := Points[I mod Part] + FDirections[Text[I]];
-          if Houses.ContainsKey(Point) then
-            Houses[Point] := Houses[Point] + 1
-          else
-            Houses.Add(Point, 1);
+        SetLength(Points, Part);
+        for I := 0 to Part - 1 do
+          Points[I] := TPoint.Zero;
 
-          Points[I mod Part] := Point;
-        end;
+        for I := 1 to Text.Trim.Length do
+          begin
+            Point := Points[I mod Part] + FDirections[Text[I]];
+            if Houses.ContainsKey(Point) then
+              Houses[Point] := Houses[Point] + 1
+            else
+              Houses.Add(Point, 1);
 
-      OK(Format('Part %d: %d', [ Part, Houses.Count ]));
+            Points[I mod Part] := Point;
+          end;
+
+        OK(Format('Part %d: %d', [ Part, Houses.Count ]));
+      finally
+        Houses.Free;
+      end;
     finally
-      Houses.Free;
       Free;
     end;
 end;

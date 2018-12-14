@@ -46,7 +46,7 @@ begin
   Result := MaxInt;
   for C := 'a' to 'z' do
     begin
-      S := FPolymer.Replace(C, '').Replace(UpCase(C), '');
+      S := FPolymer.Replace(String(C), '').Replace(String(UpCase(C)), '');
       L := ReactAll(S);
       if L < Result then
         Result := L;
@@ -64,7 +64,7 @@ var
     if UpCase(S[I]) <> UpCase(S[I + 1]) then
       Exit(False);
 
-    if ((S[I] in [ 'A'..'Z' ]) and (S[I + 1] in [ 'a'..'z' ])) or ((S[I] in [ 'a'..'z' ]) and (S[I + 1] in [ 'A'..'Z' ])) then
+    if (CharInSet(S[I], [ 'A'..'Z' ]) and CharInSet(S[I + 1], [ 'a'..'z' ])) or (CharInSet(S[I], [ 'a'..'z' ]) and CharInSet(S[I + 1], [ 'A'..'Z' ])) then
       Exit(True);
   end;
 

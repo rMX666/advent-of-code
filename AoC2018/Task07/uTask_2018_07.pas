@@ -113,6 +113,7 @@ function TTask_AoC.GetFirstStepName: Char;
 var
   X: TStep;
 begin
+  Result := #0;
   for X in FSteps do
     if X.Value.IsEmpty then
       Exit(X.Key);

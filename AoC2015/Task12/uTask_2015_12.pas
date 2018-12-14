@@ -35,26 +35,29 @@ begin
       JSON := TJSONParser.Parse(Text.Trim);
       JSON.OnJSONTraverse := JSONTraverse;
 
-      FNumberSum := 0;
-      FPart := 1;
-      JSON.Traverse;
-      Result1 := FNumberSum;
+      try
+        FNumberSum := 0;
+        FPart := 1;
+        JSON.Traverse;
+        Result1 := FNumberSum;
 
-      FNumberSum := 0;
-      FPart := 2;
-      JSON.Traverse;
-      Result2 := FNumberSum;
+        FNumberSum := 0;
+        FPart := 2;
+        JSON.Traverse;
+        Result2 := FNumberSum;
 
-      with TfMain_2015_12.Create(Application) do
-        try
-          ShowJSON(JSON);
-          SetResult(Format('Part 1: %d, Part 2: %d', [ Result1, Result2 ]));
-          ShowModal;
-        finally
-          Free;
-        end;
+        with TfMain_2015_12.Create(Application) do
+          try
+            ShowJSON(JSON);
+            SetResult(Format('Part 1: %d, Part 2: %d', [ Result1, Result2 ]));
+            ShowModal;
+          finally
+            Free;
+          end;
+      finally
+        JSON.Free;
+      end;
     finally
-      JSON.Free;
       Free;
     end;
 end;

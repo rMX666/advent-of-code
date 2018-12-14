@@ -93,6 +93,7 @@ const
   end;
 
 begin
+  Result := False;
   case Part of
     1: Result := HasVowel and HasDouble and (not HasForbidden);
     2: Result := HasDoubleDouble and HasXYXPattern;

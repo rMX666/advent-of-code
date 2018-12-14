@@ -31,7 +31,7 @@ type
   public
     constructor Create(const AObjectType: TJSONType; const AValue: Pointer); overload;
     procedure Traverse;
-    function ToString: String;
+    function ToString: String; override;
     property ObjectType: TJSONType read FObjectType;
     property AsNumber: TJSONNumber read GetAsNumber;
     property AsString: TJSONString read GetAsString;
@@ -89,6 +89,7 @@ end;
 
 function TJSONItem.GetAsList: TJSONArray;
 begin
+  Result := nil;
   if FObjectType = jsonArray then
     Result := FValue
   else
@@ -97,6 +98,7 @@ end;
 
 function TJSONItem.GetAsNumber: TJSONNumber;
 begin
+  Result := -1;
   if FObjectType = jsonNumber then
     Result := TJSONNumber(FValue^)
   else
@@ -105,6 +107,7 @@ end;
 
 function TJSONItem.GetAsObject: TJSONObject;
 begin
+  Result := nil;
   if FObjectType = jsonObject then
     Result := FValue
   else
@@ -240,7 +243,7 @@ function TJSONParser.Parse(var Pos: Integer): TJSONItem;
     S: String;
   begin
     S := '';
-    while FStr[Pos] in [ '-', '0' .. '9' ] do
+    while CharInSet(FStr[Pos], [ '-', '0' .. '9' ]) do
       begin
         S := S + FStr[Pos];
         Inc(Pos);

@@ -44,7 +44,7 @@ type
 implementation
 
 uses
-  VCL.Forms, Winapi.Windows, FileCtrl;
+  VCL.Forms, Winapi.Windows;
 
 const
   INPUT_DIR = 'Input';

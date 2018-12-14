@@ -14,6 +14,8 @@ type
   public
     constructor Create(const Counts: TCounts);
     function Compare(const Left, Right: Char): Integer; override;
+    function Equals(const Left, Right: Char): Boolean; reintroduce; overload; override;
+    function GetHashCode(const Value: Char): Integer; reintroduce; overload; override;
   end;
 
   TTask_AoC = class (TTask)
@@ -53,6 +55,16 @@ begin
   FCounts := Counts;
 end;
 
+function TCharComparer.Equals(const Left, Right: Char): Boolean;
+begin
+  Result := Left = Right;
+end;
+
+function TCharComparer.GetHashCode(const Value: Char): Integer;
+begin
+  Result := Ord(Value);
+end;
+
 { TTask_AoC }
 
 function TTask_AoC.CountRealRooms: Integer;
@@ -78,7 +90,7 @@ function TTask_AoC.FindNorthPoleID: Integer;
   begin
     Result := S;
     for I := 1 to S.Length do
-      if S[I] in [ 'a'..'z' ] then
+      if CharInSet(S[I], [ 'a'..'z' ]) then
         Result[I] := RotChar(S[I], Rounds);
   end;
 
@@ -110,7 +122,7 @@ var
 begin
   Result := '';
   I := Room.IndexOf('[');
-  while Room[I] in [ '0'..'9' ] do
+  while CharInSet(Room[I], [ '0'..'9' ]) do
     begin
       Result := Room[I] + Result;
       Dec(I);
@@ -122,7 +134,7 @@ var
   I: Integer;
 begin
   I := 1;
-  while (I <= Room.Length) and not (Room[I] in [ '0'..'9' ]) do
+  while (I <= Room.Length) and not CharInSet(Room[I], [ '0'..'9' ]) do
     Inc(I);
   Result := Room.Substring(0, I - 2);
 end;

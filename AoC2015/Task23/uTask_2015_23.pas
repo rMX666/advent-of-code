@@ -8,8 +8,8 @@ uses
 type
   TState = class;
 
-  TRegisterType = ( rtRegA, rtRegB );
-  TInstructionType = ( itHlf, itTpl, itInc, itJmp, itJie, itJio );
+  TRegisterType = ( rtNone, rtRegA, rtRegB );
+  TInstructionType = ( itNone, itHlf, itTpl, itInc, itJmp, itJie, itJio );
   TInstruction = record
     Owner: TState;
     InstructionType: TInstructionType;
@@ -56,6 +56,7 @@ constructor TInstruction.Create(const AOwner: TState; const Cmd: String);
 
   function GetInstructionType(const S: String): TInstructionType;
   begin
+    Result := itNone;
     if S = 'hlf' then
       Result := itHlf
     else if S = 'tpl' then
@@ -72,6 +73,7 @@ constructor TInstruction.Create(const AOwner: TState; const Cmd: String);
 
   function GetRegisterType(const S: String): TRegisterType;
   begin
+    Result := rtNone;
     if S = 'a' then
       Result := rtRegA
     else if S = 'b' then

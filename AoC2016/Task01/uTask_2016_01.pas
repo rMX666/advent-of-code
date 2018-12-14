@@ -72,7 +72,6 @@ var
   Path: TList<TPoint>;
   Found: Boolean;
 begin
-  Result := 0;
   CurrentPos := TPoint.Zero;
   CurrentDir := N;
 
@@ -114,7 +113,6 @@ var
   CurrentDir: TDirection;
   I: Integer;
 begin
-  Result := 0;
   CurrentPos := TPoint.Zero;
   CurrentDir := N;
 
@@ -150,6 +148,7 @@ end;
 
 function TTask_AoC.Turn(const TurnDir, CurrDir: TDirection): TDirection;
 begin
+  Result := L;
   case TurnDir of
     L: Result := TDirection((4 + Integer(CurrDir) - Integer(N) - 1) mod 4 + Integer(N));
     R: Result := TDirection((4 + Integer(CurrDir) - Integer(N) + 1) mod 4 + Integer(N));

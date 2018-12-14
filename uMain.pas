@@ -64,6 +64,7 @@ begin
   FormHeight := 0;
 
   Year := -1;
+  YearBox := nil;
   with TTaskHost.Tasks do
     for I := 0 to Count - 1 do
       begin

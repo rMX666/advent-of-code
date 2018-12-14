@@ -92,8 +92,6 @@ var
   Next: TArray<String>;
   Possibilities: TMolecules;
 begin
-  Result := 0;
-
   Possibilities := TList<String>.Create;
   with Possibilities do
     try
@@ -134,7 +132,6 @@ var
   Keys: TArray<String>;
   RestartCounter: Integer;
   InitialMolecule: String;
-  DidReplace: Boolean;
 begin
   Randomize;
   Keys := FReplacements.Keys.ToArray;

@@ -85,7 +85,6 @@ const
 var
   PowerLevel, MaxPowerLevel, X, Y: Integer;
 begin
-  PowerLevel := 0;
   MaxPowerLevel := 0;
 
   for X := 1 to 298 do
@@ -115,7 +114,6 @@ function TTask_AoC.MaxRegion(out Size: Integer): TPoint;
 var
   PowerLevel, MaxPowerLevel, X, Y, S: Integer;
 begin
-  PowerLevel := 0;
   MaxPowerLevel := 0;
 
   for X := 1 to 300 do

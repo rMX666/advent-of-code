@@ -29,7 +29,6 @@ type
   TTask_AoC = class (TTask)
   private
     FWires: TWires;
-    FStep: Cardinal;
     procedure InitializeWires;
   protected
     procedure DoRun; override;
@@ -94,6 +93,7 @@ end;
 
 function TInstruction.Run: Integer;
 begin
+  Result := -1;
   case Gate of
     gtNone:
       if OpBType = otNone then
@@ -126,9 +126,9 @@ procedure TTask_AoC.InitializeWires;
     if Op.Length = 0 then
       Exit;
 
-    if Op[1] in [ '0' .. '9' ] then
+    if CharInSet(Op[1], [ '0' .. '9' ]) then
       Result := otValue
-    else if Op[1] in [ 'a' .. 'z' ] then
+    else if CharInSet(Op[1], [ 'a' .. 'z' ]) then
       Result := otWire;
   end;
 
@@ -142,7 +142,6 @@ procedure TTask_AoC.InitializeWires;
   begin
     A := S.Split([' ']);
     Output := A[Length(A) - 1];
-    OpAType := otNone;
     OpBType := otNone;
     Gate := gtNone;
 
