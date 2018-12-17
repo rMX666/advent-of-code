@@ -1,0 +1,40 @@
+object fMain_2018_17: TfMain_2018_17
+  Left = 0
+  Top = 0
+  Caption = 'Advent of Code 2018 - Day 17'
+  ClientHeight = 299
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object sgMap: TDrawGrid
+    Left = 0
+    Top = 0
+    Width = 635
+    Height = 299
+    Align = alClient
+    DefaultColWidth = 2
+    DefaultRowHeight = 2
+    DoubleBuffered = True
+    FixedCols = 0
+    FixedRows = 0
+    GridLineWidth = 0
+    ParentDoubleBuffered = False
+    TabOrder = 0
+    OnDrawCell = sgMapDrawCell
+    OnMouseWheelDown = sgMapMouseWheelDown
+    OnMouseWheelUp = sgMapMouseWheelUp
+    ExplicitLeft = 224
+    ExplicitTop = 104
+    ExplicitWidth = 320
+    ExplicitHeight = 120
+  end
+end
