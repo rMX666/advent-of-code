@@ -70,7 +70,8 @@ uses
   uTask_2018_16 in 'AoC2018\Task16\uTask_2018_16.pas',
   uTask_2018_17 in 'AoC2018\Task17\uTask_2018_17.pas',
   uForm_2018_17 in 'AoC2018\Task17\uForm_2018_17.pas' {fMain_2018_17},
-  uWater_2018_17 in 'AoC2018\Task17\uWater_2018_17.pas';
+  uWater_2018_17 in 'AoC2018\Task17\uWater_2018_17.pas',
+  uTask_2018_18 in 'AoC2018\Task18\uTask_2018_18.pas';
 
 {$R *.res}
 
