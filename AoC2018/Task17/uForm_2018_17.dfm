@@ -2,8 +2,8 @@ object fMain_2018_17: TfMain_2018_17
   Left = 0
   Top = 0
   Caption = 'Advent of Code 2018 - Day 17'
-  ClientHeight = 299
-  ClientWidth = 635
+  ClientHeight = 961
+  ClientWidth = 484
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object fMain_2018_17: TfMain_2018_17
   object sgMap: TDrawGrid
     Left = 0
     Top = 0
-    Width = 635
-    Height = 299
+    Width = 484
+    Height = 961
     Align = alClient
     DefaultColWidth = 2
     DefaultRowHeight = 2
@@ -32,9 +32,7 @@ object fMain_2018_17: TfMain_2018_17
     OnDrawCell = sgMapDrawCell
     OnMouseWheelDown = sgMapMouseWheelDown
     OnMouseWheelUp = sgMapMouseWheelUp
-    ExplicitLeft = 224
-    ExplicitTop = 104
-    ExplicitWidth = 320
-    ExplicitHeight = 120
+    ExplicitWidth = 635
+    ExplicitHeight = 299
   end
 end

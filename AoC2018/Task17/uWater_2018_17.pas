@@ -86,7 +86,7 @@ end;
 procedure TMap.Simulate;
 var
   Source: TPoint;
-  Queue: TQueue<TPoint>;
+  Queue: TList<TPoint>;
   StepNo: Integer;
 
   function CanGo(const P: TPoint; const D: TFlowDirection): Boolean;
@@ -112,6 +112,7 @@ var
     Box: TRect;
     FoundTop, WaterFalls: Boolean;
   begin
+    Queue.Remove(Source);
     P := Source;
 
     // Detect box bottom
@@ -138,7 +139,8 @@ var
         // Detect fall (water drops on edge)
         if CanGo(PL, fdDown) then
           begin
-            Queue.Enqueue(PL);
+            if not Queue.Contains(PL) then
+              Queue.Add(PL);
             WaterFalls := True;
             Break;
           end;
@@ -154,7 +156,8 @@ var
         // Detect fall (water drops on edge)
         if CanGo(PR, fdDown) then
           begin
-            Queue.Enqueue(PR);
+            if not Queue.Contains(PR) then
+              Queue.Add(PR);
             WaterFalls := True;
             Break;
           end;
@@ -174,7 +177,8 @@ var
             for I := PL.X to PR.X do
               FMap[I][PL.Y] := stWetSand
           else
-            Queue.Enqueue(Source);
+            if not Queue.Contains(Source) then
+              Queue.Add(Source);
 
           for I := PL.X to Source.X do
             FMap[I][PL.Y] := stWetSand;
@@ -183,7 +187,8 @@ var
               FMap[PL.X - 1][PL.Y] := stWetSand;
               Dec(PL.X, 2);
               if CanGo(PL, fdDown) then
-                Queue.Enqueue(PL);
+                if not Queue.Contains(PL) then
+                  Queue.Add(PL);
             end;
 
           for I := Source.X to PR.X do
@@ -193,7 +198,8 @@ var
               FMap[PR.X + 1][PR.Y] := stWetSand;
               Inc(PR.X, 2);
               if CanGo(PR, fdDown) then
-                Queue.Enqueue(PR);
+                if not Queue.Contains(PR) then
+                  Queue.Add(PR);
             end;
 
           Inc(PL.Y);
@@ -206,7 +212,8 @@ var
             if FMap[I][PL.Y - 1] = stClay then
               begin
                 FoundTop := True;
-                Queue.Enqueue(Source);
+                if not Queue.Contains(Source) then
+                  Queue.Add(Source);
                 Break;
               end;
 
@@ -229,11 +236,11 @@ begin
   StepNo := 0;
   try
     Source := WaterSource;
-    Queue := TQueue<TPoint>.Create;
-    Queue.Enqueue(Source);
+    Queue := TList<TPoint>.Create;
+    Queue.Add(Source);
     while Queue.Count > 0 do
       begin
-        FloodBox(Queue.Dequeue);
+        FloodBox(Queue.First);
         Inc(StepNo);
         DoOnSimulationStep;
       end;
