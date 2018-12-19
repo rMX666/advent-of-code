@@ -71,7 +71,10 @@ uses
   uTask_2018_17 in 'AoC2018\Task17\uTask_2018_17.pas',
   uForm_2018_17 in 'AoC2018\Task17\uForm_2018_17.pas' {fMain_2018_17},
   uWater_2018_17 in 'AoC2018\Task17\uWater_2018_17.pas',
-  uTask_2018_18 in 'AoC2018\Task18\uTask_2018_18.pas';
+  uTask_2018_18 in 'AoC2018\Task18\uTask_2018_18.pas',
+  uTask_2018_19 in 'AoC2018\Task19\uTask_2018_19.pas',
+  uForm_2018_19 in 'AoC2018\Task19\uForm_2018_19.pas' {fMain_2018_19},
+  uProgram_2018_19 in 'AoC2018\Task19\uProgram_2018_19.pas';
 
 {$R *.res}
 
@@ -83,5 +86,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
   Application.CreateForm(TfMain_2018_17, fMain_2018_17);
+  Application.CreateForm(TfMain_2018_19, fMain_2018_19);
   Application.Run;
 end.
