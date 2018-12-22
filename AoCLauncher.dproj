@@ -210,6 +210,8 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2018\Task19\uProgram_2018_19.pas"/>
+        <DCCReference Include="AoC2018\Task20\uTask_2018_20.pas"/>
+        <DCCReference Include="AoC2018\Task21\uTask_2018_21.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

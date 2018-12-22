@@ -41,9 +41,6 @@ object fMain_2018_19: TfMain_2018_19
     ItemHeight = 15
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = 65
-    ExplicitWidth = 384
-    ExplicitHeight = 248
   end
   object Panel1: TPanel
     Left = 0
@@ -59,6 +56,13 @@ object fMain_2018_19: TfMain_2018_19
       Width = 55
       Height = 13
       Caption = 'Break After'
+    end
+    object Label2: TLabel
+      Left = 232
+      Top = 12
+      Width = 10
+      Height = 13
+      Caption = 'r0'
     end
     object btnRun: TButton
       AlignWithMargins = True
@@ -85,9 +89,17 @@ object fMain_2018_19: TfMain_2018_19
     object edBreak: TEdit
       Left = 160
       Top = 8
-      Width = 121
+      Width = 33
       Height = 21
       TabOrder = 2
+    end
+    object edR0: TEdit
+      Left = 248
+      Top = 8
+      Width = 33
+      Height = 21
+      TabOrder = 3
+      OnKeyPress = edR0KeyPress
     end
   end
   object lbRegisters: TListBox
@@ -104,6 +116,5 @@ object fMain_2018_19: TfMain_2018_19
     ItemHeight = 15
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 502
   end
 end

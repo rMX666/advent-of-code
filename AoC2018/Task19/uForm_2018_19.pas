@@ -17,10 +17,13 @@ type
     btnStep: TButton;
     edBreak: TEdit;
     Label1: TLabel;
+    Label2: TLabel;
+    edR0: TEdit;
     procedure btnStepClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShortCut(var Msg: TWMKey; var Handled: Boolean);
     procedure btnRunClick(Sender: TObject);
+    procedure edR0KeyPress(Sender: TObject; var Key: Char);
   private
     FProgram: TProgram;
     function Step: Boolean;
@@ -57,6 +60,13 @@ begin
   Result := FProgram.IP >= StrToInt(edBreak.Text);
 end;
 
+procedure TfMain_2018_19.edR0KeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+    if edR0.Text <> '' then
+      FProgram.State[0] := StrToInt(edR0.Text);
+end;
+
 procedure TfMain_2018_19.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
@@ -86,7 +96,7 @@ begin
   lbProgram.Selected[FProgram.IP] := True;
 
   lbRegisters.Clear;
-  for I := Low(FProgram.State) to High(FProgram.State) do
+  for I := 0 to FProgram.CountStates - 1 do
     lbRegisters.AddItem(FProgram.State[I].ToString, nil);
 end;
 
@@ -105,7 +115,7 @@ begin
   lbProgram.Selected[FProgram.IP] := True;
 
   lbRegisters.Items.BeginUpdate;
-  for I := Low(FProgram.State) to High(FProgram.State) do
+  for I := 0 to FProgram.CountStates - 1 do
     lbRegisters.Items[I] := FProgram.State[I].ToString;
   lbRegisters.Items.EndUpdate;
 end;

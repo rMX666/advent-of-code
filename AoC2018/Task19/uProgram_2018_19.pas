@@ -21,7 +21,7 @@ type
   TOp = record
     OpName: String;
     OpType: TOpType;
-    A, B, C: Integer;
+    A, B, C: Int64;
     constructor Create(const S: String);
     function Apply(const Before: TState): TState;
     function ToString: String;
@@ -33,12 +33,16 @@ type
     FState: TState;
     function GetIP: Integer;
     procedure SetIP(const Value: Integer);
+    function GetState(const Index: Integer): Int64;
+    procedure SetState(const Index: Integer; const Value: Int64);
+    function GetCountStates: Integer;
   public
     function Execute(const InitialState: TState; const BreakOnEnter: Boolean = False): TState;
     function Step: Boolean;
     procedure SetIPRegister(const AIP: Integer);
     property IP: Integer read GetIP write SetIP;
-    property State: TState read FState;
+    property State[const Index: Integer]: Int64 read GetState write SetState;
+    property CountStates: Integer read GetCountStates;
   end;
 
 implementation
@@ -132,9 +136,19 @@ begin
   Result := FState;
 end;
 
+function TProgram.GetCountStates: Integer;
+begin
+  Result := Length(FState);
+end;
+
 function TProgram.GetIP: Integer;
 begin
   Result := FState[FIP];
+end;
+
+function TProgram.GetState(const Index: Integer): Int64;
+begin
+  Result := FState[Index];
 end;
 
 procedure TProgram.SetIP(const Value: Integer);
@@ -147,15 +161,20 @@ begin
   FIP := AIP;
 end;
 
+procedure TProgram.SetState(const Index: Integer; const Value: Int64);
+begin
+  FState[Index] := Value;
+end;
+
 function TProgram.Step: Boolean;
 begin
-  Result := True;
-
   if IP >= Count then
     Exit(False);
 
   FState := Items[IP].Apply(FState);
   IP := IP + 1;
+
+  Result := IP < Count;
 end;
 
 end.
