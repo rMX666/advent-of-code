@@ -11,6 +11,7 @@ type
 
   TfMain_2016_13 = class(TForm)
     imgMaze: TImage;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -48,6 +49,11 @@ begin
 
   Application.ProcessMessages;
   Sleep(5);
+end;
+
+procedure TfMain_2016_13.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
 end;
 
 procedure TfMain_2016_13.Reset;

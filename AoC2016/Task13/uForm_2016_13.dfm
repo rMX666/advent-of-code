@@ -13,6 +13,7 @@ object fMain_2016_13: TfMain_2016_13
   Font.Style = []
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object imgMaze: TImage
