@@ -48,6 +48,8 @@ uses
   uTask_2016_09 in 'AoC2016\Task09\uTask_2016_09.pas',
   uTask_2016_10 in 'AoC2016\Task10\uTask_2016_10.pas',
   uTask_2016_12 in 'AoC2016\Task12\uTask_2016_12.pas',
+  uTask_2016_13 in 'AoC2016\Task13\uTask_2016_13.pas',
+  uForm_2016_13 in 'AoC2016\Task13\uForm_2016_13.pas' {fMain_2016_13},
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
