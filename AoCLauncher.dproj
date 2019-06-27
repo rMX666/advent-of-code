@@ -173,6 +173,7 @@
             <Form>fMain_2016_13</Form>
         </DCCReference>
         <DCCReference Include="AoC2016\Task14\uTask_2016_14.pas"/>
+        <DCCReference Include="AoC2016\Task15\uTask_2016_15.pas"/>
         <DCCReference Include="AoC2018\Task01\uTask_2018_01.pas"/>
         <DCCReference Include="AoC2018\Task02\uTask_2018_02.pas"/>
         <DCCReference Include="AoC2018\Task03\uTask_2018_03.pas"/>

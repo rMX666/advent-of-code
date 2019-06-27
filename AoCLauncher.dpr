@@ -51,6 +51,7 @@ uses
   uTask_2016_13 in 'AoC2016\Task13\uTask_2016_13.pas',
   uForm_2016_13 in 'AoC2016\Task13\uForm_2016_13.pas' {fMain_2016_13},
   uTask_2016_14 in 'AoC2016\Task14\uTask_2016_14.pas',
+  uTask_2016_15 in 'AoC2016\Task15\uTask_2016_15.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
