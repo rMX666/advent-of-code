@@ -176,6 +176,8 @@
         <DCCReference Include="AoC2016\Task15\uTask_2016_15.pas"/>
         <DCCReference Include="AoC2016\Task16\uTask_2016_16.pas"/>
         <DCCReference Include="AoC2016\Task17\uTask_2016_17.pas"/>
+        <DCCReference Include="AoC2016\Task18\uTask_2016_18.pas"/>
+        <DCCReference Include="AoC2016\Task19\uTask_2016_19.pas"/>
         <DCCReference Include="AoC2018\Task01\uTask_2018_01.pas"/>
         <DCCReference Include="AoC2018\Task02\uTask_2018_02.pas"/>
         <DCCReference Include="AoC2018\Task03\uTask_2018_03.pas"/>
@@ -222,7 +224,6 @@
         <DCCReference Include="AoC2018\Task20\uTask_2018_20.pas"/>
         <DCCReference Include="AoC2018\Task21\uTask_2018_21.pas"/>
         <DCCReference Include="AoC2018\Task22\uTask_2018_22.pas"/>
-        <DCCReference Include="AoC2016\Task18\uTask_2016_18.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
