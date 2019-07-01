@@ -86,7 +86,8 @@ uses
   uProgram_2018_19 in 'AoC2018\Task19\uProgram_2018_19.pas',
   uTask_2018_20 in 'AoC2018\Task20\uTask_2018_20.pas',
   uTask_2018_21 in 'AoC2018\Task21\uTask_2018_21.pas',
-  uTask_2018_22 in 'AoC2018\Task22\uTask_2018_22.pas';
+  uTask_2018_22 in 'AoC2018\Task22\uTask_2018_22.pas',
+  uTask_2016_20 in 'AoC2016\Task20\uTask_2016_20.pas';
 
 {$R *.res}
 
