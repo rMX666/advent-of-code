@@ -62,6 +62,7 @@ uses
   uTask_2016_22 in 'AoC2016\Task22\uTask_2016_22.pas',
   uSolver_2016_22 in 'AoC2016\Task22\uSolver_2016_22.pas',
   uForm_2016_22 in 'AoC2016\Task22\uForm_2016_22.pas' {fForm_2016_22},
+  uTask_2016_23 in 'AoC2016\Task23\uTask_2016_23.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
