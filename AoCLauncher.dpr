@@ -68,6 +68,7 @@ uses
   uMain_2016_24 in 'AoC2016\Task24\uMain_2016_24.pas' {fMain_2016_24},
   uTask_2016_25 in 'AoC2016\Task25\uTask_2016_25.pas',
   uTask_2017_01 in 'AoC2017\Task01\uTask_2017_01.pas',
+  uTask_2017_02 in 'AoC2017\Task02\uTask_2017_02.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
