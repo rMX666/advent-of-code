@@ -187,6 +187,11 @@
             <Form>fForm_2016_22</Form>
         </DCCReference>
         <DCCReference Include="AoC2016\Task23\uTask_2016_23.pas"/>
+        <DCCReference Include="AoC2016\Task24\uTask_2016_24.pas"/>
+        <DCCReference Include="AoC2016\Task24\uSolver_2016_24.pas"/>
+        <DCCReference Include="AoC2016\Task24\uMain_2016_24.pas">
+            <Form>fMain_2016_24</Form>
+        </DCCReference>
         <DCCReference Include="AoC2018\Task01\uTask_2018_01.pas"/>
         <DCCReference Include="AoC2018\Task02\uTask_2018_02.pas"/>
         <DCCReference Include="AoC2018\Task03\uTask_2018_03.pas"/>

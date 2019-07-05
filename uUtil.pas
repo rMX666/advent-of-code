@@ -11,11 +11,12 @@ type
   TPermutations = class(TEnumerable<TPermutationItems>)
   public
     FItemCount: Integer;
+    FStartIndex: Integer;
     FCount: Integer;
   protected
     function DoGetEnumerator: TEnumerator<TPermutationItems>; reintroduce;
   public
-    constructor Create(const AItemCount: Integer);
+    constructor Create(const AItemCount: Integer; const AStartIndex: Integer = 0);
     type
       TEnumerator = class(TEnumerator<TPermutationItems>)
       private
@@ -164,7 +165,7 @@ begin
 
   SetLength(FInitial, FParent.FItemCount);
   for I := 0 to FParent.FItemCount do
-    FInitial[I] := I;
+    FInitial[I] := FParent.FStartIndex + I;
 
   FCurrent := Copy(FInitial, 0, FParent.FItemCount);
   FCurrentIndex := 0;
@@ -208,11 +209,12 @@ end;
 
 { TPermutation }
 
-constructor TPermutations.Create(const AItemCount: Integer);
+constructor TPermutations.Create(const AItemCount: Integer; const AStartIndex: Integer);
 var
   I: Integer;
 begin
   FItemCount := AItemCount;
+  FStartIndex := AStartIndex;
 
   FCount := 1;
   for I := 2 to FItemCount do
