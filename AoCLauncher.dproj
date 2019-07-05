@@ -122,14 +122,12 @@
         <DCCReference Include="AoC2015\Task09\uTask_2015_09.pas"/>
         <DCCReference Include="AoC2015\Task09\uForm_2015_09.pas">
             <Form>fForm_2015_09</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2015\Task10\uTask_2015_10.pas"/>
         <DCCReference Include="AoC2015\Task11\uTask_2015_11.pas"/>
         <DCCReference Include="AoC2015\Task12\uTask_2015_12.pas"/>
         <DCCReference Include="AoC2015\Task12\uForm_2015_12.pas">
             <Form>fMain_2015_12</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2015\Task12\uJSON_2015_12.pas"/>
         <DCCReference Include="AoC2015\Task13\uTask_2015_13.pas"/>
@@ -140,7 +138,6 @@
         <DCCReference Include="AoC2015\Task18\uTask_2015_18.pas"/>
         <DCCReference Include="AoC2015\Task18\uForm_2015_18.pas">
             <Form>fMain_2015_18</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2015\Task19\uTask_2015_19.pas"/>
         <DCCReference Include="AoC2015\Task20\uTask_2015_20.pas"/>
@@ -157,14 +154,12 @@
         <DCCReference Include="AoC2016\Task05\uTask_2016_05.pas"/>
         <DCCReference Include="AoC2016\Task05\uForm_2016_05.pas">
             <Form>fMain_2016_05</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2016\Task06\uTask_2016_06.pas"/>
         <DCCReference Include="AoC2016\Task07\uTask_2016_07.pas"/>
         <DCCReference Include="AoC2016\Task08\uTask_2016_08.pas"/>
         <DCCReference Include="AoC2016\Task08\uForm_2016_08.pas">
             <Form>fMain_2016_08</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2016\Task09\uTask_2016_09.pas"/>
         <DCCReference Include="AoC2016\Task10\uTask_2016_10.pas"/>
@@ -193,6 +188,7 @@
             <Form>fMain_2016_24</Form>
         </DCCReference>
         <DCCReference Include="AoC2016\Task25\uTask_2016_25.pas"/>
+        <DCCReference Include="AoC2017\Task01\uTask_2017_01.pas"/>
         <DCCReference Include="AoC2018\Task01\uTask_2018_01.pas"/>
         <DCCReference Include="AoC2018\Task02\uTask_2018_02.pas"/>
         <DCCReference Include="AoC2018\Task03\uTask_2018_03.pas"/>
@@ -201,7 +197,6 @@
         <DCCReference Include="AoC2018\Task06\uTask_2018_06.pas"/>
         <DCCReference Include="AoC2018\Task06\uForm_2018_06.pas">
             <Form>fMain_2018_06</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2018\Task07\uTask_2018_07.pas"/>
         <DCCReference Include="AoC2018\Task08\uTask_2018_08.pas"/>
@@ -209,7 +204,6 @@
         <DCCReference Include="AoC2018\Task10\uTask_2018_10.pas"/>
         <DCCReference Include="AoC2018\Task10\uForm_2018_10.pas">
             <Form>fMain_2018_10</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2018\Task10\uStars_2018_10.pas"/>
         <DCCReference Include="AoC2018\Task11\uTask_2018_11.pas"/>
@@ -218,7 +212,6 @@
         <DCCReference Include="AoC2018\Task13\uCarts_2018_13.pas"/>
         <DCCReference Include="AoC2018\Task13\uForm_2018_13.pas">
             <Form>fMain_2018_13</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2018\Task14\uTask_2018_14.pas"/>
         <DCCReference Include="AoC2018\Task15\uTask_2018_15.pas"/>
@@ -226,14 +219,12 @@
         <DCCReference Include="AoC2018\Task17\uTask_2018_17.pas"/>
         <DCCReference Include="AoC2018\Task17\uForm_2018_17.pas">
             <Form>fMain_2018_17</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2018\Task17\uWater_2018_17.pas"/>
         <DCCReference Include="AoC2018\Task18\uTask_2018_18.pas"/>
         <DCCReference Include="AoC2018\Task19\uTask_2018_19.pas"/>
         <DCCReference Include="AoC2018\Task19\uForm_2018_19.pas">
             <Form>fMain_2018_19</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="AoC2018\Task19\uProgram_2018_19.pas"/>
         <DCCReference Include="AoC2018\Task20\uTask_2018_20.pas"/>
