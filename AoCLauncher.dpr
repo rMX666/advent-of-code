@@ -73,6 +73,7 @@ uses
   uTask_2017_04 in 'AoC2017\Task04\uTask_2017_04.pas',
   uTask_2017_05 in 'AoC2017\Task05\uTask_2017_05.pas',
   uTask_2017_06 in 'AoC2017\Task06\uTask_2017_06.pas',
+  uTask_2017_07 in 'AoC2017\Task07\uTask_2017_07.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
