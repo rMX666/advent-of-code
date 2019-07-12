@@ -3,7 +3,7 @@ unit uKnotHash;
 interface
 
 uses
-  SysUtils;
+  SysUtils, System.Classes;
 
 const
   KNOT_SALT_LENGTH = 5;
@@ -38,6 +38,7 @@ type
     procedure Hash(const Rounds: Integer = 1);
     property RawList: TByteArray256 read GetRawList;
     class function HashHex(const S: String): String;
+    class function HashBits(const S: String): TBits;
   end;
 
 implementation
@@ -126,6 +127,23 @@ begin
       end;
 
   FList.Rot(-(Reverse mod 256));
+end;
+
+class function TKnotHash.HashBits(const S: String): TBits;
+var
+  Current, I, J: Byte;
+  Hash: String;
+begin
+  Result := TBits.Create;
+  Hash := HashHex(S);
+  I := 1;
+  while I <= Hash.Length do
+    begin
+      Current := String('0x' + Hash[I]).ToInteger;
+      for J := 0 to 3 do
+        Result.Bits[I * 4 - J] := (Current shr J) and 1 = 1;
+      Inc(I);
+    end;
 end;
 
 class function TKnotHash.HashHex(const S: String): String;
