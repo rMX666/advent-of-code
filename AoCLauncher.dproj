@@ -207,6 +207,7 @@
         <DCCReference Include="AoC2017\Task16\uTask_2017_16.pas"/>
         <DCCReference Include="AoC2017\Task17\uTask_2017_17.pas"/>
         <DCCReference Include="AoC2017\Task18\uTask_2017_18.pas"/>
+        <DCCReference Include="AoC2017\Task19\uTask_2017_19.pas"/>
         <DCCReference Include="AoC2018\Task01\uTask_2018_01.pas"/>
         <DCCReference Include="AoC2018\Task02\uTask_2018_02.pas"/>
         <DCCReference Include="AoC2018\Task03\uTask_2018_03.pas"/>

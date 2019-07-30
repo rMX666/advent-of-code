@@ -86,6 +86,7 @@ uses
   uTask_2017_16 in 'AoC2017\Task16\uTask_2017_16.pas',
   uTask_2017_17 in 'AoC2017\Task17\uTask_2017_17.pas',
   uTask_2017_18 in 'AoC2017\Task18\uTask_2017_18.pas',
+  uTask_2017_19 in 'AoC2017\Task19\uTask_2017_19.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
