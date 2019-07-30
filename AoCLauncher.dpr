@@ -84,6 +84,8 @@ uses
   uTask_2017_14 in 'AoC2017\Task14\uTask_2017_14.pas',
   uTask_2017_15 in 'AoC2017\Task15\uTask_2017_15.pas',
   uTask_2017_16 in 'AoC2017\Task16\uTask_2017_16.pas',
+  uTask_2017_17 in 'AoC2017\Task17\uTask_2017_17.pas',
+  uTask_2017_18 in 'AoC2017\Task18\uTask_2017_18.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
@@ -114,8 +116,7 @@ uses
   uProgram_2018_19 in 'AoC2018\Task19\uProgram_2018_19.pas',
   uTask_2018_20 in 'AoC2018\Task20\uTask_2018_20.pas',
   uTask_2018_21 in 'AoC2018\Task21\uTask_2018_21.pas',
-  uTask_2018_22 in 'AoC2018\Task22\uTask_2018_22.pas',
-  uTask_2017_17 in 'AoC2017\Task17\uTask_2017_17.pas';
+  uTask_2018_22 in 'AoC2018\Task22\uTask_2018_22.pas';
 
 {$R *.res}
 
