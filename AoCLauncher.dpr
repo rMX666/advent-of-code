@@ -90,6 +90,8 @@ uses
   uTask_2017_20 in 'AoC2017\Task20\uTask_2017_20.pas',
   uTask_2017_21 in 'AoC2017\Task21\uTask_2017_21.pas',
   uForm_2017_21 in 'AoC2017\Task21\uForm_2017_21.pas' {fForm_2017_21},
+  uTask_2017_22 in 'AoC2017\Task22\uTask_2017_22.pas',
+  uForm_2017_22 in 'AoC2017\Task22\uForm_2017_22.pas' {fForm_2017_22},
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
