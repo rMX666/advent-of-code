@@ -93,6 +93,7 @@ uses
   uTask_2017_22 in 'AoC2017\Task22\uTask_2017_22.pas',
   uForm_2017_22 in 'AoC2017\Task22\uForm_2017_22.pas' {fForm_2017_22},
   uTask_2017_23 in 'AoC2017\Task23\uTask_2017_23.pas',
+  uTask_2017_24 in 'AoC2017\Task24\uTask_2017_24.pas',
   uTask_2018_01 in 'AoC2018\Task01\uTask_2018_01.pas',
   uTask_2018_02 in 'AoC2018\Task02\uTask_2018_02.pas',
   uTask_2018_03 in 'AoC2018\Task03\uTask_2018_03.pas',
