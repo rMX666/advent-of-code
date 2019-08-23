@@ -246,6 +246,9 @@
         </DCCReference>
         <DCCReference Include="AoC2018\Task14\uTask_2018_14.pas"/>
         <DCCReference Include="AoC2018\Task15\uTask_2018_15.pas"/>
+        <DCCReference Include="AoC2018\Task15\uForm_2018_15.pas">
+            <Form>fForm_2018_15</Form>
+        </DCCReference>
         <DCCReference Include="AoC2018\Task16\uTask_2018_16.pas"/>
         <DCCReference Include="AoC2018\Task17\uTask_2018_17.pas"/>
         <DCCReference Include="AoC2018\Task17\uForm_2018_17.pas">

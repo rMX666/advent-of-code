@@ -115,6 +115,7 @@ uses
   uForm_2018_13 in 'AoC2018\Task13\uForm_2018_13.pas' {fMain_2018_13},
   uTask_2018_14 in 'AoC2018\Task14\uTask_2018_14.pas',
   uTask_2018_15 in 'AoC2018\Task15\uTask_2018_15.pas',
+  uForm_2018_15 in 'AoC2018\Task15\uForm_2018_15.pas' {fForm_2018_15},
   uTask_2018_16 in 'AoC2018\Task16\uTask_2018_16.pas',
   uTask_2018_17 in 'AoC2018\Task17\uTask_2018_17.pas',
   uForm_2018_17 in 'AoC2018\Task17\uForm_2018_17.pas' {fMain_2018_17},
@@ -136,5 +137,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TfForm_2018_15, fForm_2018_15);
   Application.Run;
 end.
