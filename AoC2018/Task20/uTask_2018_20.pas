@@ -7,14 +7,16 @@ uses
 
 type
   TNeighbours = TList<TPoint>;
-  TMap = TObjectDictionary<TPoint, TNeighbours>;
+  TMap = TObjectDictionary<TPoint,TNeighbours>;
 
   TTask_AoC = class (TTask)
   private
-    FMap: TMap;
     FRegExp: String;
+    FMap: TMap;
     procedure LoadRegExp;
-    function GetLongestPath: Integer;
+    function BFS(const Start: TPoint): TDictionary<TPoint,Integer>;
+    function FurtherPoint: Integer;
+    function RoomsWithMoreThan(const N: Integer): Integer;
   protected
     procedure DoRun; override;
   end;
@@ -22,7 +24,7 @@ type
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils, uForm_2018_20;
 
 var
   GTask: TTask_AoC;
@@ -31,131 +33,154 @@ var
 
 procedure TTask_AoC.DoRun;
 begin
-  LoadRegExp;
-
+  FMap := TMap.Create([doOwnsValues]);
   try
-    OK(Format('Part 1: %d', [ GetLongestPath ]));
+    fForm_2018_20 := TfForm_2018_20.Create(nil);
+    LoadRegExp;
+    fForm_2018_20.DrawMap(FMap, TPoint.Zero);
+    fForm_2018_20.ShowModal;
+    OK(Format('Part 1: %d, Part 2: %d', [ FurtherPoint, RoomsWithMoreThan(1000) ]));
   finally
     FMap.Free;
   end;
 end;
 
-function TTask_AoC.GetLongestPath: Integer;
+function TTask_AoC.BFS(const Start: TPoint): TDictionary<TPoint,Integer>;
 type
-  TWalkedPoint = record
-    P: TPoint;
-    Path: Integer;
-  end;
-
-  function WalkedPoint(const P: TPoint; const Path: Integer): TWalkedPoint;
-  begin
-    Result.P := P;
-    Result.Path := Path;
-  end;
-
+  TQueuePair = TPair<TPoint,Integer>;
 var
-  Path: Integer;
-  Queue: TQueue<TWalkedPoint>;
-  Visited: TDictionary<TPoint,Integer>;
-
-  procedure GetNeightbours(const WP: TWalkedPoint);
-  var
-    P: TPoint;
-  begin
-    if not Visited.ContainsKey(WP.P) then
-      Visited.Add(WP.P, WP.Path)
-    else
-      if Visited[P] > WP.Path + 1 then
-        Visited[P] := WP.Path + 1;
-
-    for P in FMap[WP.P] do
-      begin
-        if Visited.ContainsKey(P) then
-          begin
-            if Visited[P] > WP.Path + 1 then
-              Visited[P] := WP.Path + 1;
-            Continue;
-          end;
-
-        Queue.Enqueue(WalkedPoint(P, WP.Path + 1));
-      end;
-  end;
-
+  Queue: TQueue<TQueuePair>;
+  Current: TQueuePair;
+  Next: TPoint;
 begin
-  Result := 0;
-
-  Queue   := TQueue<TWalkedPoint>.Create;
-  Visited := TDictionary<TPoint,Integer>.Create;
+  Result := TDictionary<TPoint,Integer>.Create;
+  Queue := TQueue<TQueuePair>.Create;
 
   try
-    Queue.Enqueue(WalkedPoint(TPoint.Zero, 0));
-
+    Queue.Enqueue(TQueuePair.Create(Start, 0));
     while Queue.Count > 0 do
-      GetNeightbours(Queue.Dequeue);
-
-    for Path in Visited.Values do
-      if Result < Path then
-        Result := Path;
+      begin
+        Current := Queue.Dequeue;
+        for Next in FMap[Current.Key] do
+          begin
+            if Result.ContainsKey(Next) then
+              Continue;
+            Result.Add(Next, Current.Value + 1);
+            Queue.Enqueue(TQueuePair.Create(Next, Current.Value + 1));
+          end;
+      end;
   finally
     Queue.Free;
-    Visited.Free;
+  end;
+end;
+
+function TTask_AoC.FurtherPoint: Integer;
+var
+  Results: TDictionary<TPoint,Integer>;
+  Key: TPoint;
+begin
+  try
+    Results := BFS(TPoint.Zero);
+
+    // Find further point
+    Result := 0;
+    for Key in Results.Keys do
+      if Results[Key] > Result then
+        Result := Results[Key];
+  finally
+    Results.Free;
+  end;
+end;
+
+function TTask_AoC.RoomsWithMoreThan(const N: Integer): Integer;
+var
+  Results: TDictionary<TPoint,Integer>;
+  Key: TPoint;
+begin
+  try
+    Results := BFS(TPoint.Zero);
+
+    Result := 0;
+    for Key in Results.Keys do
+      if Results[Key] >= N then
+        Inc(Result);
+  finally
+    Results.Free;
   end;
 end;
 
 procedure TTask_AoC.LoadRegExp;
-var
-  Current: Integer;
-  P: TPoint;
 
-  procedure AddP(const P, CameFrom: TPoint);
+  procedure PushMap(const P1, P2: TPoint);
   begin
-    if not FMap.ContainsKey(P) then
-      FMap.Add(P, TNeighbours.Create);
-    if not FMap.ContainsKey(CameFrom) then
-      FMap.Add(CameFrom, TNeighbours.Create);
-
-    if not FMap[CameFrom].Contains(P) then
-      FMap[CameFrom].Add(P);
+    if not FMap.ContainsKey(P1) then
+      FMap.Add(P1, TNeighbours.Create);
+    FMap[P1].Add(P2);
   end;
 
-  procedure WalkUntil(const S: String);
+  function AddPoint(const C: Char; const P: TPoint): TPoint;
+  begin
+    case C of
+      'N': Result := P + TPoint.Create( 0, -1);
+      'S': Result := P + TPoint.Create( 0,  1);
+      'W': Result := P + TPoint.Create(-1,  0);
+      'E': Result := P + TPoint.Create( 1,  0);
+    end;
+    PushMap(P, Result);
+    PushMap(Result, P);
+  end;
+
+  function Contains(const P: TPoint; const A: TArray<TPoint>): Boolean;
   var
-    NextP: TPoint;
+    I: Integer;
   begin
-    while not S.Contains(FRegExp[Current]) do
+    Result := False;
+    for I := 0 to Length(A) - 1 do
+      if A[I] = P then
+        Exit(True);
+  end;
+
+  function MergeUnique(const A, B: TArray<TPoint>): TArray<TPoint>;
+  var
+    I: Integer;
+  begin
+    Result := Copy(A, 0, Length(A));
+    for I := 0 to Length(B) - 1 do
+      if not Contains(B[I], Result) then
+        Insert(B[I], Result, 0);
+  end;
+
+  function MakeMap(const Points: TArray<TPoint>): TArray<TPoint>;
+  var
+    I: Integer;
+    C: Char;
+    Saved: TArray<TPoint>;
+  begin
+    Result := Copy(Points, 0, Length(Points));
+    while FRegExp.Length > 0 do
       begin
-        case FRegExp[Current] of
-          'N': NextP := TPoint.Create(P.X, P.Y - 1);
-          'S': NextP := TPoint.Create(P.X, P.Y + 1);
-          'W': NextP := TPoint.Create(P.X - 1, P.Y);
-          'E': NextP := TPoint.Create(P.X + 1, P.Y);
+        C := FRegExp[1];
+        Delete(FRegExp, 1, 1);
+        case C of
+          '(':
+            Result := MakeMap(Result);
+          '|':
+            begin
+              Saved := Copy(Result, 0, Length(Result));
+              Result := Copy(Points, 0, Length(Points));
+            end;
+          ')':
+            Break;
+          else
+            for I := 0 to Length(Result) - 1 do
+              Result[I] := AddPoint(C, Result[I]);
         end;
-        AddP(NextP, P);
-        P := NextP;
-        Inc(Current);
       end;
+    Result := MergeUnique(Result, Saved);
   end;
 
-  procedure WalkMap;
-  begin
-    while (Current <= FRegExp.Length) and (FRegExp[Current] <> ')') do
-      case FRegExp[Current] of
-        '(':
-          begin
-            Inc(Current);
-            WalkMap;
-          end;
-        '|':
-          begin
-            Inc(Current);
-            WalkUntil('(|)');
-          end;
-        else
-          WalkUntil('(|)');
-      end;
-    Inc(Current);
-  end;
-
+var
+  Points: TArray<TPoint>;
 begin
   with Input do
     try
@@ -164,10 +189,9 @@ begin
       Free;
     end;
 
-  FMap := TMap.Create([ doOwnsValues ]);
-  Current := 1;
-  P := TPoint.Zero;
-  WalkMap;
+  SetLength(Points, 1);
+  Points[0] := TPoint.Zero;
+  Points := MakeMap(Points);
 end;
 
 initialization

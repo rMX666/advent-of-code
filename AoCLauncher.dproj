@@ -262,6 +262,9 @@
         </DCCReference>
         <DCCReference Include="AoC2018\Task19\uProgram_2018_19.pas"/>
         <DCCReference Include="AoC2018\Task20\uTask_2018_20.pas"/>
+        <DCCReference Include="AoC2018\Task20\uForm_2018_20.pas">
+            <Form>fForm_2018_20</Form>
+        </DCCReference>
         <DCCReference Include="AoC2018\Task21\uTask_2018_21.pas"/>
         <DCCReference Include="AoC2018\Task22\uTask_2018_22.pas"/>
         <BuildConfiguration Include="Release">
