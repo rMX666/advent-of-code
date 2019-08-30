@@ -267,6 +267,7 @@
         </DCCReference>
         <DCCReference Include="AoC2018\Task21\uTask_2018_21.pas"/>
         <DCCReference Include="AoC2018\Task22\uTask_2018_22.pas"/>
+        <DCCReference Include="AoC2018\Task23\uTask_2018_23.pas"/>
         <DCCReference Include="AoC2018\Task25\uTask_2018_25.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
