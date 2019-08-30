@@ -17,6 +17,8 @@ type
     TComparer = class(TCustomComparer<TIPRange>)
     public
       function Compare(const Left, Right: TIPRange): Integer; override;
+      function Equals(const Left, Right: TIPRange): Boolean; override;
+      function GetHashCode(const Value: TIPRange): Integer; override;
     end;
   private
     FComparer: TComparer;
@@ -39,7 +41,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Math;
+  System.SysUtils, System.Math, System.Hash;
 
 var
   GTask: TTask_AoC;
@@ -79,11 +81,21 @@ begin
     Result := Comp(Left.X2, Right.X2);
 end;
 
+function TIPRanges.TComparer.Equals(const Left, Right: TIPRange): Boolean;
+begin
+  Result := (Left.X1 = Right.X1) and (Left.X2 = Right.X2);
+end;
+
+function TIPRanges.TComparer.GetHashCode(const Value: TIPRange): Integer;
+begin
+  Result := System.Hash.THashBobJenkins.GetHashValue(Value, SizeOf(TIPRange), 0);
+end;
+
 { TIPRanges }
 
 constructor TIPRanges.Create;
 begin
-  FComparer := TComparer.Create;
+  FComparer := TIPRanges.TComparer.Create;
   inherited Create(FComparer);
 end;
 

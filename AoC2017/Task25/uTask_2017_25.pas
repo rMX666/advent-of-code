@@ -136,7 +136,6 @@ end;
 
 procedure TTask_AoC.InitializeStates;
 var
-  A: TArray<String>;
   I: Integer;
   InputList: TStrings;
 

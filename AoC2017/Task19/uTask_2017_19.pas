@@ -60,19 +60,19 @@ procedure TTask_AoC.TracePath;
       case Dirs[I] of
         'U':
           if Y - 1 >= 0 then
-            if FMap[Y - 1][X] in ['|', 'A'..'Z'] then
+            if CharInSet(FMap[Y - 1][X], ['|', 'A'..'Z']) then
               Exit(Dirs[I]);
         'D':
           if Y + 1 < Length(FMap) then
-            if FMap[Y + 1][X] in ['|', 'A'..'Z'] then
+            if CharInSet(FMap[Y + 1][X], ['|', 'A'..'Z']) then
               Exit(Dirs[I]);
         'L':
           if X - 1 > 0 then
-            if FMap[Y][X - 1] in ['-', 'A'..'Z'] then
+            if CharInSet(FMap[Y][X - 1], ['-', 'A'..'Z']) then
               Exit(Dirs[I]);
         'R':
           if X + 1 <= FMap[Y].Length then
-            if FMap[Y][X + 1] in ['-', 'A'..'Z'] then
+            if CharInSet(FMap[Y][X + 1], ['-', 'A'..'Z']) then
               Exit(Dirs[I]);
       end;
   end;

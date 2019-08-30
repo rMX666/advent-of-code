@@ -10,7 +10,9 @@ type
   private
     FProgram: TProgram;
     procedure LoadProgram;
+    {$Hints off}
     procedure Reverse;
+    {$Hints on}
     function SumOfDivisors: Integer;
   protected
     procedure DoRun; override;
@@ -69,6 +71,7 @@ begin
 end;
 
 // Turned out that this is just a very unefficient algorithm of finding sum of divisors of a number
+{$Hints off}
 procedure TTask_AoC.Reverse;
 label
   MAIN_LOOP, MAIN_LOOP1, INNER_LOOP;
@@ -139,6 +142,7 @@ begin
     else                                           // mulr 3 3 3
       begin r3 := r3 * r3; Exit; end;
 end;
+{$Hints on}
 
 function TTask_AoC.SumOfDivisors: Integer;
 var

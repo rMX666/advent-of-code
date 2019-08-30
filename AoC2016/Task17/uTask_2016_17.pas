@@ -16,7 +16,8 @@ type
   TPathComparer = class(TCustomComparer<TPath>)
   public
     function Compare(const Left, Right: TPath): Integer; override;
-    function Equals(const Left, Right: TPath): Boolean; reintroduce; overload; override;
+    function Equals(const Left, Right: TPath): Boolean; override;
+    function GetHashCode(const Value: TPath): Integer; override;
   end;
 
   TTask_AoC = class (TTask)
@@ -34,7 +35,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Math, IdHashMessageDigest, idHash;
+  System.SysUtils, System.Math, IdHashMessageDigest, idHash, System.Hash;
 
 var
   GTask: TTask_AoC;
@@ -81,12 +82,16 @@ begin
   Result := (Left.Path = Right.Path) and (Left.Point = Right.Point);
 end;
 
+function TPathComparer.GetHashCode(const Value: TPath): Integer;
+begin
+  Result := THashBobJenkins.GetHashValue(Value, SizeOf(TPath), 0);
+end;
+
 { TTask_AoC }
 
 procedure TTask_AoC.DoRun;
 var
   Part1, Part2: String;
-  I: Integer;
 begin
   with Input do
     try
@@ -167,7 +172,7 @@ begin
     try
       Hash := HashStringAsHex(FSalt + Path).ToLower.Substring(0, 4);
       for I := 1 to Hash.Length do
-        if (Hash[I] in ['b'..'f']) and CanGo(Directions[I - 1]) then
+        if CharInSet(Hash[I], ['b'..'f']) and CanGo(Directions[I - 1]) then
           begin
             SetLength(Result, Length(Result) + 1);
             Result[Length(Result) - 1] := Directions[I - 1];

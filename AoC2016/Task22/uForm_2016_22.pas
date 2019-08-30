@@ -113,7 +113,7 @@ end;
 
 procedure TfForm_2016_22.EnumerateGrid;
 var
-  I, J: Integer;
+  I: Integer;
 begin
   for I := 1 to sgNodes.ColCount - 1 do
     sgNodes.Cells[I, 0] := IntToStr(I - 1);

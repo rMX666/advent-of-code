@@ -15,7 +15,6 @@ type
     procedure LoadForest;
     function NextState(const State: TForestState): TForestState;
     function GetResourceValue(const Minutes: Integer): Integer;
-    function StatesEqual(const A, B: TForestState): Boolean;
   protected
     procedure DoRun; override;
   end;
@@ -69,6 +68,7 @@ procedure TTask_AoC.LoadForest;
 
   function CharToType(const C: Char): TAreaType;
   begin
+    Result := atEmpty;
     case C of
       '.': Result := atEmpty;
       '|': Result := atWood;
@@ -144,20 +144,6 @@ begin
   for I := 0 to Length(State) - 1 do
     for J := 0 to Length(State[I]) - 1 do
       Result[I, J] := Decide(I, J);
-end;
-
-function TTask_AoC.StatesEqual(const A, B: TForestState): Boolean;
-var
-  I, J: Integer;
-begin
-  Result := True;
-  for I := 0 to Length(A) - 1 do
-    for J := 0 to Length(A[I]) - 1 do
-      begin
-        Result := Result and (A[I, J] = B[I, J]);
-        if not Result then
-          Exit;
-      end;
 end;
 
 initialization

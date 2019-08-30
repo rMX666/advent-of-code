@@ -31,6 +31,7 @@ function TTask_AoC.CheckSum(const Part: Integer): Integer;
   var
     I, J: Integer;
   begin
+    Result := 0;
     for I := 0 to Length(A) - 1 do
       for J:= 0 to Length(A) - 1 do
         if I <> J then

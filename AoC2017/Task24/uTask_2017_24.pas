@@ -120,9 +120,9 @@ var
     NewBridge: TBridge;
     Added: Boolean;
   begin
+    Added := False;
     try
       A := Filter(Bridge.Last.Y);
-      Added := False;
       for I := 0 to Length(A) - 1 do
         if not Contains(Bridge, A[I]) then
           begin
@@ -172,6 +172,7 @@ begin
     // Find maximums
     CurSum := Sum(Bridges[0]);
     MaxSum := CurSum;
+    MaxLen := 0;
     if Longest then
       begin
         CurLen := Bridges[0].Count;

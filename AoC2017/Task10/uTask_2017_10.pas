@@ -27,7 +27,6 @@ var
 procedure TTask_AoC.DoRun;
 var
   Part1: Integer;
-  Part2: String;
 begin
   with TKnotHash.Create(ParseKey) do
     try

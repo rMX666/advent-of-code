@@ -127,6 +127,7 @@ begin
   InitElvs;
 
   try
+    Opposite := nil;
     if Part = 2 then
       Opposite := FRootElf.NextN(TElf.ElfCount div 2);
 

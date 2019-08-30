@@ -87,7 +87,6 @@ procedure TMap.Simulate;
 var
   Source: TPoint;
   Queue: TList<TPoint>;
-  StepNo: Integer;
 
   function CanGo(const P: TPoint; const D: TFlowDirection): Boolean;
   begin
@@ -233,7 +232,6 @@ var
   end;
 
 begin
-  StepNo := 0;
   try
     Source := WaterSource;
     Queue := TList<TPoint>.Create;
@@ -241,7 +239,6 @@ begin
     while Queue.Count > 0 do
       begin
         FloodBox(Queue.First);
-        Inc(StepNo);
         DoOnSimulationStep;
       end;
   finally

@@ -28,14 +28,17 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Generics.Defaults, System.Math, IdHashMessageDigest, idHash;
+  System.SysUtils, System.Generics.Defaults, System.Math, IdHashMessageDigest, idHash, System.Hash;
 
 var
   GTask: TTask_AoC;
 
 type
   TPadKeyComparer = class(TCustomComparer<TPadKey>)
+  public
     function Compare(const Left, Right: TPadKey): Integer; override;
+    function Equals(const Left, Right: TPadKey): Boolean; override;
+    function GetHashCode(const Value: TPadKey): Integer; override;
   end;
 
 { TPadKeyComparer }
@@ -43,6 +46,16 @@ type
 function TPadKeyComparer.Compare(const Left, Right: TPadKey): Integer;
 begin
   Result := Left.Num - Right.Num;
+end;
+
+function TPadKeyComparer.Equals(const Left, Right: TPadKey): Boolean;
+begin
+  Result := Left.Num = Right.Num;
+end;
+
+function TPadKeyComparer.GetHashCode(const Value: TPadKey): Integer;
+begin
+  Result := THashBobJenkins.GetHashValue(Value, SizeOf(TPadKey), 0);
 end;
 
 { TPadKey }

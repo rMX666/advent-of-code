@@ -93,6 +93,7 @@ begin
 
   RegBVal := FRegisters[RegB];
 
+  CompRes := False;
   if      Comp = '==' then CompRes := RegBVal =  ValC
   else if Comp = '!=' then CompRes := RegBVal <> ValC
   else if Comp = '>'  then CompRes := RegBVal >  ValC

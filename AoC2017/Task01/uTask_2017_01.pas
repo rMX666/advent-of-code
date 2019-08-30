@@ -43,6 +43,7 @@ var
 begin
   Result := 0;
 
+  Next := 0;
   for I := 1 to FCaptcha.Length do
     begin
       case Part of

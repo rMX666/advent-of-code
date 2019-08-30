@@ -68,8 +68,6 @@ uses
 { TNode }
 
 constructor TNode.Create(const S: String);
-var
-  M: TMatch;
 begin
   with TRegEx.Match(S, 'node-x(\d+)-y(\d+)\s+(\d+)T\s+(\d+)T\s+(\d+)', [roNotEmpty, roCompiled]) do
     if Groups.Count >= 5 then
@@ -173,7 +171,6 @@ var
     VisitedItem: TPathItem;
     NextCost: Integer;
     NextPoint: TPoint;
-    NextNode: PNode;
   begin
     SetLength(Result, 0);
 
@@ -269,7 +266,6 @@ begin
       Result := Left.HeuristicCost - Right.HeuristicCost;
     end;
 
-  Result := 0;
   Visited := TList<TPathItem>.Create;
   Queue := TList<TPathItem>.Create;
 
@@ -359,6 +355,7 @@ function TSolver.GetEmpty: PNode;
 var
   I, J: Integer;
 begin
+  Result := nil;
   for I := 0 to FNodes.Count - 1 do
     for J := 0 to FNodes[I].Count - 1 do
       if FNodes[I][J].Used = 0 then
@@ -374,6 +371,7 @@ function TSolver.GetSource: PNode;
 var
   I, J: Integer;
 begin
+  Result := nil;
   for I := 0 to FNodes.Count - 1 do
     for J := 0 to FNodes[I].Count - 1 do
       if FNodes[I][J].Source then
@@ -384,6 +382,7 @@ function TSolver.GetTarget: PNode;
 var
   I, J: Integer;
 begin
+  Result := nil;
   for I := 0 to FNodes.Count - 1 do
     for J := 0 to FNodes[I].Count - 1 do
       if FNodes[I][J].Target then
@@ -442,7 +441,7 @@ begin
   for I := 0 to FNodes.Count - 1 do
     for J := 0 to FNodes[I].Count - 1 do
       for K := 0 to FNodes.Count - 1 do
-        for L := 0 to FNodes[L].Count - 1 do
+        for L := 0 to FNodes[K].Count - 1 do
       begin
         A := FNodes[I][J];
         B := FNodes[K][L];

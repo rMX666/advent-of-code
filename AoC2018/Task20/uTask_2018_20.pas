@@ -79,6 +79,7 @@ var
   Results: TDictionary<TPoint,Integer>;
   Key: TPoint;
 begin
+  Results := nil;
   try
     Results := BFS(TPoint.Zero);
 
@@ -88,7 +89,8 @@ begin
       if Results[Key] > Result then
         Result := Results[Key];
   finally
-    Results.Free;
+    if Assigned(Results) then
+      Results.Free;
   end;
 end;
 
@@ -97,6 +99,7 @@ var
   Results: TDictionary<TPoint,Integer>;
   Key: TPoint;
 begin
+  Results := nil;
   try
     Results := BFS(TPoint.Zero);
 
@@ -105,7 +108,8 @@ begin
       if Results[Key] >= N then
         Inc(Result);
   finally
-    Results.Free;
+    if Assigned(Results) then
+      Results.Free;
   end;
 end;
 

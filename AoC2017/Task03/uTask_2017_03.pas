@@ -41,8 +41,6 @@ function TTask_AoC.Part1: Integer;
 var
   I: Integer;
 begin
-  Result := 0;
-
   // Find resulting spiral turn
   I := 1;
   while I * I < FInput do

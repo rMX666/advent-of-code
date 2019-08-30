@@ -22,7 +22,7 @@ type
   private
     FX, FY: Integer;
   protected
-    constructor Create(const Parent: TScrambler; const X, Y: Integer);
+    constructor Create(const Parent: TScrambler; const X, Y: Integer); reintroduce; overload;
   public
     procedure DoAction(const Reverse: Boolean); override;
   end;
@@ -31,7 +31,7 @@ type
   private
     FX, FY: Char;
   protected
-    constructor Create(const Parent: TScrambler; const X, Y: Char);
+    constructor Create(const Parent: TScrambler; const X, Y: Char); reintroduce; overload;
   public
     procedure DoAction(const Reverse: Boolean); override;
   end;
@@ -41,7 +41,7 @@ type
     FX, FY: Integer;
     function ReverseStr(const S: String): String;
   protected
-    constructor Create(const Parent: TScrambler; const X, Y: Integer);
+    constructor Create(const Parent: TScrambler; const X, Y: Integer); reintroduce; overload;
   public
     procedure DoAction(const Reverse: Boolean); override;
   end;
@@ -50,7 +50,7 @@ type
   private
     FX: Integer; // Positive - Right
   protected
-    constructor Create(const Parent: TScrambler; const X: Integer);
+    constructor Create(const Parent: TScrambler; const X: Integer); reintroduce; overload;
   public
     procedure DoAction(const Reverse: Boolean); override;
   end;
@@ -59,7 +59,7 @@ type
   private
     FX: Char;
   protected
-    constructor Create(const Parent: TScrambler; const X: Char);
+    constructor Create(const Parent: TScrambler; const X: Char); reintroduce; overload;
   public
     procedure DoAction(const Reverse: Boolean); override;
   end;
@@ -68,7 +68,7 @@ type
   private
     FX, FY: Integer;
   protected
-    constructor Create(const Parent: TScrambler; const X, Y: Integer);
+    constructor Create(const Parent: TScrambler; const X, Y: Integer); reintroduce; overload;
   public
     procedure DoAction(const Reverse: Boolean); override;
   end;

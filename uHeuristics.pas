@@ -45,8 +45,8 @@ end;
 
 function Heuristic(const Dx, Dy: Integer; HeuristicsType: THeuristicsType): Integer;
 begin
+  Result := 0;
   case HeuristicsType of
-    htNone:      Result := 0;
     htManhattan: Result := Manhattan(Dx, Dy);
     htEuclidian: Result := Euclidian(Dx, Dy);
     htChebishev: Result := Chebishev(Dx, Dy);

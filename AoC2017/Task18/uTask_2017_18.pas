@@ -196,7 +196,7 @@ end;
 
 function TProgram.ValOrReg(const S: String): Int64;
 begin
-  if S[1] in ['-', '0'..'9'] then
+  if CharInSet(S[1], ['-', '0'..'9']) then
     Result := S.ToInt64
   else
     Result := Reg[S[1]];

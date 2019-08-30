@@ -107,7 +107,7 @@ var
   Queue: TVisitQueue;
   QueueComparison: TComparison<TQueueItem>;
   Current: TQueueItem;
-  Time, BestTime: Integer;
+  BestTime: Integer;
 
   procedure CleanQueue(Item: TQueueItem);
   var
@@ -186,7 +186,6 @@ var
   end;
 
 begin
-  Result := -1;
   BestTime := MaxInt;
 
   QueueComparison := function (const Left, Right: TQueueItem): Integer

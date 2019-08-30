@@ -96,9 +96,9 @@ type
     FTurn: Integer;
     constructor Create; overload;
     constructor Create(const ABossHealth, ABossDamage: Integer); overload;
-    destructor Destroy; override;
     function Clone: TSimulator;
   public
+    destructor Destroy; override;
     // Mode: False - Regular mode, True - hard mode
     class function Simulate(const ABossHealth, ABossDamage: Integer; const Mode: Boolean): Integer;
   end;

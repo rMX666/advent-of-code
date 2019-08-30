@@ -93,7 +93,6 @@ end;
 function TTask_AoC.ConstellationCount: Integer;
 var
   Constellation: TConstellation;
-  Star: TStar;
   I: Integer;
   Added: Boolean;
 begin

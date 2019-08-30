@@ -187,6 +187,7 @@ var
 begin
   Node := FindDisbalanced.Parent;
   Siblings := Node.Parent.Children;
+  Result := -1;
   for I := 0 to Length(Siblings) - 1 do
     if Siblings[I] <> Node then
       Exit(Node.Weight + Siblings[I].FullWeight - Node.FullWeight);

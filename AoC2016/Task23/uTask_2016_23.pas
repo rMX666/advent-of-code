@@ -67,7 +67,7 @@ constructor TInstruction.Create(const S: String);
 
   procedure SetVal(const S: String; out V: Integer; out R: Char);
   begin
-    if S[1] in ['-', '0'..'9'] then
+    if CharInSet(S[1], ['-', '0'..'9']) then
       begin
         R := #0;
         V := StrToInt(S);
