@@ -129,6 +129,7 @@ uses
   uTask_2018_21 in 'AoC2018\Task21\uTask_2018_21.pas',
   uTask_2018_22 in 'AoC2018\Task22\uTask_2018_22.pas',
   uTask_2018_23 in 'AoC2018\Task23\uTask_2018_23.pas',
+  uTask_2018_24 in 'AoC2018\Task24\uTask_2018_24.pas',
   uTask_2018_25 in 'AoC2018\Task25\uTask_2018_25.pas';
 
 {$R *.res}
