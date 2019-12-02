@@ -32,7 +32,7 @@ procedure TfMain.DrawTaskList;
     Result := TGroupBox.Create(Application);
     with Result do
       begin
-        Left := 800;
+        Left := 2000;
         Parent := fMain;
         Caption := 'Year ' + IntToStr(Year);
         Align := alLeft;
