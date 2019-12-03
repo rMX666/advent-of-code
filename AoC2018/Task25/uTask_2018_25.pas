@@ -129,7 +129,7 @@ begin
   try
     FConstellations := TObjectList<TConstellation>.Create;
     LoadStars;
-    OK(Format('Part 1: %d', [ ConstellationCount ]));
+    OK('Part 1: %d', [ ConstellationCount ]);
   finally
     FStars.Free;
     FConstellations.Free;

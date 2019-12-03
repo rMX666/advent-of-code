@@ -30,7 +30,7 @@ begin
   FPhrases := Input;
 
   try
-    OK(Format('Part 1: %d, Part 2: %d', [ NoDuplicates, NoAnagrams ]));
+    OK('Part 1: %d, Part 2: %d', [ NoDuplicates, NoAnagrams ]);
   finally
     FPhrases.Free;
   end;

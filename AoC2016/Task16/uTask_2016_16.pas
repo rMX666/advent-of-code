@@ -54,7 +54,7 @@ begin
   LoadInitialState;
 
   try
-    OK(Format('Part 1: %s, Part 2: %s', [ GetCurveChecksum(LENGTH_PART1), GetCurveChecksum(LENGTH_PART2) ]));
+    OK('Part 1: %s, Part 2: %s', [ GetCurveChecksum(LENGTH_PART1), GetCurveChecksum(LENGTH_PART2) ]);
   finally
     FCurve.Free;
   end;

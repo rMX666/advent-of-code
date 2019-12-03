@@ -388,7 +388,7 @@ begin
   try
     LoadGroups;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FindTheWinnerScore, BoostedImmuneScore ]));
+    OK('Part 1: %d, Part 2: %d', [ FindTheWinnerScore, BoostedImmuneScore ]);
   finally
     FGroups.Free;
   end;

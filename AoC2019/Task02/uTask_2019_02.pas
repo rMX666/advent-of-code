@@ -32,7 +32,7 @@ begin
   try
     LoadProgram;
     State := FInitialState.Clone;
-    OK(Format('Part 1: %d, Part 2: %d', [ State.Execute(12, 2), FindNounAndVerb(19690720) ]));
+    OK('Part 1: %d, Part 2: %d', [ State.Execute(12, 2), FindNounAndVerb(19690720) ]);
   finally
     State.Free;
     FInitialState.Free;

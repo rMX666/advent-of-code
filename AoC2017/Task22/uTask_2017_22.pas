@@ -50,7 +50,7 @@ procedure TTask_AoC.DoRun;
 begin
   fForm_2017_22 := TfForm_2017_22.Create(nil);
   fForm_2017_22.Show;
-  OK(Format('Part 1: %d, Part 2: %d', [ CountInfections(10000, 1), CountInfections(10000000, 2) ]));
+  OK('Part 1: %d, Part 2: %d', [ CountInfections(10000, 1), CountInfections(10000000, 2) ]);
 end;
 
 procedure TTask_AoC.InitializeCarrier(Carrier: TCarrier);

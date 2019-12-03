@@ -38,7 +38,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ GetHighScore(FMaxNumber), GetHighScore(FMaxNumber * 100) ]));
+  OK('Part 1: %d, Part 2: %d', [ GetHighScore(FMaxNumber), GetHighScore(FMaxNumber * 100) ]);
 end;
 
 function TTask_AoC.GetHighScore(const MaxNumber: Integer): Int64;

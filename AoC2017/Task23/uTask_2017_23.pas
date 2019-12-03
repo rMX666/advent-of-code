@@ -156,7 +156,7 @@ end;
 
 procedure TTask_AoC.DoRun;
 begin
-  OK(Format('Part 1: %d, Part 2: %d', [ GetMulExcutions, OptimizedPart2 ]));
+  OK('Part 1: %d, Part 2: %d', [ GetMulExcutions, OptimizedPart2 ]);
 end;
 
 function TTask_AoC.GetMulExcutions: Integer;

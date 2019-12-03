@@ -33,7 +33,7 @@ begin
 
     fForm_2017_21 := TfForm_2017_21.Create(nil);
     fForm_2017_21.Show;
-    OK(Format('Part 1: %d, Part 2: %d', [ Iterate(5), Iterate(18 - 5) ]));
+    OK('Part 1: %d, Part 2: %d', [ Iterate(5), Iterate(18 - 5) ]);
   finally
     FGrid.Free;
     fForm_2017_21.Free;

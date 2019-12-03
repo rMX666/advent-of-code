@@ -30,7 +30,7 @@ procedure TTask_AoC.DoRun;
 begin
   try
     LoadChanges;
-    OK(Format('Part 1: %d, Part 2: %d', [ GetResultingFreq, GetFirstTwice ]));
+    OK('Part 1: %d, Part 2: %d', [ GetResultingFreq, GetFirstTwice ]);
   finally
     FChanges.Free;
   end;

@@ -100,7 +100,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ WinnerID(1), WinnerID(2) ]));
+  OK('Part 1: %d, Part 2: %d', [ WinnerID(1), WinnerID(2) ]);
 end;
 
 procedure TTask_AoC.InitElvs;

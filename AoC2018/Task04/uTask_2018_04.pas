@@ -133,7 +133,7 @@ begin
   try
     LoadGuards;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ GetBestMinute, GetBestFreqMinute ]));
+    OK('Part 1: %d, Part 2: %d', [ GetBestMinute, GetBestFreqMinute ]);
   finally
     FGuards.Free;
   end;

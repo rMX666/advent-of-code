@@ -237,7 +237,7 @@ begin
   try
     ParseInput;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ BehavesLikeThreeOrMore, ExecuteTestProgram[0] ]));
+    OK('Part 1: %d, Part 2: %d', [ BehavesLikeThreeOrMore, ExecuteTestProgram[0] ]);
   finally
     FTestProgram.Free;
     FCapturedOps.Free;

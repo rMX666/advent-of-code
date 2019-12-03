@@ -27,7 +27,7 @@ var
 
 procedure TTask_AoC.DoRun;
 begin
-  OK(Format('Part 1: %d, Part 2: %d', [ JumpOutSteps(1), JumpOutSteps(2) ]))
+  OK('Part 1: %d, Part 2: %d', [ JumpOutSteps(1), JumpOutSteps(2) ])
 end;
 
 function TTask_AoC.JumpOutSteps(const Part: Integer): Integer;

@@ -15,8 +15,10 @@ type
     function GetInput: TStrings;
   protected
     procedure DoRun; virtual; abstract;
-    procedure OK(const Msg: String);
-    procedure Error(const Msg: String);
+    procedure OK(const Msg: String); overload;
+    procedure OK(const Msg: String; const Args: array of const); overload;
+    procedure Error(const Msg: String); overload;
+    procedure Error(const Msg: String; const Args: array of const); overload;
   public
     constructor Create; overload; virtual;
     constructor Create(const AYear, ANumber: Integer; const AName: String); overload;
@@ -128,9 +130,19 @@ begin
   Application.MessageBox(PWideChar(Msg), nil, MB_OK or MB_ICONINFORMATION);
 end;
 
+procedure TTask.OK(const Msg: String; const Args: array of const);
+begin
+  OK(Format(Msg, Args));
+end;
+
 procedure TTask.Error(const Msg: String);
 begin
   Application.MessageBox(PWideChar(Msg), nil, MB_OK or MB_ICONERROR);
+end;
+
+procedure TTask.Error(const Msg: String; const Args: array of const);
+begin
+  Error(Format(Msg, Args));
 end;
 
 procedure TTask.Run;

@@ -214,7 +214,7 @@ begin
   try
     LoadCommands;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FPrograms[0].RunProgram(1), FPrograms[0].RunProgram(2) ]));
+    OK('Part 1: %d, Part 2: %d', [ FPrograms[0].RunProgram(1), FPrograms[0].RunProgram(2) ]);
   finally
     FPrograms[0].Free;
     FPrograms[1].Free;

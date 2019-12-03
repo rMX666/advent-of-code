@@ -127,7 +127,7 @@ begin
     FTape := TTape.Create;
     InitializeStates;
 
-    OK(Format('Result: %d', [ RunMachine ]));
+    OK('Result: %d', [ RunMachine ]);
   finally
     FStates.Free;
     FTape.Free;

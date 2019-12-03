@@ -31,7 +31,7 @@ begin
   try
     LoadIDs;
 
-    OK(Format('Part 1: %d, Part 2: %s', [ GetCheckSum, GetBoxID ]));
+    OK('Part 1: %d, Part 2: %s', [ GetCheckSum, GetBoxID ]);
   finally
     FIDs.Free;
   end;

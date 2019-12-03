@@ -104,7 +104,7 @@ procedure TTask_AoC.DoRun;
 begin
   try
     FRow := TBits.Create;
-    OK(Format('Part 1: %d, Part 2: %d', [ CountFree(40), CountFree(400000) ]));
+    OK('Part 1: %d, Part 2: %d', [ CountFree(40), CountFree(400000) ]);
   finally
     FRow.Free;
   end;

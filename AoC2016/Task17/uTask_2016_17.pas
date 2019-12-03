@@ -101,7 +101,7 @@ begin
     end;
 
   FindMinMaxPath(Part1, Part2);
-  OK(Format('Part 1: %s, Part 2: %d', [ Part1, Part2.Length ]));
+  OK('Part 1: %s, Part 2: %d', [ Part1, Part2.Length ]);
 end;
 
 procedure TTask_AoC.FindMinMaxPath(out OMin, OMax: String);

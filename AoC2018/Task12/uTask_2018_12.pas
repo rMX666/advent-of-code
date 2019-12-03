@@ -107,7 +107,7 @@ begin
   Part2 := N1 + (500000000 - 1) * (N2 - N1);
 
   try
-    OK(Format('Part 1: %d, Part 2: %d', [ StateSum(AfterNGenerations(FInitialState, 20)), Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ StateSum(AfterNGenerations(FInitialState, 20)), Part2 ]);
   finally
     FPlanter.Free;
   end;

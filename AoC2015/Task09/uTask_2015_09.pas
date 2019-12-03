@@ -160,7 +160,7 @@ begin
 
       Form.ShowModal;
 
-      Ok(Format('Part 1: %d, Part 2: %d', [ MinPath, MaxPath ]));
+      OK('Part 1: %d, Part 2: %d', [ MinPath, MaxPath ]);
     finally
       FLocations.Free;
       FGraph.Free;

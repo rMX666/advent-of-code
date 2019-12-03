@@ -45,7 +45,7 @@ begin
             FMaxRegister := LastMax;
         end;
     finally
-      OK(Format('Part 1: %d, Part 2: %d', [ MaxRegister, FMaxRegister ]));
+      OK('Part 1: %d, Part 2: %d', [ MaxRegister, FMaxRegister ]);
       FRegisters.Free;
       Free;
     end;

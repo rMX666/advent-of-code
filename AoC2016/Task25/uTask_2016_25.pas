@@ -312,7 +312,7 @@ begin
       FProcessor.RegisterA := I;
       FProcessor.Execute;
     until FProcessor.FOutput.StartsWith(REF_SIGNAL);
-    OK(Format('Part 1: %d', [ I ]));
+    OK('Part 1: %d', [ I ]);
   finally
     FProcessor.Free;
   end;

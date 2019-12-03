@@ -25,7 +25,7 @@ var
 
 procedure TTask_AoC.DoRun;
 begin
-  Ok(Format('Part 1: %d, Part 2: %d', [ MineAdventCoints(5), MineAdventCoints(6) ]));
+  OK('Part 1: %d, Part 2: %d', [ MineAdventCoints(5), MineAdventCoints(6) ]);
 end;
 
 function TTask_AoC.MineAdventCoints(const Complexity: Integer): Integer;

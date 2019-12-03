@@ -30,7 +30,7 @@ procedure TTask_AoC.DoRun;
 begin
   try
     LoadMasses;
-    OK(Format('Part 1: %d, Part 2: %d', [ GetFuelSum, GetFuelWithFuelSum ]));
+    OK('Part 1: %d, Part 2: %d', [ GetFuelSum, GetFuelWithFuelSum ]);
   finally
     FMasses.Free;
   end;

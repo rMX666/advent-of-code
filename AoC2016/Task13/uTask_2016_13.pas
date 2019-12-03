@@ -144,9 +144,9 @@ begin
   fMain_2016_13 := TfMain_2016_13.Create(Application);
   fMain_2016_13.Show;
 
-  OK(Format('Part 1: %d', [ BFS(TPoint.Create(1, 1), TPoint.Create(31, 39), 1) ]));
+  OK('Part 1: %d', [ BFS(TPoint.Create(1, 1), TPoint.Create(31, 39), 1) ]);
   fMain_2016_13.Reset;
-  OK(Format('Part 2: %d', [ BFS(TPoint.Create(1, 1), TPoint.Create(99, 99), 2) ]));
+  OK('Part 2: %d', [ BFS(TPoint.Create(1, 1), TPoint.Create(99, 99), 2) ]);
 end;
 
 procedure TTask_AoC.DrawToForm(const A: TPoint; const DrawType: TDrawType);

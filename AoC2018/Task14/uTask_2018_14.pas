@@ -37,7 +37,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %s, Part 2: %d', [ GetRecipeScore(FLastRecipe), GetRecipeCountBefore(FLastRecipe) ]));
+  OK('Part 1: %s, Part 2: %d', [ GetRecipeScore(FLastRecipe), GetRecipeCountBefore(FLastRecipe) ]);
 end;
 
 function TTask_AoC.GetRecipeCountBefore(const Last: Integer): Int64;

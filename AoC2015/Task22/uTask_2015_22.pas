@@ -38,7 +38,7 @@ begin
   Part1 := TSimulator.Simulate(FBossHealth, FBossDamage, False);
   Part2 := TSimulator.Simulate(FBossHealth, FBossDamage, True);
 
-  OK(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+  OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
 end;
 
 initialization

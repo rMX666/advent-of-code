@@ -31,7 +31,7 @@ begin
   try
     FillHashes;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ UsedBlocks, GroupCount ]));
+    OK('Part 1: %d, Part 2: %d', [ UsedBlocks, GroupCount ]);
   finally
     FHashes.Free;
   end;

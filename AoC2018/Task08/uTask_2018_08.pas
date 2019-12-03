@@ -91,7 +91,7 @@ begin
   try
     LoadTree;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FRoot.Checksum, FRoot.NodeValue ]));
+    OK('Part 1: %d, Part 2: %d', [ FRoot.Checksum, FRoot.NodeValue ]);
   finally
     FRoot.Free;
   end;

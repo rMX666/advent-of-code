@@ -43,7 +43,7 @@ begin
   for I := 1 to Target do
     Code := (Code * 252533) mod 33554393;
 
-  OK(Format('%d', [ Code ]));
+  OK('%d', [ Code ]);
 end;
 
 initialization

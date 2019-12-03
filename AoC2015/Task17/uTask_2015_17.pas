@@ -80,7 +80,7 @@ begin
 
   CountMinWaysToFill;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ FWaysToFill, FMinWaysToFill ]));
+  OK('Part 1: %d, Part 2: %d', [ FWaysToFill, FMinWaysToFill ]);
 end;
 
 initialization

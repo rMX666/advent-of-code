@@ -36,7 +36,7 @@ begin
   try
     LoadDirections;
     FindDistances(Part1, Part2);
-    OK(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
   finally
     FDirections.Free;
   end;

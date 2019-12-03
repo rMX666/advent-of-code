@@ -37,7 +37,7 @@ begin
   // I fount that cicle starts after 425 states with period of 28.
   // So solution is: CicledResults[ (1.000.000.000 - 425) mod 28 ]
   // But I'm to lazy to write code for it...
-  OK(Format('Part 1: %d, Part 2: %d', [ GetResourceValue(10000), 203138 ]))
+  OK('Part 1: %d, Part 2: %d', [ GetResourceValue(10000), 203138 ])
 end;
 
 function TTask_AoC.GetResourceValue(const Minutes: Integer): Integer;

@@ -325,7 +325,7 @@ end;
 
 procedure TTask_AoC.DoRun;
 begin
-  OK(Format('Part 1: %s, Part 2: %s', [ Scramble('abcdefgh', False), Scramble('fbgdceah', True) ]));
+  OK('Part 1: %s, Part 2: %s', [ Scramble('abcdefgh', False), Scramble('fbgdceah', True) ]);
 end;
 
 procedure TTask_AoC.LoadActions;

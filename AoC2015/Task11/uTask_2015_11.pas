@@ -37,7 +37,7 @@ begin
   Part1 := GetNextPassword(Start);
   Part2 := GetNextPassword(Part1);
 
-  OK(Format('Part 1: %s, Part 2: %s', [ Part1, Part2 ]));
+  OK('Part 1: %s, Part 2: %s', [ Part1, Part2 ]);
 end;
 
 function TTask_AoC.GetNextPassword(const Password: String): String;

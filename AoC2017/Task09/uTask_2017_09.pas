@@ -34,7 +34,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ FGroupsScore, FGarbageChars ]));
+  OK('Part 1: %d, Part 2: %d', [ FGroupsScore, FGarbageChars ]);
 end;
 
 procedure TTask_AoC.ProcessStream(const S: String);

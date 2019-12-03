@@ -173,7 +173,7 @@ begin
   try
     BuildTree;
 
-    OK(Format('Part 1: %s, Part 2: %d', [ FRoot.Name, FindCorrectWeight ]));
+    OK('Part 1: %s, Part 2: %d', [ FRoot.Name, FindCorrectWeight ]);
   finally
     FRoot.Free;
   end;

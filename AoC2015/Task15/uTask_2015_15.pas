@@ -66,7 +66,7 @@ begin
     Part1 := FindBestCookieScore;
     Part2 := FindBestCookieScore(500);
 
-    OK(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
   finally
     FIngridients.Free;
   end;

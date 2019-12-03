@@ -43,7 +43,7 @@ begin
   Part1 := GetCode(Part1KP.Split(['$']));
   Part2 := GetCode(Part2KP.Split(['$']));
 
-  OK(Format('Part1: %s, Part 2: %s', [ Part1, Part2 ]));
+  OK('Part1: %s, Part 2: %s', [ Part1, Part2 ]);
 end;
 
 function TTask_AoC.GetCode(const KeyPad: TKeyPad): String;

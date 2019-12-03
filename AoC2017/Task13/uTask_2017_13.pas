@@ -91,7 +91,7 @@ begin
   FFirewall := TFirewall.Create;
   try
     LoadFirewall;
-    OK(Format('Part 1: %d, Part 2: %d', [ FFirewall.TotalSeverity(0), FFirewall.TimeToGo ]));
+    OK('Part 1: %d, Part 2: %d', [ FFirewall.TotalSeverity(0), FFirewall.TimeToGo ]);
   finally
     FFirewall.Free;
   end;

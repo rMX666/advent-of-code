@@ -69,12 +69,12 @@ begin
       for I := 0 to Count - 1 do
         Inc(Part1, CalculateEscapes(Strings[I]));
 
-      Ok(Format('Part 1: %d', [ Part1 ]));
+      OK('Part 1: %d', [ Part1 ]);
 
       for I := 0 to Count - 1 do
         Inc(Part2, CalculateEscapes(EscapeString(Strings[I])));
 
-      Ok(Format('Part 2: %d', [ Part2 ]));
+      OK('Part 2: %d', [ Part2 ]);
     finally
       Free;
     end;

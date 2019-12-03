@@ -36,7 +36,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %s', [ Part1, TKnotHash.HashHex(GetInputValue) ]));
+  OK('Part 1: %d, Part 2: %s', [ Part1, TKnotHash.HashHex(GetInputValue) ]);
 end;
 
 function TTask_AoC.GetInputValue: String;

@@ -58,7 +58,7 @@ begin
 
     Part2 := FindBestSeating;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
   finally
     FRelationGraph.Free;
     FPersons.Free;

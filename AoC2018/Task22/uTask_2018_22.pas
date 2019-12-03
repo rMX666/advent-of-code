@@ -234,7 +234,7 @@ begin
   try
     LoadMaze;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FMap.GetRiskLevel, FMap.GetResqueTime ]));
+    OK('Part 1: %d, Part 2: %d', [ FMap.GetRiskLevel, FMap.GetResqueTime ]);
   finally
     FMap.Free;
   end;

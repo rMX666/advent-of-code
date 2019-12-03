@@ -183,7 +183,7 @@ begin
     FRooms.Free;
   end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+  OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
 end;
 
 procedure TTask_AoC.LoadRooms;

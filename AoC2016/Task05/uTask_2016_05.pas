@@ -84,7 +84,7 @@ begin
   Part1 := CinemaDecrypt(False);
   Part2 := CinemaDecrypt(True);
 
-  OK(Format('Part 1: %s, Part 2: %s', [ Part1, Part2 ]));
+  OK('Part 1: %s, Part 2: %s', [ Part1, Part2 ]);
 end;
 
 procedure TTask_AoC.PasswordChanged(const IsHardMode: Boolean; const S: String);

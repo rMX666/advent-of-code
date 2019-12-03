@@ -90,7 +90,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ GetNthPass(64, 0), GetNthPass(64, 2016) ]));
+  OK('Part 1: %d, Part 2: %d', [ GetNthPass(64, 0), GetNthPass(64, 2016) ]);
 end;
 
 function TTask_AoC.FindThreeInARow(const Hash: String): String;

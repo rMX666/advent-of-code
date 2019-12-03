@@ -93,7 +93,7 @@ procedure TTask_AoC.DoRun;
 begin
   with Input do
     try
-      OK(Format('Part 1: %d, Part 2: %d', [ DecompresedSize(Text.Trim), AdvDecompresedSize(Text.Trim) ]));
+      OK('Part 1: %d, Part 2: %d', [ DecompresedSize(Text.Trim), AdvDecompresedSize(Text.Trim) ]);
     finally
       Free;
     end;

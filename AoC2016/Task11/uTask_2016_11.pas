@@ -259,7 +259,7 @@ end;
 procedure TTask_AoC.DoRun;
 begin
   LoadInitialState;
-  OK(Format('Part 1: %d, Part 2: %d', [ Steps(1), Steps(2) ]));
+  OK('Part 1: %d, Part 2: %d', [ Steps(1), Steps(2) ]);
 end;
 
 procedure TTask_AoC.LoadInitialState;

@@ -185,7 +185,7 @@ begin
   try
     LoadParticles;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FindClosestToZero, CoundUncollided ]));
+    OK('Part 1: %d, Part 2: %d', [ FindClosestToZero, CoundUncollided ]);
   finally
     FParticles.Free;
   end;

@@ -270,7 +270,7 @@ begin
 
     FAreas.Expand;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ MaximalFiniteArea, SafePlacesCount ]));
+    OK('Part 1: %d, Part 2: %d', [ MaximalFiniteArea, SafePlacesCount ]);
 
     fMain_2018_06 := TfMain_2018_06.Create(nil);
     fMain_2018_06.Show;

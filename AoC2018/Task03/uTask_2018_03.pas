@@ -52,7 +52,7 @@ begin
   try
     LoadClaims;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ GetIntersectCount, NoIntersections ]));
+    OK('Part 1: %d, Part 2: %d', [ GetIntersectCount, NoIntersections ]);
   finally
     FClaims.Free;
   end;

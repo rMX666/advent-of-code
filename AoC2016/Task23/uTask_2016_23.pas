@@ -282,7 +282,7 @@ begin
     LoadInput;
     FProcessor.RegisterA := 7;
     FProcessor.Execute;
-    OK(Format('Part 1: %d, Part 2: %d', [ FProcessor.RegisterA, Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ FProcessor.RegisterA, Part2 ]);
   finally
     FProcessor.Free;
   end;

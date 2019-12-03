@@ -31,7 +31,7 @@ begin
     try
       FPolymer := Text.Trim;
 
-      OK(Format('Part 1: %d, Part 2: %d', [ ReactAll(FPolymer), FindBestReduce ]));
+      OK('Part 1: %d, Part 2: %d', [ ReactAll(FPolymer), FindBestReduce ]);
     finally
       Free;
     end;

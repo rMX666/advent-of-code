@@ -40,7 +40,7 @@ begin
     fMain_2018_13.Show;
 
     while FCarts.StepCarts do;
-    OK(Format('Part 1: %d,%d, Part 2: %d, %d', [ FCarts.Collision.X, FCarts.Collision.Y, FCarts[0].Pos.X, FCarts[0].Pos.Y ]))
+    OK('Part 1: %d,%d, Part 2: %d, %d', [ FCarts.Collision.X, FCarts.Collision.Y, FCarts[0].Pos.X, FCarts[0].Pos.Y ])
   finally
     fMain_2018_13.Map := nil;
     fMain_2018_13.Carts := nil;

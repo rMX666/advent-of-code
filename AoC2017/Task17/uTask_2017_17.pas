@@ -71,7 +71,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ After2017, After0 ]));
+  OK('Part 1: %d, Part 2: %d', [ After2017, After0 ]);
 end;
 
 

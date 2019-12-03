@@ -86,7 +86,7 @@ begin
   try
     fMain_2016_08.Show;
 
-    OK(Format('Part 1: %d', [ ProcessCommands ]));
+    OK('Part 1: %d', [ ProcessCommands ]);
   finally
     FCommands.Free;
   end;

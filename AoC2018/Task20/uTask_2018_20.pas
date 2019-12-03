@@ -39,7 +39,7 @@ begin
     LoadRegExp;
     fForm_2018_20.DrawMap(FMap, TPoint.Zero);
     fForm_2018_20.ShowModal;
-    OK(Format('Part 1: %d, Part 2: %d', [ FurtherPoint, RoomsWithMoreThan(1000) ]));
+    OK('Part 1: %d, Part 2: %d', [ FurtherPoint, RoomsWithMoreThan(1000) ]);
   finally
     FMap.Free;
   end;

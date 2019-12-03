@@ -35,7 +35,7 @@ procedure TTask_AoC.DoRun;
 begin
   InitializeGenerators;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ Judge(1), Judge(2) ]));
+  OK('Part 1: %d, Part 2: %d', [ Judge(1), Judge(2) ]);
 end;
 
 function TTask_AoC.GetNextValue(const Value, Factor: Int64): Int64;

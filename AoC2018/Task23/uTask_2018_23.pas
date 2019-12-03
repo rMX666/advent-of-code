@@ -256,7 +256,7 @@ begin
   LoadBots;
 
   try
-    OK(Format('Part 1: %d, Part2: %d', [ StrongestBotInRange, BestLocationDistance ]));
+    OK('Part 1: %d, Part2: %d', [ StrongestBotInRange, BestLocationDistance ]);
   finally
     FBots.Free;
   end;

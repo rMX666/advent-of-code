@@ -57,7 +57,7 @@ procedure TTask_AoC.DoRun;
 begin
   InitializeItems;
   try
-    OK(Format('Part 1: %d, Part 2: %d', [ MinimalCostWin, MaximalCostLose ]));
+    OK('Part 1: %d, Part 2: %d', [ MinimalCostWin, MaximalCostLose ]);
   finally
     FWarSets.Free;
   end;

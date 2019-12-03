@@ -60,7 +60,7 @@ begin
         Break;
     Part2 := I + 1;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
   finally
     Ethalon.Free;
     FAunts.Free;

@@ -43,7 +43,7 @@ begin
   Part1 := Max3x3Region;
   Part2 := MaxRegion(Part2Size);
 
-  OK(Format('Part 1: %d,%d, Part 2: %d,%d,%d', [ Part1.X, Part1.Y, Part2.X, Part2.Y, Part2Size ]));
+  OK('Part 1: %d,%d, Part 2: %d,%d,%d', [ Part1.X, Part1.Y, Part2.X, Part2.Y, Part2Size ]);
 end;
 
 function TTask_AoC.GetPowerLevel(const X, Y: Integer): Integer;

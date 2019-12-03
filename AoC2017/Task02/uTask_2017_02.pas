@@ -60,7 +60,7 @@ procedure TTask_AoC.DoRun;
 begin
   LoadSheet;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ CheckSum(1), CheckSum(2) ]));
+  OK('Part 1: %d, Part 2: %d', [ CheckSum(1), CheckSum(2) ]);
 end;
 
 

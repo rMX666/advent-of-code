@@ -135,7 +135,7 @@ begin
   try
     InitializeRules;
 
-    Ok(Format('Part 1: %d, Part 2: %d', [ CalculateGrid(1), CalculateGrid(2) ]));
+    OK('Part 1: %d, Part 2: %d', [ CalculateGrid(1), CalculateGrid(2) ]);
   finally
     FreeAndNil(FRules);
   end;

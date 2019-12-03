@@ -83,7 +83,7 @@ begin
             Points[I mod Part] := Point;
           end;
 
-        OK(Format('Part %d: %d', [ Part, Houses.Count ]));
+        OK('Part %d: %d', [ Part, Houses.Count ]);
       finally
         Houses.Free;
       end;

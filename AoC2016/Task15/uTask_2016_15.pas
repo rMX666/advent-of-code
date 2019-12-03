@@ -76,10 +76,10 @@ begin
   try
     LoadDisks;
 
-    OK(Format('Part 1: %d', [ GetSyncTime ]));
+    OK('Part 1: %d', [ GetSyncTime ]);
 
     FDisks.Add(TDisk.Create(7, 11, 0));
-    OK(Format('Part 2: %d', [ GetSyncTime ]));
+    OK('Part 2: %d', [ GetSyncTime ]);
   finally
     FDisks.Free;
   end;

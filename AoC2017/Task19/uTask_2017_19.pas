@@ -31,7 +31,7 @@ procedure TTask_AoC.DoRun;
 begin
   LoadMap;
   TracePath;
-  OK(Format('Part 1: %s, Part 2: %d', [ FPath, FPathLength ]));
+  OK('Part 1: %s, Part 2: %d', [ FPath, FPathLength ]);
 end;
 
 procedure TTask_AoC.LoadMap;

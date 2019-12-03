@@ -33,7 +33,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ Solve(1), Solve(2) ]));
+  OK('Part 1: %d, Part 2: %d', [ Solve(1), Solve(2) ]);
 end;
 
 

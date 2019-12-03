@@ -89,7 +89,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d', [ Area ]));
+  OK('Part 1: %d', [ Area ]);
 end;
 
 procedure TTask_AoC.Part2;
@@ -114,7 +114,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 2: %d', [ RibbonLength ]));
+  OK('Part 2: %d', [ RibbonLength ]);
 end;
 
 initialization

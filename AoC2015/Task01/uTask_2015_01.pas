@@ -48,7 +48,7 @@ begin
       '(': Inc(Floor);
       ')': Dec(Floor);
     end;
-  OK(Format('Part 1: %d', [ Floor ]));
+  OK('Part 1: %d', [ Floor ]);
 end;
 
 procedure TTask_AoC.Part2;
@@ -65,7 +65,7 @@ begin
       if Floor = -1 then
         Break;
     end;
-  OK(Format('Part 2: %d', [ I ]));
+  OK('Part 2: %d', [ I ]);
 end;
 
 initialization

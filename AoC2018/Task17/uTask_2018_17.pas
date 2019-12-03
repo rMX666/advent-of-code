@@ -35,7 +35,7 @@ begin
     fMain_2018_17.Show;
     FMap.Simulate;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FMap.CountOf([ stWater, stWetSand ]), FMap.CountOf([ stWater ]) ]));
+    OK('Part 1: %d, Part 2: %d', [ FMap.CountOf([ stWater, stWetSand ]), FMap.CountOf([ stWater ]) ]);
   finally
     if Assigned(fMain_2018_17) and not fMain_2018_17.Visible then
       FMap.Free;

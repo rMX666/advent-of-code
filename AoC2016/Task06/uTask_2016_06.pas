@@ -38,7 +38,7 @@ begin
   Part1 := GetMessage(False);
   Part2 := GetMessage(True);
 
-  OK(Format('Part 1: %s, Part2: %s', [ Part1, Part2 ]));
+  OK('Part 1: %s, Part2: %s', [ Part1, Part2 ]);
 end;
 
 function TTask_AoC.GetMessage(const ModifiedCode: Boolean): String;

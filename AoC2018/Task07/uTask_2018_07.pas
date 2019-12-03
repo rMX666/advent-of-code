@@ -36,7 +36,7 @@ begin
   try
     LoadSteps;
 
-    OK(Format('Part 1: %s, Part 2: %d', [ GetStepOrder, GetAssemblyTime ]));
+    OK('Part 1: %s, Part 2: %d', [ GetStepOrder, GetAssemblyTime ]);
   finally
     FSteps.Free;
   end;

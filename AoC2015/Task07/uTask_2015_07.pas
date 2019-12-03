@@ -206,7 +206,7 @@ begin
     FWires['b'].IOpA := Part1;
     Part2 := FWires['a'].Run;
 
-    Ok(Format('Part 1: %d, Part 2: %d', [ Part1, Part2 ]));
+    OK('Part 1: %d, Part 2: %d', [ Part1, Part2 ]);
   finally
     FWires.Free;
   end;

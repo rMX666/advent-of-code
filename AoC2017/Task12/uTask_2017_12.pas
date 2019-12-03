@@ -38,7 +38,7 @@ begin
     LoadPrograms;
     SplitGroups(0);
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FGroups[0].Count, FGroups.Count ]));
+    OK('Part 1: %d, Part 2: %d', [ FGroups[0].Count, FGroups.Count ]);
   finally
     FPrograms.Free;
     FGroups.Free;

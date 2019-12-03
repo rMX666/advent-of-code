@@ -47,7 +47,7 @@ begin
   try
     LoopDetect(UntilLoop, LoopLength);
 
-    OK(Format('Part 1: %d, Part 2: %d', [ UntilLoop, LoopLength ]));
+    OK('Part 1: %d, Part 2: %d', [ UntilLoop, LoopLength ]);
   finally
     FStates.Free;
   end;

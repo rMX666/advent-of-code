@@ -205,7 +205,7 @@ begin
     for I := 0 to 2 do
       Part2 := Part2 * FConveyor.FOutputs[I].First;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ F_17_61_BotNo, Part2 ]))
+    OK('Part 1: %d, Part 2: %d', [ F_17_61_BotNo, Part2 ])
   finally
     FConveyor.Free;
   end;

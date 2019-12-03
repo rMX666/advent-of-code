@@ -37,7 +37,7 @@ begin
   FIntersections := TIntersections.Create;
   try
     LoadPaths;
-    OK(Format('Part 1: %d, Part 2: %d', [ GetClosestIntersectionDistance, GetBestIntersectionPathLength ]));
+    OK('Part 1: %d, Part 2: %d', [ GetClosestIntersectionDistance, GetBestIntersectionPathLength ]);
   finally
     FPath1.Free;
     FPath2.Free;

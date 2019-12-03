@@ -113,7 +113,7 @@ begin
   try
     LoadMoves;
 
-    OK(Format('Part 1: %s, Part 2: %s', [ MoveIt(1), MoveIt(1000000000) ]));
+    OK('Part 1: %s, Part 2: %s', [ MoveIt(1), MoveIt(1000000000) ]);
   finally
     FMoves.Free;
   end;

@@ -216,12 +216,12 @@ begin
   try
     LoadInput;
     FProcessor.Execute;
-    OK(Format('Part 1: %d', [ FProcessor.RegisterA ]));
+    OK('Part 1: %d', [ FProcessor.RegisterA ]);
 
     FProcessor.Reset;
     FProcessor.RegisterC := 1;
     FProcessor.Execute;
-    OK(Format('Part 2: %d', [ FProcessor.RegisterA ]));
+    OK('Part 2: %d', [ FProcessor.RegisterA ]);
   finally
     FProcessor.Free;
   end;

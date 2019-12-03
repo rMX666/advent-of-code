@@ -118,7 +118,7 @@ end;
 
 procedure TTask_AoC.DoRun;
 begin
-  Ok(Format('Part 1: %d, Part 2: %d', [ CountNiceStrings(1), CountNiceStrings(2) ]));
+  OK('Part 1: %d, Part 2: %d', [ CountNiceStrings(1), CountNiceStrings(2) ]);
 end;
 
 initialization

@@ -34,7 +34,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ TLSCount, SSLCount ]))
+  OK('Part 1: %d, Part 2: %d', [ TLSCount, SSLCount ])
 end;
 
 function TTask_AoC.TLSCount: Integer;

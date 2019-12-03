@@ -46,7 +46,7 @@ begin
 //  }
 
   try
-    OK(Format('Part 1: %d, Part 2: %d', [ FProgram.Execute(Part1State)[0], SumOfDivisors ]))
+    OK('Part 1: %d, Part 2: %d', [ FProgram.Execute(Part1State)[0], SumOfDivisors ])
   finally
     FProgram.Free;
   end;

@@ -112,7 +112,7 @@ begin
   try
     LoadBlacklist;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ FirstFree, CountFree ]));
+    OK('Part 1: %d, Part 2: %d', [ FirstFree, CountFree ]);
   finally
     FBlacklist.Free;
   end;

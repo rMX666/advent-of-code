@@ -210,7 +210,7 @@ begin
   try
     LoadPorts;
 
-    OK(Format('Part 1: %d, Part 2: %d', [ BuildBridge(False), BuildBridge(True) ]));
+    OK('Part 1: %d, Part 2: %d', [ BuildBridge(False), BuildBridge(True) ]);
   finally
     FPorts.Free;
   end;

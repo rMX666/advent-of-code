@@ -33,7 +33,7 @@ begin
       Free;
     end;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ LookAndSay(Start, 40), LookAndSay(Start, 50) ]));
+  OK('Part 1: %d, Part 2: %d', [ LookAndSay(Start, 40), LookAndSay(Start, 50) ]);
 end;
 
 function TTask_AoC.LookAndSay(const Start: String; const Iterations: Integer): Integer;

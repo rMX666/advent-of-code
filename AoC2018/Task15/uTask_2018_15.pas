@@ -173,7 +173,7 @@ begin
   fForm_2018_15 := TfForm_2018_15.Create(nil);
   fForm_2018_15.Show;
 
-  OK(Format('Part 1: %d, Part 2: %d', [ Battle, ElfsWinningBattle ]));
+  OK('Part 1: %d, Part 2: %d', [ Battle, ElfsWinningBattle ]);
 end;
 
 procedure TTask_AoC.Draw;
