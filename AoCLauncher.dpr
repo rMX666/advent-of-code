@@ -136,7 +136,8 @@ uses
   uTask_2018_25 in 'AoC2018\Task25\uTask_2018_25.pas',
   uTask_2019_01 in 'AoC2019\Task01\uTask_2019_01.pas',
   uTask_2019_02 in 'AoC2019\Task02\uTask_2019_02.pas',
-  IntCode in 'AoC2019\IntCode.pas';
+  IntCode in 'AoC2019\IntCode.pas',
+  uTask_2019_03 in 'AoC2019\Task03\uTask_2019_03.pas';
 
 {$R *.res}
 
