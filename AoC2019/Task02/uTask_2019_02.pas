@@ -29,9 +29,9 @@ procedure TTask_AoC.DoRun;
 var
   State: TIntCode;
 begin
+  LoadProgram;
+  State := FInitialState.Clone;
   try
-    LoadProgram;
-    State := FInitialState.Clone;
     OK('Part 1: %d, Part 2: %d', [ State.Execute(12, 2), FindNounAndVerb(19690720) ]);
   finally
     State.Free;
@@ -57,20 +57,13 @@ begin
 end;
 
 procedure TTask_AoC.LoadProgram;
-var
-  A: TArray<String>;
-  I: Integer;
 begin
   with Input do
     try
-      A := Text.Trim.Split([',']);
+      FInitialState := TIntCode.LoadProgram(Text);
     finally
       Free;
     end;
-
-  FInitialState := TIntCode.Create;
-  for I := 0 to Length(A) - 1 do
-    FInitialState.Add(A[I].ToInteger);
 end;
 
 initialization

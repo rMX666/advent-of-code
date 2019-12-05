@@ -138,7 +138,8 @@ uses
   uTask_2019_01 in 'AoC2019\Task01\uTask_2019_01.pas',
   uTask_2019_02 in 'AoC2019\Task02\uTask_2019_02.pas',
   uTask_2019_03 in 'AoC2019\Task03\uTask_2019_03.pas',
-  uTask_2019_04 in 'AoC2019\Task04\uTask_2019_04.pas';
+  uTask_2019_04 in 'AoC2019\Task04\uTask_2019_04.pas',
+  uTask_2019_05 in 'AoC2019\Task05\uTask_2019_05.pas';
 
 {$R *.res}
 
