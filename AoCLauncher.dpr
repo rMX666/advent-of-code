@@ -141,7 +141,9 @@ uses
   uTask_2019_04 in 'AoC2019\Task04\uTask_2019_04.pas',
   uTask_2019_05 in 'AoC2019\Task05\uTask_2019_05.pas',
   uTask_2019_06 in 'AoC2019\Task06\uTask_2019_06.pas',
-  uTask_2019_07 in 'AoC2019\Task07\uTask_2019_07.pas';
+  uTask_2019_07 in 'AoC2019\Task07\uTask_2019_07.pas',
+  uTask_2019_08 in 'AoC2019\Task08\uTask_2019_08.pas',
+  uForm_2019_08 in 'AoC2019\Task08\uForm_2019_08.pas' {fForm_2019_08};
 
 {$R *.res}
 
