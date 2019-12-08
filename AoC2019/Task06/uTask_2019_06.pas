@@ -155,8 +155,9 @@ var
   end;
 
 begin
+  Result := 0;
   if not FOrbitMap.ContainsKey(A) or not FOrbitMap.ContainsKey(B) then
-    Exit(0);
+    Exit;
 
   Queue := TQueue<String>.Create;
   Visited := TDictionary<String,String>.Create;

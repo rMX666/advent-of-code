@@ -22,7 +22,7 @@ type
   TParameterMode = ( pmPosition
                    , pmImmediate
                    );
-  TInstructionExecuteResult = ( ierOk, ierNoInc, ierHalt );
+  TExecuteResult = ( erNone, erOk, erNoInc, erHalt, erWaitForInput );
   TParameterModes = array [0..2] of TParameterMode;
   TInstruction = record
   private
@@ -38,34 +38,32 @@ type
     FInstructionType: TInstructionType;
     FParams: TArray<Integer>;
     constructor Create(const AOwner: TIntCode; const AIndex: Integer);
-    function Execute: TInstructionExecuteResult;
+    function Execute: TExecuteResult;
     property Params[const Index: Integer]: Integer read GetParams write SetParams;
     property ParamCount: Integer read GetParamCount;
   end;
 
-  TOnInputHandler  = procedure (const Sender: TIntCode; out Value: Integer) of object;
-  TOnOutputHandler = procedure (const Sender: TIntCode; const Value: Integer) of object;
-
   TIntCode = class(TList<Integer>)
   private
     FInstructionPointer: Integer;
-    FOnInput: TOnInputHandler;
-    FOnOutput: TOnOutputHandler;
+    FProgramLabel: String;
+    FInputQueue: TQueue<Integer>;
+    FOutput: TList<Integer>;
   protected
-    procedure DoOnInput(var Value: Integer);
-    procedure DoOnOutput(const Value: Integer);
     property InstructionPointer: Integer read FInstructionPointer write FInstructionPointer;
   public
+    constructor Create;
+    destructor Destroy; override;
     class function LoadProgram(const Input: String): TIntCode;
-    function Execute: Integer; overload;
-    function Execute(const Noun, Verb: Integer): Integer; overload;
+    function Execute: TExecuteResult;
     function Clone: TIntCode;
-    property OnInput: TOnInputHandler read FOnInput write FOnInput;
-    property OnOutput: TOnOutputHandler read FOnOutput write FOnOutput;
+    procedure AddInput(const Value: Integer);
+    function GetInput: Integer;
+    property Output: TList<Integer> read FOutput;
+    property ProgramLabel: String read FProgramLabel;
   end;
 
 implementation
-
 
 { TInstruction }
 
@@ -82,11 +80,9 @@ begin
   FParameterModes[2] := TParameterMode((FOwner[FIndex] div 10000) mod 10);
 end;
 
-function TInstruction.Execute: TInstructionExecuteResult;
-var
-  Tmp: Integer;
+function TInstruction.Execute: TExecuteResult;
 begin
-  Result := ierOk;
+  Result := erOk;
 
   case FInstructionType of
     itAdd:
@@ -94,23 +90,24 @@ begin
     itMul:
       Params[2] := Params[0] * Params[1];
     itIn:
-      begin
-        FOwner.DoOnInput(Tmp);
-        Params[0] := Tmp;
+      try
+        Params[0] := FOwner.GetInput;
+      except
+        Exit(erWaitForInput);
       end;
     itOut:
-      FOwner.DoOnOutput(Params[0]);
+      FOwner.Output.Add(Params[0]);
     itJNZ:
       if Params[0] <> 0 then
         begin
           FOwner.InstructionPointer := Params[1];
-          Result := ierNoInc;
+          Result := erNoInc;
         end;
     itJZ:
       if Params[0] = 0 then
         begin
           FOwner.InstructionPointer := Params[1];
-          Result := ierNoInc;
+          Result := erNoInc;
         end;
     itLT:
       Params[2] := Integer(Params[0] < Params[1]);
@@ -118,7 +115,7 @@ begin
       Params[2] := Integer(Params[0] = Params[1]);
     //
     itHalt:
-      Exit(ierHalt);
+      Exit(erHalt);
     else
       RaiseWrongInstructionTypeException;
   end;
@@ -175,50 +172,59 @@ end;
 
 { TIntCode }
 
+constructor TIntCode.Create;
+begin
+  inherited Create;
+  FInputQueue := TQueue<Integer>.Create;
+  FOutput := TList<Integer>.Create;
+end;
+
+destructor TIntCode.Destroy;
+begin
+  FreeAndNil(FInputQueue);
+  FreeAndNil(FOutput);
+  inherited;
+end;
+
+function TIntCode.GetInput: Integer;
+begin
+  Result := FInputQueue.Dequeue;
+end;
+
+procedure TIntCode.AddInput(const Value: Integer);
+begin
+  FInputQueue.Enqueue(Value);
+end;
+
 function TIntCode.Clone: TIntCode;
 begin
   Result := TIntCode.Create;
   Result.AddRange(ToArray);
-  Result.FOnInput := FOnInput;
-  Result.FOnOutput := FOnOutput;
 end;
 
-procedure TIntCode.DoOnInput(var Value: Integer);
-begin
-  if Assigned(FOnInput) then
-    FOnInput(Self, Value);
-end;
-
-procedure TIntCode.DoOnOutput(const Value: Integer);
-begin
-  if Assigned(FOnOutput) then
-    FOnOutput(Self, Value);
-end;
-
-function TIntCode.Execute: Integer;
+function TIntCode.Execute: TExecuteResult;
+var
+  E: TExecuteResult;
 begin
   InstructionPointer := 0;
+  Result := erNone;
 
   while FInstructionPointer < Count do
     with TInstruction.Create(Self, InstructionPointer) do
-      case Execute of
-        ierOk:
-          InstructionPointer := InstructionPointer + 1 + ParamCount;
-        ierNoInc:
-          ; // Dummy
-        ierHalt:
-          Break;
+      begin
+        E := Execute;
+        case E of
+          erOk:
+            Inc(FInstructionPointer, 1 + ParamCount);
+          erNoInc:
+            ; // Do not shift the instruction pointer
+          erHalt,
+          erWaitForInput:
+            Exit(E);
+          else
+            raise Exception.CreateFmt('Wrong instruction execute result code: %d', [ Integer(E) ]);
+        end;
       end;
-
-  Result := Items[0];
-end;
-
-function TIntCode.Execute(const Noun, Verb: Integer): Integer;
-begin
-  Items[1] := Noun;
-  Items[2] := Verb;
-
-  Result := Execute;
 end;
 
 class function TIntCode.LoadProgram(const Input: String): TIntCode;
