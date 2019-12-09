@@ -63,7 +63,7 @@ type
     function Execute: TExecuteResult;
     function Clone: TIntCode;
     procedure AddInput(const Value: Int64);
-    function GetInput: Int64;
+    function TryGetInput(out Value: Int64): Boolean;
     property Output: TList<Int64> read FOutput;
     property Items[const Index: Integer]: Int64 read GetItem write SetItem; default;
   end;
@@ -86,6 +86,8 @@ begin
 end;
 
 function TInstruction.Execute: TExecuteResult;
+var
+  Tmp: Int64;
 begin
   Result := erOk;
 
@@ -95,11 +97,10 @@ begin
     itMul:
       Params[2] := Params[0] * Params[1];
     itIn:
-      try
-        Params[0] := FOwner.GetInput;
-      except
+      if FOwner.TryGetInput(Tmp) then
+        Params[0] := Tmp
+      else
         Exit(erWaitForInput);
-      end;
     itOut:
       FOwner.Output.Add(Params[0]);
     itJNZ:
@@ -206,9 +207,13 @@ begin
   inherited;
 end;
 
-function TIntCode.GetInput: Int64;
+function TIntCode.TryGetInput(out Value: Int64): Boolean;
 begin
-  Result := FInputQueue.Dequeue;
+  Result := True;
+  if FInputQueue.Count = 0 then
+    Exit(False);
+
+  Value := FInputQueue.Dequeue;
 end;
 
 procedure TIntCode.AddInput(const Value: Int64);
