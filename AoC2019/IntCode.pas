@@ -8,59 +8,64 @@ uses
 type
   TIntCode = class;
 
-  TInstructionType = ( itNone = 0
-                     , itAdd  = 1
-                     , itMul  = 2
-                     , itIn   = 3
-                     , itOut  = 4
-                     , itJNZ  = 5
-                     , itJZ   = 6
-                     , itLT   = 7
-                     , itEq   = 8
-                     , itHalt = 99
+  TInstructionType = ( itNone =  0 // Dummy
+                     , itAdd  =  1 // Summ two values
+                     , itMul  =  2 // Multiply two values
+                     , itIn   =  3 // Request imput value
+                     , itOut  =  4 // Output value
+                     , itJNZ  =  5 // Jump if not zero
+                     , itJZ   =  6 // Jump if zero
+                     , itLT   =  7 // Less then check
+                     , itEq   =  8 // Equality check
+                     , itRelC =  9 // Change relative base value
+                     , itHalt = 99 // Stop program execution
                      );
   TParameterMode = ( pmPosition
                    , pmImmediate
+                   , pmRelative
                    );
   TExecuteResult = ( erNone, erOk, erNoInc, erHalt, erWaitForInput );
   TParameterModes = array [0..2] of TParameterMode;
   TInstruction = record
   private
+    FInstructionType: TInstructionType;
+    FParams: TArray<Int64>;
     FIndex: Integer;
     FOwner: TIntCode;
     FParamCount: Integer;
     FParameterModes: TParameterModes;
     function GetParamCount: Integer;
     procedure RaiseWrongInstructionTypeException;
-    function GetParams(const Index: Integer): Integer;
-    procedure SetParams(const Index, Value: Integer);
+    function GetParams(const Index: Integer): Int64;
+    procedure SetParams(const Index: Integer; const Value: Int64);
   public
-    FInstructionType: TInstructionType;
-    FParams: TArray<Integer>;
     constructor Create(const AOwner: TIntCode; const AIndex: Integer);
     function Execute: TExecuteResult;
-    property Params[const Index: Integer]: Integer read GetParams write SetParams;
+    property Params[const Index: Integer]: Int64 read GetParams write SetParams;
     property ParamCount: Integer read GetParamCount;
   end;
 
-  TIntCode = class(TList<Integer>)
+  TIntCode = class(TList<Int64>)
   private
     FInstructionPointer: Integer;
-    FProgramLabel: String;
-    FInputQueue: TQueue<Integer>;
-    FOutput: TList<Integer>;
+    FInputQueue: TQueue<Int64>;
+    FOutput: TList<Int64>;
+    FRelativeBase: Integer;
+    function GetItem(const Index: Integer): Int64;
+    procedure SetItem(const Index: Integer; const Value: Int64);
   protected
     property InstructionPointer: Integer read FInstructionPointer write FInstructionPointer;
+    property RelativeBase: Integer read FRelativeBase write FRelativeBase;
   public
     constructor Create;
     destructor Destroy; override;
     class function LoadProgram(const Input: String): TIntCode;
     function Execute: TExecuteResult;
     function Clone: TIntCode;
-    procedure AddInput(const Value: Integer);
-    function GetInput: Integer;
-    property Output: TList<Integer> read FOutput;
-    property ProgramLabel: String read FProgramLabel;
+    procedure AddInput(const Value: Int64);
+    function GetInput: Int64;
+    property Output: TList<Int64> read FOutput;
+    property Items[const Index: Integer]: Int64 read GetItem write SetItem; default;
   end;
 
 implementation
@@ -113,6 +118,8 @@ begin
       Params[2] := Integer(Params[0] < Params[1]);
     itEq:
       Params[2] := Integer(Params[0] = Params[1]);
+    itRelC:
+      FOwner.RelativeBase := FOwner.RelativeBase + Params[0];
     //
     itHalt:
       Exit(erHalt);
@@ -121,7 +128,7 @@ begin
   end;
 end;
 
-function TInstruction.GetParams(const Index: Integer): Integer;
+function TInstruction.GetParams(const Index: Integer): Int64;
 begin
   Result := 0;
   case FParameterModes[Index] of
@@ -129,10 +136,12 @@ begin
       Result := FOwner[FParams[Index]];
     pmImmediate:
       Result := FParams[Index];
+    pmRelative:
+      Result := FOwner[FOwner.RelativeBase + FParams[Index]];
   end;
 end;
 
-procedure TInstruction.SetParams(const Index, Value: Integer);
+procedure TInstruction.SetParams(const Index: Integer; const Value: Int64);
 begin
   case FParameterModes[Index] of
     pmPosition:
@@ -142,6 +151,8 @@ begin
         FParams[Index] := Value;
         FOwner[FIndex + Index + 1] := Value;
       end;
+    pmRelative:
+      FOwner[FOwner.RelativeBase + FParams[Index]] := Value;
   end;
 end;
 
@@ -157,6 +168,7 @@ begin
       itJZ:   FParamCount := 2;
       itLT:   FParamCount := 3;
       itEq:   FParamCount := 3;
+      itRelC: FParamCount := 1;
       //
       itHalt: FParamCount := 0;
       else RaiseWrongInstructionTypeException;
@@ -172,11 +184,19 @@ end;
 
 { TIntCode }
 
+function TIntCode.Clone: TIntCode;
+begin
+  Result := TIntCode.Create;
+  Result.AddRange(ToArray);
+end;
+
 constructor TIntCode.Create;
 begin
   inherited Create;
-  FInputQueue := TQueue<Integer>.Create;
-  FOutput := TList<Integer>.Create;
+  FInputQueue := TQueue<Int64>.Create;
+  FOutput := TList<Int64>.Create;
+  FRelativeBase := 0;
+  FInstructionPointer := 0;
 end;
 
 destructor TIntCode.Destroy;
@@ -186,27 +206,36 @@ begin
   inherited;
 end;
 
-function TIntCode.GetInput: Integer;
+function TIntCode.GetInput: Int64;
 begin
   Result := FInputQueue.Dequeue;
 end;
 
-procedure TIntCode.AddInput(const Value: Integer);
+procedure TIntCode.AddInput(const Value: Int64);
 begin
   FInputQueue.Enqueue(Value);
 end;
 
-function TIntCode.Clone: TIntCode;
+function TIntCode.GetItem(const Index: Integer): Int64;
 begin
-  Result := TIntCode.Create;
-  Result.AddRange(ToArray);
+  while Count <= Index do
+    Add(0);
+
+  Result := inherited Items[Index];
+end;
+
+procedure TIntCode.SetItem(const Index: Integer; const Value: Int64);
+begin
+  while Count <= Index do
+    Add(0);
+
+  inherited Items[Index] := Value;
 end;
 
 function TIntCode.Execute: TExecuteResult;
 var
   E: TExecuteResult;
 begin
-  InstructionPointer := 0;
   Result := erNone;
 
   while FInstructionPointer < Count do
