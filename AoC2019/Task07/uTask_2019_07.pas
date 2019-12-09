@@ -10,7 +10,6 @@ type
   private
     FInitialState: TIntCode;
     procedure LoadProgram;
-    procedure GetPermutation(const Initial: TArray<Integer>; const Index: Integer; out Permutated: TArray<Integer>);
     function GetBestAmpSignal: Integer;
     function GetBestFeedbackAmpSignal: Integer;
   protected
@@ -18,6 +17,9 @@ type
   end;
 
 implementation
+
+uses
+  uUtil;
 
 var
   GTask: TTask_AoC;
@@ -32,26 +34,6 @@ begin
   finally
     FInitialState.Free;
   end;
-end;
-
-procedure TTask_AoC.GetPermutation(const Initial: TArray<Integer>; const Index: Integer;
-  out Permutated: TArray<Integer>);
-var
-  I, J, K, Tmp: Integer;
-begin
-  // Generate pemutations
-  Permutated := Copy(Initial);
-  K := Index;
-  for I := 1 to Length(Permutated) do
-    begin
-      J := K mod I;
-      // Swap
-      Tmp := Permutated[J];
-      Permutated[J] := Permutated[I - 1];
-      Permutated[I - 1] := Tmp;
-      //
-      K := K div I;
-    end;
 end;
 
 function TTask_AoC.GetBestAmpSignal: Integer;
@@ -71,26 +53,12 @@ function TTask_AoC.GetBestAmpSignal: Integer;
   end;
 
 var
-  I, J, AmpOutput: Integer;
-  InitialPhases, Phases: TArray<Integer>;
+  I, AmpOutput: Integer;
+  Phases: TPermutationItems;
+  Permutations: TPermutations;
 begin
   Result := 0;
 
-  SetLength(InitialPhases, 5);
-  for I := 0 to 4 do
-    InitialPhases[I] := I;
-
-  for I := 1 to 120 do
-    begin
-      GetPermutation(InitialPhases, I, Phases);
-      AmpOutput := 0;
-      for J := 0 to Length(Phases) - 1 do
-        AmpOutput := RunAmplifier(Phases[J], AmpOutput);
-      if Result < AmpOutput then
-        Result := AmpOutput;
-    end;
-
-  { XXX: It throws "Invalid pointer operation" exception on 5 elements permutation generation. WTF?
   Permutations := TPermutations.Create(5);
   try
     for Phases in Permutations do
@@ -104,7 +72,6 @@ begin
   finally
     Permutations.Free;
   end;
-  }
 end;
 
 function TTask_AoC.GetBestFeedbackAmpSignal: Integer;
@@ -140,22 +107,23 @@ function TTask_AoC.GetBestFeedbackAmpSignal: Integer;
   end;
 
 var
-  I, J, AmpOutput: Integer;
-  InitialPhases, Phases: TArray<Integer>;
+  AmpOutput: Integer;
+  Phases: TPermutationItems;
+  Permutations: TPermutations;
 begin
   Result := 0;
 
-  SetLength(InitialPhases, 5);
-  for I := 5 to 9 do
-    InitialPhases[I - 5] := I;
-
-  for I := 1 to 120 do
-    begin
-      GetPermutation(InitialPhases, I, Phases);
-      AmpOutput := RunFeedbackChain(Phases);
-      if Result < AmpOutput then
-        Result := AmpOutput;
-    end;
+  Permutations := TPermutations.Create(5, 5);
+  try
+    for Phases in Permutations do
+      begin
+        AmpOutput := RunFeedbackChain(Phases);
+        if Result < AmpOutput then
+          Result := AmpOutput;
+      end;
+  finally
+    Permutations.Free;
+  end;
 end;
 
 procedure TTask_AoC.LoadProgram;

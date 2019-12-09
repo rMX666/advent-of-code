@@ -164,7 +164,7 @@ begin
   FParent := AParent;
 
   SetLength(FInitial, FParent.FItemCount);
-  for I := 0 to FParent.FItemCount do
+  for I := 0 to FParent.FItemCount - 1 do
     FInitial[I] := FParent.FStartIndex + I;
 
   FCurrent := Copy(FInitial, 0, FParent.FItemCount);
