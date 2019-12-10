@@ -157,6 +157,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TfForm_2019_10, fForm_2019_10);
   Application.Run;
 end.
