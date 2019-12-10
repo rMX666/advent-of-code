@@ -144,11 +144,11 @@ uses
   uTask_2019_07 in 'AoC2019\Task07\uTask_2019_07.pas',
   uTask_2019_08 in 'AoC2019\Task08\uTask_2019_08.pas',
   uForm_2019_08 in 'AoC2019\Task08\uForm_2019_08.pas' {fForm_2019_08},
-  uTask_2019_09 in 'AoC2019\Task09\uTask_2019_09.pas';
+  uTask_2019_09 in 'AoC2019\Task09\uTask_2019_09.pas',
+  uTask_2019_10 in 'AoC2019\Task10\uTask_2019_10.pas',
+  uForm_2019_10 in 'AoC2019\Task10\uForm_2019_10.pas' {fForm_2019_10};
 
 {$R *.res}
-
-{$define CheckHeapForCorruption}
 
 begin
   {$IFDEF DEBUG}
@@ -157,5 +157,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TfForm_2019_10, fForm_2019_10);
   Application.Run;
 end.
