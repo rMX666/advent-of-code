@@ -105,16 +105,27 @@ begin
 end;
 
 function TMap.CanBeSeen(const SrcX, SrcY, TgtX, TgtY: Integer): Boolean;
-type
-  TLineEquation = reference to function (const X: Integer): Real;
 var
-  SrcP, TgtP, P: TPoint;
+  SrcP, TgtP: TPoint;
   X, Dx, Y, Dy: Integer;
   Yr: Real;
-  LineEquation: TLineEquation;
+
+  procedure CheckAndCache(const X, Y: Integer);
+  begin
+    if IsAsteroid[X, Y] then
+      begin
+        AddToCache(SrcP, TPoint.Create(X, Y), Result);
+        Result := False;
+      end;
+  end;
+
 begin
   SrcP := TPoint.Create(SrcX, SrcY);
   TgtP := TPoint.Create(TgtX, TgtY);
+
+  // Source and target should not be the same point
+  if SrcP = TgtP then
+    Exit(False);
 
   // Cached as invisible from the given point
   if IsInCache(SrcP, TgtP, False) then
@@ -127,21 +138,17 @@ begin
   // Nothing in cache => walk asteroids between two given points and cache the visibility
   Result := True;
 
-  // If it's vertical line - special case, just walk vertically and check all asreroids by the way
+  // If it's a vertical line then it's the special case.
+  // Just walk vertically and check all asreroids by the way.
   if SrcX = TgtX then
     begin
+      // Find direction of line
       Y := SrcY;
       Dy := Sign(TgtY - SrcY);
       while Y <> TgtY do
         begin
           Inc(Y, Dy);
-          P := TPoint.Create(SrcX, Y);
-          if IsAsteroid[P.X, P.Y] then
-            begin
-              AddToCache(SrcP, P, Result);
-              if Result then
-                Result := False;
-            end;
+          CheckAndCache(SrcX, Y);
         end;
     end
   else
@@ -150,27 +157,16 @@ begin
       X := SrcX;
       Dx := Sign(TgtX - SrcX);
 
-      // Build linear equation for given cordinates
-      LineEquation := function (const X: Integer): Real
-        begin
-          Result := (X - SrcX) * (TgtY - SrcY) / (TgtX - SrcX) + SrcY;
-        end;
-
       while X <> TgtX do
         begin
           Inc(X, Dx);
-          Yr := LineEquation(X);
+          // Line equation
+          Yr := (X - SrcX) * (TgtY - SrcY) / (TgtX - SrcX) + SrcY;
           // If it's not an integer number, go further
           if Abs(Yr) - Floor(Abs(Yr)) > 0 then
             Continue;
           // Otherwise check if there's an asteroid in the sight
-          P := TPoint.Create(X, Floor(Yr));
-          if IsAsteroid[P.X, P.Y] then
-            begin
-              AddToCache(SrcP, P, Result);
-              if Result and (P <> TgtP) then
-                Result := False;
-            end;
+          CheckAndCache(X, Floor(Yr));
         end;
     end;
 end;
@@ -186,7 +182,7 @@ begin
   Result := 0;
   for I := 0 to FWidth - 1 do
     for J := 0 to FHeight - 1 do
-      if ((X <> I) or (Y <> J)) and IsAsteroid[I, J] and CanBeSeen(X, Y, I, J) then
+      if IsAsteroid[I, J] and CanBeSeen(X, Y, I, J) then
         Inc(Result);
 
   // Align result with cache
@@ -276,7 +272,7 @@ function TTask_AoC.FindNthVaporized(const Index: Integer): Integer;
          1: Exit(450);
       end;
 
-    Result := ArcTan(Abs(Dy / Dx)) * 180 / Pi;
+    Result := RadToDeg(ArcTan(Abs(Dy / Dx)));
     if      (Dx > 0) and (Dy >  0) then Result := 360 + Result
     else if (Dx < 0) and (Dy >  0) then Result := 180 - Result
     else if (Dx < 0) and (Dy <= 0) then Result := 180 + Result
