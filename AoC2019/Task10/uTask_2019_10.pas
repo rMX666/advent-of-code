@@ -16,12 +16,12 @@ type
     procedure SetInSight(const X, Y, Value: Integer);
     function GetIsAsteroid(const X, Y: Integer): Boolean;
     procedure SetIsAsteriod(const X, Y: Integer; const Value: Boolean);
+    function GetSightCache(const X, Y: Integer): TSightCache;
     function GetIsEvaporated(const X, Y: Integer): Boolean;
     procedure SetIsEvaporated(const X, Y: Integer; const Value: Boolean);
     function CanBeSeen(const SrcX, SrcY, TgtX, TgtY: Integer): Boolean;
     function IsInCache(const P1, P2: TPoint; const Value: Boolean): Boolean;
     procedure AddToCache(const P1, P2: TPoint; const Value: Boolean);
-    function GetSightCache(const X, Y: Integer): TSightCache;
   public
     constructor Create(const Width, Height: Integer);
     destructor Destroy; override;
@@ -270,13 +270,17 @@ function TTask_AoC.FindNthVaporized(const Index: Integer): Integer;
   begin
     Dx := P.X - FLaserPosition.X;
     Dy := FLaserPosition.Y - P.Y;
-//    if Dx = 0 then
-//      case Sign(Dy) of
-//        -1: Exit(270);
-//         1: Exit(450);
-//      end;
+    if Dx = 0 then
+      case Sign(Dy) of
+        -1: Exit(270);
+         1: Exit(450);
+      end;
 
-    Result := -ArcTan2(Dy, Dx);
+    Result := ArcTan(Abs(Dy / Dx)) * 180 / Pi;
+    if      (Dx > 0) and (Dy >  0) then Result := 360 + Result
+    else if (Dx < 0) and (Dy >  0) then Result := 180 - Result
+    else if (Dx < 0) and (Dy <= 0) then Result := 180 + Result
+    else if (Dx > 0) and (Dy <= 0) then Result := 360 - Result;
   end;
 
   function AngleGT(const A1, A2: Real): Boolean;

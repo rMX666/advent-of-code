@@ -60,6 +60,9 @@ begin
     if FSightCache.ContainsKey(P) and FSightCache[P] then
       BgColor := clWebLightBlue;
 
+  if FMap.IsEvaporated[ACol, ARow] then
+    BgColor := clWebLightYellow;
+
   if P = FLaserPosition then
     BgColor := clRed;
 
