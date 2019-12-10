@@ -283,17 +283,32 @@ function TTask_AoC.FindNthVaporized(const Index: Integer): Integer;
     else if (Dx > 0) and (Dy <= 0) then Result := 360 - Result;
   end;
 
-  function AngleGT(const A1, A2: Real): Boolean;
+  procedure BinInsert(const Value: TPoint; var A: TArray<TPoint>);
+  var
+    Angle: Real;
+    S, E, M: Integer;
   begin
-    Result := A1 < A2;
+    Angle := GetAngle(Value);
+    S := 0;
+    M := 0;
+    E := Length(A) - 1;
+    while E - S > 1 do
+      begin
+        M := S + (E - S) div 2;
+        if Angle < GetAngle(A[M]) then
+          S := M
+        else
+          E := M;
+      end;
+    System.Insert(Value, A, M);
   end;
 
 var
   P: TPoint;
   I, EvaporatedAmount: Integer;
-  Angle: Real;
   InSight: TArray<TPoint>;
 begin
+  Result := 0;
   EvaporatedAmount := 0;
   while EvaporatedAmount < Index do
     begin
@@ -302,29 +317,7 @@ begin
       with FMap.SightCache[FLaserPosition.X, FLaserPosition.Y] do
         for P in Keys do
           if Items[P] then
-            begin
-              Angle := GetAngle(P);
-              // Insert sorted
-              case Length(InSight) of
-                0:
-                  System.Insert(P, InSight, -1);
-                1:
-                  if AngleGT(Angle, GetAngle(InSight[0])) then
-                    System.Insert(P, InSight, 1)
-                  else
-                    System.Insert(P, InSight, -1);
-                else
-                  if AngleGT(Angle, GetAngle(InSight[Length(InSight) - 1])) then
-                    System.Insert(P, InSight, Length(InSight) + 1)
-                  else
-                    for I := 0 to Length(InSight) - 1 do
-                      if not AngleGT(Angle, GetAngle(InSight[I])) then
-                        begin
-                          System.Insert(P, InSight, I);
-                          Break;
-                        end;
-              end;
-            end;
+            BinInsert(P, InSight);
 
       for I := 0 to Length(InSight) - 1 do
         begin
