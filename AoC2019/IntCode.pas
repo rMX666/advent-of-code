@@ -51,6 +51,7 @@ type
     FInputQueue: TQueue<Int64>;
     FOutput: TList<Int64>;
     FRelativeBase: Integer;
+    procedure CheckGrow(const Index: Integer);
     function GetItem(const Index: Integer): Int64;
     procedure SetItem(const Index: Integer; const Value: Int64);
   protected
@@ -221,18 +222,27 @@ begin
   FInputQueue.Enqueue(Value);
 end;
 
+procedure TIntCode.CheckGrow(const Index: Integer);
+var
+  A: TArray<Int64>;
+begin
+  if Count <= Index then
+    begin
+      SetLength(A, Index - Count + 1);
+      AddRange(A);
+    end;
+end;
+
 function TIntCode.GetItem(const Index: Integer): Int64;
 begin
-  while Count <= Index do
-    Add(0);
+  CheckGrow(Index);
 
   Result := inherited Items[Index];
 end;
 
 procedure TIntCode.SetItem(const Index: Integer; const Value: Int64);
 begin
-  while Count <= Index do
-    Add(0);
+  CheckGrow(Index);
 
   inherited Items[Index] := Value;
 end;
