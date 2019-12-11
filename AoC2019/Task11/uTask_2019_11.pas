@@ -173,10 +173,10 @@ begin
     try
       Color := 1;
       while Move do;
-    finally
       fForm_2019_11 := TfForm_2019_11.Create(nil);
       fForm_2019_11.DrawMap(Map);
       fForm_2019_11.ShowModal;
+    finally
       Free;
     end;
 end;
