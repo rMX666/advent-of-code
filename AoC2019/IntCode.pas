@@ -24,7 +24,12 @@ type
                    , pmImmediate
                    , pmRelative
                    );
-  TExecuteResult = ( erNone, erOk, erNoInc, erHalt, erWaitForInput );
+  TExecuteResult = ( erNone
+                   , erOk
+                   , erHalt
+                   , erWaitForInput
+                   , erDeny
+                   );
   TParameterModes = array [0..2] of TParameterMode;
   TInstruction = record
   private
@@ -45,28 +50,39 @@ type
     property ParamCount: Integer read GetParamCount;
   end;
 
+  TBeforeInstruction = procedure (const Sender: TIntCode; const Instruction: TInstruction; var Allow: Boolean) of object;
+  TOnOutput = procedure (const Sender: TIntCode; const Value: Integer) of object;
+
   TIntCode = class(TList<Int64>)
   private
     FInstructionPointer: Integer;
     FInputQueue: TQueue<Int64>;
     FOutput: TList<Int64>;
+    FOnOutput: TOnOutput;
     FRelativeBase: Integer;
+    FBeforeInstruction: TBeforeInstruction;
     procedure CheckGrow(const Index: Integer);
     function GetItem(const Index: Integer): Int64;
     procedure SetItem(const Index: Integer; const Value: Int64);
   protected
+    function DoBeforeInstruction(const Instruction: TInstruction): Boolean;
+    procedure DoOnAddOutput(const Value: Integer);
+    function ExecuteInstruction: TExecuteResult;
     property InstructionPointer: Integer read FInstructionPointer write FInstructionPointer;
     property RelativeBase: Integer read FRelativeBase write FRelativeBase;
   public
     constructor Create;
     destructor Destroy; override;
     class function LoadProgram(const Input: String): TIntCode;
-    function Execute: TExecuteResult;
     function Clone: TIntCode;
+    function Execute: TExecuteResult;
     procedure AddInput(const Value: Int64);
+    procedure AddOutput(const Value: Int64);
     function TryGetInput(out Value: Int64): Boolean;
     property Output: TList<Int64> read FOutput;
     property Items[const Index: Integer]: Int64 read GetItem write SetItem; default;
+    property BeforeInstruction: TBeforeInstruction read FBeforeInstruction write FBeforeInstruction;
+    property OnOutput: TOnOutput read FOnOutput write FOnOutput;
   end;
 
 implementation
@@ -89,8 +105,10 @@ end;
 function TInstruction.Execute: TExecuteResult;
 var
   Tmp: Int64;
+  ShiftPointer: Boolean;
 begin
   Result := erOk;
+  ShiftPointer := True;
 
   case FInstructionType of
     itAdd:
@@ -103,18 +121,18 @@ begin
       else
         Exit(erWaitForInput);
     itOut:
-      FOwner.Output.Add(Params[0]);
+      FOwner.AddOutput(Params[0]);
     itJNZ:
       if Params[0] <> 0 then
         begin
           FOwner.InstructionPointer := Params[1];
-          Result := erNoInc;
+          ShiftPointer := False;
         end;
     itJZ:
       if Params[0] = 0 then
         begin
           FOwner.InstructionPointer := Params[1];
-          Result := erNoInc;
+          ShiftPointer := False;
         end;
     itLT:
       Params[2] := Integer(Params[0] < Params[1]);
@@ -128,6 +146,10 @@ begin
     else
       RaiseWrongInstructionTypeException;
   end;
+
+  // If executed and need to shift instruction pointer
+  if (Result = erOk) and ShiftPointer then
+    FOwner.InstructionPointer := FOwner.InstructionPointer + 1 + ParamCount;
 end;
 
 function TInstruction.GetParams(const Index: Integer): Int64;
@@ -190,6 +212,7 @@ function TIntCode.Clone: TIntCode;
 begin
   Result := TIntCode.Create;
   Result.AddRange(ToArray);
+  Result.FOnOutput := FOnOutput;
 end;
 
 constructor TIntCode.Create;
@@ -199,6 +222,8 @@ begin
   FOutput := TList<Int64>.Create;
   FRelativeBase := 0;
   FInstructionPointer := 0;
+  FOnOutput := nil;
+  FBeforeInstruction := nil;
 end;
 
 destructor TIntCode.Destroy;
@@ -206,6 +231,19 @@ begin
   FreeAndNil(FInputQueue);
   FreeAndNil(FOutput);
   inherited;
+end;
+
+procedure TIntCode.DoOnAddOutput(const Value: Integer);
+begin
+  if Assigned(FOnOutput) then
+    FOnOutput(Self, Value);
+end;
+
+function TIntCode.DoBeforeInstruction(const Instruction: TInstruction): Boolean;
+begin
+  Result := True;
+  if Assigned(FBeforeInstruction) then
+    FBeforeInstruction(Self, Instruction, Result);
 end;
 
 function TIntCode.TryGetInput(out Value: Int64): Boolean;
@@ -220,6 +258,12 @@ end;
 procedure TIntCode.AddInput(const Value: Int64);
 begin
   FInputQueue.Enqueue(Value);
+end;
+
+procedure TIntCode.AddOutput(const Value: Int64);
+begin
+  FOutput.Add(Value);
+  DoOnAddOutput(Value);
 end;
 
 procedure TIntCode.CheckGrow(const Index: Integer);
@@ -253,22 +297,31 @@ var
 begin
   Result := erNone;
 
-  while FInstructionPointer < Count do
-    with TInstruction.Create(Self, InstructionPointer) do
-      begin
-        E := Execute;
-        case E of
-          erOk:
-            Inc(FInstructionPointer, 1 + ParamCount);
-          erNoInc:
-            ; // Do not shift the instruction pointer
-          erHalt,
-          erWaitForInput:
-            Exit(E);
-          else
-            raise Exception.CreateFmt('Wrong instruction execute result code: %d', [ Integer(E) ]);
-        end;
+  while InstructionPointer < Count do
+    begin
+      E := ExecuteInstruction;
+      case E of
+        erOk:
+          ; // Continue execution
+        erHalt,
+        erWaitForInput,
+        erDeny:
+          Exit(E);
+        else
+          raise Exception.CreateFmt('Wrong instruction execute result code: %d', [ Integer(E) ]);
       end;
+    end;
+end;
+
+function TIntCode.ExecuteInstruction: TExecuteResult;
+var
+  Instruction: TInstruction;
+begin
+  Result := erDeny;
+
+  Instruction := TInstruction.Create(Self, InstructionPointer);
+  if DoBeforeInstruction(Instruction) then
+    Result := Instruction.Execute;
 end;
 
 class function TIntCode.LoadProgram(const Input: String): TIntCode;
@@ -280,7 +333,7 @@ begin
 
   Result := TIntCode.Create;
   for I := 0 to Length(A) - 1 do
-    Result.Add(A[I].ToInteger);
+    Result.Add(A[I].ToInt64);
 end;
 
 end.

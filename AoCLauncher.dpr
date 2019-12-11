@@ -146,7 +146,9 @@ uses
   uForm_2019_08 in 'AoC2019\Task08\uForm_2019_08.pas' {fForm_2019_08},
   uTask_2019_09 in 'AoC2019\Task09\uTask_2019_09.pas',
   uTask_2019_10 in 'AoC2019\Task10\uTask_2019_10.pas',
-  uForm_2019_10 in 'AoC2019\Task10\uForm_2019_10.pas' {fForm_2019_10};
+  uForm_2019_10 in 'AoC2019\Task10\uForm_2019_10.pas' {fForm_2019_10},
+  uTask_2019_11 in 'AoC2019\Task11\uTask_2019_11.pas',
+  uForm_2019_11 in 'AoC2019\Task11\uForm_2019_11.pas' {fForm_2019_11};
 
 {$R *.res}
 
@@ -157,5 +159,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TfForm_2019_11, fForm_2019_11);
   Application.Run;
 end.
