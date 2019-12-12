@@ -297,6 +297,7 @@
             <Form>fForm_2019_11</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="AoC2019\Task12\uTask_2019_12.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

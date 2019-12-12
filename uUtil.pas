@@ -92,6 +92,12 @@ function BitCount(X: Integer): Integer;
 
 procedure SortString(var S: String);
 
+// Greatest common divisor
+function GCD(A, B: Int64): Int64;
+
+// Least common multiple
+function LCM(const A, B: Int64): Int64;
+
 implementation
 
 uses
@@ -144,6 +150,24 @@ begin
   A := S.ToCharArray;
   TArray.Sort<Char>(A);
   S := String.Create(A);
+end;
+
+function GCD(A, B: Int64): Int64;
+var
+  T: Int64;
+begin
+  Result := A;
+  while B <> 0 do
+    begin
+      T := B;
+      B := Result mod B;
+      Result := T;
+    end;
+end;
+
+function LCM(const A, B: Int64): Int64;
+begin
+  Result := (A div GCD(A, B)) * B;
 end;
 
 procedure Swap(var A, B: Integer);

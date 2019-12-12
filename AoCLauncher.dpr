@@ -148,9 +148,11 @@ uses
   uTask_2019_10 in 'AoC2019\Task10\uTask_2019_10.pas',
   uForm_2019_10 in 'AoC2019\Task10\uForm_2019_10.pas' {fForm_2019_10},
   uTask_2019_11 in 'AoC2019\Task11\uTask_2019_11.pas',
-  uForm_2019_11 in 'AoC2019\Task11\uForm_2019_11.pas' {fForm_2019_11};
+  uForm_2019_11 in 'AoC2019\Task11\uForm_2019_11.pas' {fForm_2019_11},
+  uTask_2019_12 in 'AoC2019\Task12\uTask_2019_12.pas';
 
 {$R *.res}
+{$SetPEFlags $20}
 
 begin
   {$IFDEF DEBUG}
@@ -159,6 +161,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfMain, fMain);
-  Application.CreateForm(TfForm_2019_11, fForm_2019_11);
   Application.Run;
 end.
