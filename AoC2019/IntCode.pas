@@ -46,6 +46,7 @@ type
   public
     constructor Create(const AOwner: TIntCode; const AIndex: Integer);
     function Execute: TExecuteResult;
+    property InstructionType: TInstructionType read FInstructionType;
     property Params[const Index: Integer]: Int64 read GetParams write SetParams;
     property ParamCount: Integer read GetParamCount;
   end;
@@ -68,7 +69,6 @@ type
     function DoBeforeInstruction(const Instruction: TInstruction): Boolean;
     procedure DoOnAddOutput(const Value: Integer);
     function ExecuteInstruction: TExecuteResult;
-    property InstructionPointer: Integer read FInstructionPointer write FInstructionPointer;
     property RelativeBase: Integer read FRelativeBase write FRelativeBase;
   public
     constructor Create;
@@ -81,6 +81,7 @@ type
     function TryGetInput(out Value: Int64): Boolean;
     property Output: TList<Int64> read FOutput;
     property Items[const Index: Integer]: Int64 read GetItem write SetItem; default;
+    property InstructionPointer: Integer read FInstructionPointer write FInstructionPointer;
     property BeforeInstruction: TBeforeInstruction read FBeforeInstruction write FBeforeInstruction;
     property OnOutput: TOnOutput read FOnOutput write FOnOutput;
   end;
@@ -95,11 +96,13 @@ begin
   FIndex := AIndex;
   FOwner := AOwner;
   FInstructionType := TInstructionType(FOwner[FIndex] mod 100);
-  FParams := Copy(FOwner.ToArray, FIndex + 1, ParamCount);
 
   FParameterModes[0] := TParameterMode((FOwner[FIndex] div 100)   mod 10);
   FParameterModes[1] := TParameterMode((FOwner[FIndex] div 1000)  mod 10);
   FParameterModes[2] := TParameterMode((FOwner[FIndex] div 10000) mod 10);
+
+  SetLength(FParams, 0);
+  FParams := Copy(FOwner.ToArray, FIndex + 1, ParamCount);
 end;
 
 function TInstruction.Execute: TExecuteResult;
@@ -213,6 +216,7 @@ begin
   Result := TIntCode.Create;
   Result.AddRange(ToArray);
   Result.FOnOutput := FOnOutput;
+  Result.FBeforeInstruction := FBeforeInstruction;
 end;
 
 constructor TIntCode.Create;

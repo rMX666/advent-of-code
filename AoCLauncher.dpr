@@ -149,7 +149,8 @@ uses
   uForm_2019_10 in 'AoC2019\Task10\uForm_2019_10.pas' {fForm_2019_10},
   uTask_2019_11 in 'AoC2019\Task11\uTask_2019_11.pas',
   uForm_2019_11 in 'AoC2019\Task11\uForm_2019_11.pas' {fForm_2019_11},
-  uTask_2019_12 in 'AoC2019\Task12\uTask_2019_12.pas';
+  uTask_2019_12 in 'AoC2019\Task12\uTask_2019_12.pas',
+  uTask_2019_13 in 'AoC2019\Task13\uTask_2019_13.pas';
 
 {$R *.res}
 {$SetPEFlags $20}
