@@ -7,11 +7,28 @@ uses
 
 type
   EInputNotFound = Exception;
-  
+
+  TTask = class;
+
+  TTaskLogger = class
+  private
+    FStream: TStream;
+    FWriter: TStreamWriter;
+    FTask: TTask;
+  public
+    constructor Create(const Task: TTask);
+    destructor Destroy; override;
+    procedure WriteLine(const S: String); overload;
+    procedure WriteLine(const Fmt: String; const Args: array of const); overload;
+  end;
+
   TTask = class
   private
     FYear, FNumber: Integer;
     FName: String;
+    FTaskLogger: TTaskLogger;
+    FLoggerEnabled: Boolean;
+    function GetTaskLogger: TTaskLogger;
     function GetInput: TStrings;
   protected
     procedure DoRun; virtual; abstract;
@@ -28,6 +45,8 @@ type
     property Number: Integer read FNumber;
     property Name: String read FName;
     property Input: TStrings read GetInput;
+    property Logger: TTaskLogger read GetTaskLogger;
+    property LoggerEnabled: Boolean read FLoggerEnabled write FLoggerEnabled;
   end;
 
   TTaskList = TList<TTask>;
@@ -52,6 +71,45 @@ const
   INPUT_DIR = 'Input';
   INPUT_FILE = '%s\%d\Task%0.2d\input.txt';
   E_INPUT_DIR_NOT_FOUND = '%s - Task %d (%s): Failed to find Input directory';
+
+{ TTaskLogger }
+
+constructor TTaskLogger.Create(const Task: TTask);
+var
+  Dir: String;
+begin
+  FTask := Task;
+  {$IFDEF DEBUG}
+  Dir := ExcludeTrailingPathDelimiter(ExtractFilePath(Application.ExeName));
+  FStream := TFileStream.Create(Format('%s\Debug-%d-%0.2d.log', [ Dir, FTask.Year, FTask.Number ]), fmCreate or fmOpenWrite or fmShareDenyWrite);
+  FWriter := TStreamWriter.Create(FStream);
+  WriteLine(FTask.Name);
+  {$ELSE}
+  FStream := nil;
+  FWriter := nil;
+  {$ENDIF}
+end;
+
+destructor TTaskLogger.Destroy;
+begin
+  FTask := nil;
+  FreeAndNil(FWriter);
+  FreeAndNil(FStream);
+  inherited;
+end;
+
+procedure TTaskLogger.WriteLine(const S: String);
+begin
+  {$IFDEF DEBUG}
+  if FTask.LoggerEnabled then
+    FWriter.WriteLine(Format('[ %s ] %s', [ FormatDateTime('yyyy-mm-dd hh24:nn:ss.zzz', Now), S ]));
+  {$ENDIF}
+end;
+
+procedure TTaskLogger.WriteLine(const Fmt: String; const Args: array of const);
+begin
+  WriteLine(Format(Fmt, Args));
+end;
 
 { TTaskHost }
 
@@ -85,6 +143,7 @@ begin
   FYear := AYear;
   FNumber := ANumber;
   FName := AName;
+  FTaskLogger := nil;
 
   Create;
 end;
@@ -96,6 +155,8 @@ end;
 
 destructor TTask.Destroy;
 begin
+  if Assigned(FTaskLogger) then
+    FreeAndNil(FTaskLogger);
   TTaskHost.Tasks.Remove(Self);
   inherited;
 end;
@@ -155,6 +216,13 @@ begin
     on E: Exception do
       Error(E.Message);
   end;
+end;
+
+function TTask.GetTaskLogger: TTaskLogger;
+begin
+  if FTaskLogger = nil then
+    FTaskLogger := TTaskLogger.Create(Self);
+  Result := FTaskLogger;
 end;
 
 end.
