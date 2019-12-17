@@ -169,7 +169,7 @@ end;
 
 procedure TTask_AoC.DrawIdentifier;
 begin
-  with TRobot.Create(FInitialState.Clone) do
+  with TRobot.Create(TIntCode.Create(FInitialState)) do
     try
       Color := 1;
       while Move do;
@@ -183,7 +183,7 @@ end;
 
 function TTask_AoC.GetPaintedCount: Integer;
 begin
-  with TRobot.Create(FInitialState.Clone) do
+  with TRobot.Create(TIntCode.Create(FInitialState)) do
     try
       while Move do;
       Result := CountPainted;
@@ -196,7 +196,7 @@ procedure TTask_AoC.LoadProgram;
 begin
   with Input do
     try
-      FInitialState := TIntCode.LoadProgram(Text);
+      FInitialState := TIntCode.Create(Text);
     finally
       Free;
     end;

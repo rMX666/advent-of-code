@@ -40,7 +40,7 @@ procedure TTask_AoC.LoadProgram;
 begin
   with Input do
     try
-      FInitialState := TIntCode.LoadProgram(Text);
+      FInitialState := TIntCode.Create(Text);
     finally
       Free;
     end;
@@ -53,7 +53,7 @@ var
 begin
   Result := 0;
 
-  with FInitialState.Clone do
+  with TIntCode.Create(FInitialState) do
     try
       AddInput(1);
 
@@ -78,7 +78,7 @@ function TTask_AoC.BoostRun: Int64;
 begin
   Result := 0;
 
-  with FInitialState.Clone do
+  with TIntCode.Create(FInitialState) do
     try
       AddInput(2);
 

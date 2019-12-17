@@ -40,7 +40,7 @@ function TTask_AoC.GetDiagnosticCode(const InputID: Integer): Integer;
 var
   I: Integer;
 begin
-  with FInitialState.Clone do
+  with TIntCode.Create(FInitialState) do
     try
       AddInput(InputID);
       Execute;
@@ -59,7 +59,7 @@ procedure TTask_AoC.LoadProgram;
 begin
   with Input do
     try
-      FInitialState := TIntCode.LoadProgram(Text);
+      FInitialState := TIntCode.Create(Text);
     finally
       Free;
     end;

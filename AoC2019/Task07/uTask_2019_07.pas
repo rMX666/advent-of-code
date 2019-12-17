@@ -41,7 +41,7 @@ function TTask_AoC.GetBestAmpSignal: Integer;
   function RunAmplifier(const Phase, Signal: Integer): Integer;
   begin
     Result := 0;
-    with FInitialState.Clone do
+    with TIntCode.Create(FInitialState) do
       try
         AddInput(Phase);
         AddInput(Signal);
@@ -86,7 +86,7 @@ function TTask_AoC.GetBestFeedbackAmpSignal: Integer;
     try
       for I := 0 to Length(Phases) - 1 do
         begin
-          Amps.Add(FInitialState.Clone);
+          Amps.Add(TIntCode.Create(FInitialState));
           Amps.Last.AddInput(Phases[I]);
         end;
 
@@ -130,7 +130,7 @@ procedure TTask_AoC.LoadProgram;
 begin
   with Input do
     try
-      FInitialState := TIntCode.LoadProgram(Text);
+      FInitialState := TIntCode.Create(Text);
     finally
       Free;
     end;

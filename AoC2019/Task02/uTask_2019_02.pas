@@ -31,7 +31,7 @@ var
   State: TIntCode;
 begin
   LoadProgram;
-  State := FInitialState.Clone;
+  State := TIntCode.Create(FInitialState);
   try
     OK('Part 1: %d, Part 2: %d', [ CalcNounAndVerb(12, 2), FindNounAndVerb(19690720) ]);
   finally
@@ -43,7 +43,7 @@ end;
 function TTask_AoC.CalcNounAndVerb(const Noun, Verb: Integer): Integer;
 begin
   Result := -1;
-  with FInitialState.Clone do
+  with TIntCode.Create(FInitialState) do
     try
       Items[1] := Noun;
       Items[2] := Verb;
@@ -69,7 +69,7 @@ procedure TTask_AoC.LoadProgram;
 begin
   with Input do
     try
-      FInitialState := TIntCode.LoadProgram(Text);
+      FInitialState := TIntCode.Create(Text);
     finally
       Free;
     end;

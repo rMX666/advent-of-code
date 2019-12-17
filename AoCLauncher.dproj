@@ -300,6 +300,9 @@
         <DCCReference Include="AoC2019\Task12\uTask_2019_12.pas"/>
         <DCCReference Include="AoC2019\Task13\uTask_2019_13.pas"/>
         <DCCReference Include="AoC2019\Task14\uTask_2019_14.pas"/>
+        <DCCReference Include="AoC2019\Task15\uTask_2019_15.pas"/>
+        <DCCReference Include="AoC2019\Task16\uTask_2019_16.pas"/>
+        <DCCReference Include="AoC2019\Task17\uTask_2019_17.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

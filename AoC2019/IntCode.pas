@@ -66,15 +66,16 @@ type
     function GetItem(const Index: Integer): Int64;
     procedure SetItem(const Index: Integer; const Value: Int64);
   protected
+    procedure LoadProgram(const Input: String);
     function DoBeforeInstruction(const Instruction: TInstruction): Boolean;
-    procedure DoOnAddOutput(const Value: Integer);
+    procedure DoOnOutput(const Value: Integer);
     function ExecuteInstruction: TExecuteResult;
     property RelativeBase: Integer read FRelativeBase write FRelativeBase;
   public
-    constructor Create;
+    constructor Create; overload;
+    constructor Create(const Input: String); overload;
+    constructor Create(const Src: TIntCode); overload;
     destructor Destroy; override;
-    class function LoadProgram(const Input: String): TIntCode;
-    function Clone: TIntCode;
     function Execute: TExecuteResult;
     procedure AddInput(const Value: Int64);
     procedure AddOutput(const Value: Int64);
@@ -211,12 +212,14 @@ end;
 
 { TIntCode }
 
-function TIntCode.Clone: TIntCode;
+procedure TIntCode.LoadProgram(const Input: String);
+var
+  A: TArray<String>;
+  I: Integer;
 begin
-  Result := TIntCode.Create;
-  Result.AddRange(ToArray);
-  Result.FOnOutput := FOnOutput;
-  Result.FBeforeInstruction := FBeforeInstruction;
+  A := Input.Trim.Split([',']);
+  for I := 0 to Length(A) - 1 do
+    Add(A[I].ToInt64);
 end;
 
 constructor TIntCode.Create;
@@ -230,6 +233,22 @@ begin
   FBeforeInstruction := nil;
 end;
 
+constructor TIntCode.Create(const Input: String);
+begin
+  Create;
+
+  LoadProgram(Input);
+end;
+
+constructor TIntCode.Create(const Src: TIntCode);
+begin
+  Create;
+
+  AddRange(Src.ToArray);
+  FOnOutput := Src.FOnOutput;
+  FBeforeInstruction := Src.FBeforeInstruction;
+end;
+
 destructor TIntCode.Destroy;
 begin
   FreeAndNil(FInputQueue);
@@ -237,7 +256,7 @@ begin
   inherited;
 end;
 
-procedure TIntCode.DoOnAddOutput(const Value: Integer);
+procedure TIntCode.DoOnOutput(const Value: Integer);
 begin
   if Assigned(FOnOutput) then
     FOnOutput(Self, Value);
@@ -267,7 +286,7 @@ end;
 procedure TIntCode.AddOutput(const Value: Int64);
 begin
   FOutput.Add(Value);
-  DoOnAddOutput(Value);
+  DoOnOutput(Value);
 end;
 
 procedure TIntCode.CheckGrow(const Index: Integer);
@@ -326,18 +345,6 @@ begin
   Instruction := TInstruction.Create(Self, InstructionPointer);
   if DoBeforeInstruction(Instruction) then
     Result := Instruction.Execute;
-end;
-
-class function TIntCode.LoadProgram(const Input: String): TIntCode;
-var
-  A: TArray<String>;
-  I: Integer;
-begin
-  A := Input.Trim.Split([',']);
-
-  Result := TIntCode.Create;
-  for I := 0 to Length(A) - 1 do
-    Result.Add(A[I].ToInt64);
 end;
 
 end.

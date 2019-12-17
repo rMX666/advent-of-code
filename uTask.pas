@@ -102,7 +102,7 @@ procedure TTaskLogger.WriteLine(const S: String);
 begin
   {$IFDEF DEBUG}
   if FTask.LoggerEnabled then
-    FWriter.WriteLine(Format('[ %s ] %s', [ FormatDateTime('yyyy-mm-dd hh24:nn:ss.zzz', Now), S ]));
+    FWriter.WriteLine(Format('[ %s ] %s', [ FormatDateTime('yyyy-mm-dd hh:nn:ss.zzz', Now), S ]));
   {$ENDIF}
 end;
 

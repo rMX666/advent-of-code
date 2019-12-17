@@ -32,7 +32,7 @@ var
 begin
   Result := 0;
 
-  with FInitialState.Clone do
+  with TIntCode.Create(FInitialState) do
     try
       if Execute = erHalt then
         begin
@@ -54,7 +54,7 @@ var
   State: TIntCode;
 begin
   Randomize;
-  State := FInitialState.Clone;
+  State := TIntCode.Create(FInitialState);
   try
     State[0] := 2;
     while State.Execute <> erHalt do
@@ -78,7 +78,7 @@ procedure TTask_AoC.LoadProgram;
 begin
   with Input do
     try
-      FInitialState := TIntCode.LoadProgram(Text);
+      FInitialState := TIntCode.Create(Text);
     finally
       Free;
     end;
