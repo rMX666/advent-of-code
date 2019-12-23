@@ -37,8 +37,6 @@ begin
 end;
 
 procedure TTask_AoC.LoadList;
-var
-  I: Integer;
 begin
   with Input do
     try

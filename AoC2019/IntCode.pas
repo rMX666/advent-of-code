@@ -66,6 +66,8 @@ type
     function GetItem(const Index: Integer): Int64;
     procedure SetItem(const Index: Integer; const Value: Int64);
   protected
+    function TryGetInput(out Value: Int64): Boolean;
+    procedure AddOutput(const Value: Int64);
     procedure LoadProgram(const Input: String);
     function DoBeforeInstruction(const Instruction: TInstruction): Boolean;
     procedure DoOnOutput(const Value: Integer);
@@ -77,9 +79,9 @@ type
     constructor Create(const Src: TIntCode); overload;
     destructor Destroy; override;
     function Execute: TExecuteResult;
-    procedure AddInput(const Value: Int64);
-    procedure AddOutput(const Value: Int64);
-    function TryGetInput(out Value: Int64): Boolean;
+    procedure AddInput(const Value: Int64); overload;
+    procedure AddInput(const S: String); overload;
+    function OutputToString: String;
     property Output: TList<Int64> read FOutput;
     property Items[const Index: Integer]: Int64 read GetItem write SetItem; default;
     property InstructionPointer: Integer read FInstructionPointer write FInstructionPointer;
@@ -222,6 +224,15 @@ begin
     Add(A[I].ToInt64);
 end;
 
+function TIntCode.OutputToString: String;
+var
+  I: Integer;
+begin
+  Result := '';
+  for I := 0 to Output.Count - 1 do
+    Result := Result + Chr(Output[I]);
+end;
+
 constructor TIntCode.Create;
 begin
   inherited Create;
@@ -281,6 +292,14 @@ end;
 procedure TIntCode.AddInput(const Value: Int64);
 begin
   FInputQueue.Enqueue(Value);
+end;
+
+procedure TIntCode.AddInput(const S: String);
+var
+  I: Integer;
+begin
+  for I := 1 to S.Length do
+    AddInput(Ord(S[I]));
 end;
 
 procedure TIntCode.AddOutput(const Value: Int64);

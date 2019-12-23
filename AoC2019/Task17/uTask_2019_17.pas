@@ -72,6 +72,7 @@ begin
   B := 'R,6,L,8,R,10'#10;
   C := 'L,8,R,4,R,4,R,6'#10;
   Robot := TIntCode.Create(FInitialState);
+  Result := 0;
   with Robot do
     try
       Items[0] := 2;

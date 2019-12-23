@@ -154,7 +154,15 @@ uses
   uTask_2019_14 in 'AoC2019\Task14\uTask_2019_14.pas',
   uTask_2019_15 in 'AoC2019\Task15\uTask_2019_15.pas',
   uTask_2019_16 in 'AoC2019\Task16\uTask_2019_16.pas',
-  uTask_2019_17 in 'AoC2019\Task17\uTask_2019_17.pas';
+  uTask_2019_17 in 'AoC2019\Task17\uTask_2019_17.pas',
+  uTask_2019_18 in 'AoC2019\Task18\uTask_2019_18.pas',
+  uForm_2019_18 in 'AoC2019\Task18\uForm_2019_18.pas' {fForm_2019_18},
+  uTask_2019_19 in 'AoC2019\Task19\uTask_2019_19.pas',
+  uTask_2019_20 in 'AoC2019\Task20\uTask_2019_20.pas',
+  uTask_2019_21 in 'AoC2019\Task21\uTask_2019_21.pas',
+  uForm_2019_21 in 'AoC2019\Task21\uForm_2019_21.pas' {fForm_2019_21},
+  uTask_2019_22 in 'AoC2019\Task22\uTask_2019_22.pas',
+  uTask_2019_23 in 'AoC2019\Task23\uTask_2019_23.pas';
 
 {$R *.res}
 {$SetPEFlags $20}
