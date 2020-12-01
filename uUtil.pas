@@ -98,6 +98,10 @@ function GCD(A, B: Int64): Int64;
 // Least common multiple
 function LCM(const A, B: Int64): Int64;
 
+// Swap A and B
+procedure Swap(var A, B: Integer); overload;
+procedure Swap(var A, B: Int64); overload;
+
 implementation
 
 uses
@@ -173,6 +177,15 @@ end;
 procedure Swap(var A, B: Integer);
 var
   Tmp: Integer;
+begin
+  Tmp := A;
+  A := B;
+  B := Tmp;
+end;
+
+procedure Swap(var A, B: Int64);
+var
+  Tmp: Int64;
 begin
   Tmp := A;
   A := B;

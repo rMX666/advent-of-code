@@ -9,9 +9,9 @@ type
   TTechniqueType = ( ttStack, ttCut, ttIncrement );
   TTechnique = record
     TechniqueType: TTechniqueType;
-    N: Integer;
+    N: Int64;
     constructor Create(const S: String); overload;
-    constructor Create(const TechniqueType: TTechniqueType; const N: Integer); overload;
+    constructor Create(const TechniqueType: TTechniqueType; const N: Int64); overload;
   end;
 
   TTechniques = TList<TTechnique>;
@@ -21,7 +21,9 @@ type
     FTechniques: TTechniques;
     procedure LoadTechniques;
     function TryTechniques: Integer;
-    function SimplifyAt(const I, DeckSize: Integer): Boolean;
+    function TryHardTechniques: Integer;
+    function SimplifyAt(const I: Integer; const DeckSize: Int64): Boolean;
+    procedure Simplify(const DeckSize: Int64);
   protected
     procedure DoRun; override;
   end;
@@ -29,7 +31,7 @@ type
 implementation
 
 uses
-  System.SysUtils, System.Math;
+  System.SysUtils, System.Math, uUtil;
 
 var
   GTask: TTask_AoC;
@@ -57,7 +59,7 @@ begin
     raise Exception.CreateFmt('Wrong operation: %s', [ S ]);
 end;
 
-constructor TTechnique.Create(const TechniqueType: TTechniqueType; const N: Integer);
+constructor TTechnique.Create(const TechniqueType: TTechniqueType; const N: Int64);
 begin
   Self.TechniqueType := TechniqueType;
   Self.N := N;
@@ -67,12 +69,7 @@ end;
 
 procedure TTask_AoC.DoRun;
 begin
-  LoadTechniques;
-  try
-    OK('Part 1: %d, Part 2: %d', [ TryTechniques ]);
-  finally
-    FTechniques.Free;
-  end;
+  OK('Part 1: %d, Part 2: %d', [ TryTechniques, TryHardTechniques ]);
 end;
 
 procedure TTask_AoC.LoadTechniques;
@@ -89,7 +86,7 @@ begin
     end;
 end;
 
-function TTask_AoC.SimplifyAt(const I, DeckSize: Integer): Boolean;
+function TTask_AoC.SimplifyAt(const I: Integer; const DeckSize: Int64): Boolean;
 var
   T1, T2: TTechnique;
 begin
@@ -138,27 +135,10 @@ begin
     end;
 end;
 
-function TTask_AoC.TryTechniques: Integer;
-
-  procedure Swap(var A, B: Integer);
-  var
-    T: Integer;
-  begin
-    T := A;
-    A := B;
-    B := T;
-  end;
-
-const
-  DeckSize = 10007;
+procedure TTask_AoC.Simplify(const DeckSize: Int64);
 var
-  I, J, Shift: Integer;
-  Cards, Tmp: TArray<Integer>;
+  I: Integer;
 begin
-  SetLength(Cards, DeckSize);
-  for I := 0 to DeckSize - 1 do
-    Cards[I] := I;
-
   while FTechniques.Count > 3 do
     begin
       I := 0;
@@ -166,35 +146,75 @@ begin
         if SimplifyAt(I, DeckSize) then
           Inc(I);
     end;
+end;
 
-  for I := 0 to FTechniques.Count - 1 do
-    with FTechniques[I] do
-      case TechniqueType of
-        ttStack:
-          for J := 0 to (DeckSize - 1) div 2 do
-            Swap(Cards[J], Cards[DeckSize - J - 1]);
-        ttCut:
-          begin
-            Shift := (DeckSize + N) mod DeckSize;
-            Tmp := Copy(Cards, 0, Shift);
-            Cards := Copy(Cards, Shift);
-            SetLength(Cards, DeckSize);
-            for J := 0 to Shift - 1 do
-              Cards[J + (DeckSize - Shift)] := Tmp[J];
-          end;
-        ttIncrement:
-          begin
-            SetLength(Tmp, DeckSize);
-            for J := 0 to DeckSize - 1 do
-              Tmp[(J * N) mod DeckSize] := Cards[J];
-            Cards := Copy(Tmp);
-          end;
+function TTask_AoC.TryHardTechniques: Integer;
+const
+  DeckSize = 119315717514047;
+  Times    = 101741582076661;
+var
+  P: Int64;
+begin
+  LoadTechniques;
+  try
+    P := 1;
+    while P < Times do
+      begin
+        P := P shl 1;
+        FTechniques.AddRange(FTechniques.ToArray);
+        Simplify(DeckSize);
       end;
+  finally
+    FTechniques.Free;
+  end;
+end;
 
-  Result := -1;
-  for I := 0 to DeckSize - 1 do
-    if Cards[I] = 2019 then
-      Exit(I);
+function TTask_AoC.TryTechniques: Integer;
+const
+  DeckSize = 10007;
+var
+  I, J, Shift: Integer;
+  Cards, Tmp: TArray<Integer>;
+begin
+  LoadTechniques;
+  try
+    SetLength(Cards, DeckSize);
+    for I := 0 to DeckSize - 1 do
+      Cards[I] := I;
+
+    Simplify(DeckSize);
+
+    for I := 0 to FTechniques.Count - 1 do
+      with FTechniques[I] do
+        case TechniqueType of
+          ttStack:
+            for J := 0 to (DeckSize - 1) div 2 do
+              Swap(Cards[J], Cards[DeckSize - J - 1]);
+          ttCut:
+            begin
+              Shift := (DeckSize + N) mod DeckSize;
+              Tmp := Copy(Cards, 0, Shift);
+              Cards := Copy(Cards, Shift);
+              SetLength(Cards, DeckSize);
+              for J := 0 to Shift - 1 do
+                Cards[J + (DeckSize - Shift)] := Tmp[J];
+            end;
+          ttIncrement:
+            begin
+              SetLength(Tmp, DeckSize);
+              for J := 0 to DeckSize - 1 do
+                Tmp[(J * N) mod DeckSize] := Cards[J];
+              Cards := Copy(Tmp);
+            end;
+        end;
+
+    Result := -1;
+    for I := 0 to DeckSize - 1 do
+      if Cards[I] = 2019 then
+        Exit(I);
+  finally
+    FTechniques.Free;
+  end;
 end;
 
 initialization
