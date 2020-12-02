@@ -49,8 +49,6 @@ begin
 end;
 
 class operator TMazeTile.Equal(const Left, Right: TMazeTile): Boolean;
-var
-  I: Integer;
 begin
   Result := (Left.P        = Right.P)
         and (Left.TileType = Right.TileType);
@@ -62,8 +60,6 @@ begin
 end;
 
 function TMazeTile.ToString: String;
-var
-  I: Integer;
 begin
   Result := Format('%d,%d,%d,%s', [ P.X, P.Y, Integer(TileType), Name ]);
 end;
