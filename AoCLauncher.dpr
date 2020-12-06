@@ -169,7 +169,9 @@ uses
   uTask_2020_01 in 'AoC2020\Task01\uTask_2020_01.pas',
   uTask_2020_02 in 'AoC2020\Task02\uTask_2020_02.pas',
   uTask_2020_03 in 'AoC2020\Task03\uTask_2020_03.pas',
-  uTask_2020_04 in 'AoC2020\Task04\uTask_2020_04.pas';
+  uTask_2020_04 in 'AoC2020\Task04\uTask_2020_04.pas',
+  uTask_2020_05 in 'AoC2020\Task05\uTask_2020_05.pas',
+  uTask_2020_06 in 'AoC2020\Task06\uTask_2020_06.pas';
 
 {$R *.res}
 {$SetPEFlags $20}

@@ -102,6 +102,10 @@ function LCM(const A, B: Int64): Int64;
 procedure Swap(var A, B: Integer); overload;
 procedure Swap(var A, B: Int64); overload;
 
+// Convert a String with binary representation of a number to Integer
+// e.g. '100101010'
+function BinToInt(const Bin: String): Integer;
+
 implementation
 
 uses
@@ -190,6 +194,17 @@ begin
   Tmp := A;
   A := B;
   B := Tmp;
+end;
+
+function BinToInt(const Bin: String): Integer;
+var
+  I, L: Integer;
+begin
+  Result := 0;
+  L := Bin.Length;
+  for I := 1 to L do
+    if Bin[I] = '1' then
+      Inc(Result, 1 shl (L - I));
 end;
 
 { TPermutation.TEnumerator }
