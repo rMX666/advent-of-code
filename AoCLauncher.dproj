@@ -334,6 +334,7 @@
         <DCCReference Include="AoC2020\Task09\uTask_2020_09.pas"/>
         <DCCReference Include="AoC2020\Task10\uTask_2020_10.pas"/>
         <DCCReference Include="AoC2020\Task11\uTask_2020_11.pas"/>
+        <DCCReference Include="AoC2020\Task12\uTask_2020_12.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

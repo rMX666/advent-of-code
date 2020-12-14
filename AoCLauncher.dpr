@@ -176,7 +176,8 @@ uses
   uTask_2020_08 in 'AoC2020\Task08\uTask_2020_08.pas',
   uTask_2020_09 in 'AoC2020\Task09\uTask_2020_09.pas',
   uTask_2020_10 in 'AoC2020\Task10\uTask_2020_10.pas',
-  uTask_2020_11 in 'AoC2020\Task11\uTask_2020_11.pas';
+  uTask_2020_11 in 'AoC2020\Task11\uTask_2020_11.pas',
+  uTask_2020_12 in 'AoC2020\Task12\uTask_2020_12.pas';
 
 {$R *.res}
 {$SetPEFlags $20}
