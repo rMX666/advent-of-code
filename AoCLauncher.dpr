@@ -178,7 +178,9 @@ uses
   uTask_2020_10 in 'AoC2020\Task10\uTask_2020_10.pas',
   uTask_2020_11 in 'AoC2020\Task11\uTask_2020_11.pas',
   uTask_2020_12 in 'AoC2020\Task12\uTask_2020_12.pas',
-  uTask_2020_13 in 'AoC2020\Task13\uTask_2020_13.pas';
+  uTask_2020_13 in 'AoC2020\Task13\uTask_2020_13.pas',
+  uTask_2020_14 in 'AoC2020\Task14\uTask_2020_14.pas',
+  uBitmaskProcessor in 'AoC2020\Task14\uBitmaskProcessor.pas';
 
 {$R *.res}
 {$SetPEFlags $20}
