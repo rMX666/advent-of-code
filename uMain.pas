@@ -9,6 +9,7 @@ uses
 type
   TfMain = class(TForm)
     procedure FormCreate(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
   private
     procedure DrawTaskList;
     procedure TaskLaunchButtonClick(Sender: TObject);
@@ -80,13 +81,24 @@ begin
             FormHeight := 68 + Top + 8;
       end;
 
+  if FormWidth > Screen.DesktopWidth - 100 then
+    begin
+      fMain.HorzScrollBar.Range := FormWidth - 6;
+      FormWidth := Screen.DesktopWidth - 100;
+    end;
   fMain.Width := FormWidth;
-  fMain.Height := FormHeight;
+  fMain.Height := FormHeight + 16;
 end;
 
 procedure TfMain.FormCreate(Sender: TObject);
 begin
   DrawTaskList;
+end;
+
+procedure TfMain.FormPaint(Sender: TObject);
+begin
+  fMain.HorzScrollBar.Position := 4092;
+  fMain.OnPaint := nil;
 end;
 
 procedure TfMain.TaskLaunchButtonClick(Sender: TObject);
