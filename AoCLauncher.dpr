@@ -183,7 +183,8 @@ uses
   uBitmaskProcessor in 'AoC2020\Task14\uBitmaskProcessor.pas',
   uTask_2020_15 in 'AoC2020\Task15\uTask_2020_15.pas',
   uTask_2020_18 in 'AoC2020\Task18\uTask_2020_18.pas',
-  uTask_2021_01 in 'AoC2021\Task01\uTask_2021_01.pas';
+  uTask_2021_01 in 'AoC2021\Task01\uTask_2021_01.pas',
+  uTask_2021_02 in 'AoC2021\Task02\uTask_2021_02.pas';
 
 {$R *.res}
 {$SetPEFlags $20}
